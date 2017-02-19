@@ -22,7 +22,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     curl \
     git \
     unzip \
-    mcrypt \
+    mcrypt \		
     wget \
     openssl \
     autoconf \
@@ -54,6 +54,8 @@ RUN add-apt-repository -y ppa:ondrej/php && \
     php-pear \
 		php-xml \
 		php-curl \
+		php-mbstring \
+		php-json \
     php7.0-dev \
 		php7.1-fpm \
     php7.0-mcrypt \
