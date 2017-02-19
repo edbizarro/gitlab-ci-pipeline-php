@@ -5,10 +5,12 @@
 
 ## Based on Ubuntu 16.04
 
-### Versions
+### PHP Versions
 
 [7.1, latest](php/7.1/Dockerfile)
+
 [7.0](php/7.0/Dockerfile)
+
 [5.6](php/5.6/Dockerfile)
 
 ---
