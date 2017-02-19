@@ -7,11 +7,11 @@
 
 ### PHP Versions
 
-[7.1, latest](php/7.1/Dockerfile)
+[7.1, latest](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/Dockerfile)
 
-[7.0](php/7.0/Dockerfile)
+[7.0](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.0/Dockerfile)
 
-[5.6](php/5.6/Dockerfile)
+[5.6](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/5.6/Dockerfile)
 
 ---
 
