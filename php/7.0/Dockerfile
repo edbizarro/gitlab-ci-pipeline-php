@@ -47,7 +47,6 @@ RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # PHP Extensions
-
 RUN add-apt-repository -y ppa:ondrej/php && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
@@ -87,9 +86,6 @@ RUN wget --no-check-certificate https://xdebug.org/files/xdebug-2.5.0.tgz && \
     cp modules/xdebug.so /usr/lib/. && \
     echo 'zend_extension="/usr/lib/xdebug.so"' > /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
     echo 'xdebug.remote_enable=1' >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
-
-# Time Zone
-RUN echo "date.timezone=America/Sao_Paulo" > /etc/php/7.0/cli/conf.d/date_timezone.ini
 
 VOLUME /root/composer
 

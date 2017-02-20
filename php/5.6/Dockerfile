@@ -58,10 +58,6 @@ RUN DEBIAN_FRONTEND=noninteractive add-apt-repository -y ppa:ondrej/php && \
     echo 'zend_extension="/usr/lib/xdebug.so"' > /etc/php/5.6/cli/conf.d/20-xdebug.ini && \
     echo 'xdebug.remote_enable=1' >> /etc/php/5.6/cli/conf.d/20-xdebug.ini
 
-# Time Zone
-RUN echo "date.timezone=America/Sao_Paulo" > /etc/php/5.6/cli/conf.d/date_timezone.ini && \
-    echo "date.timezone=America/Sao_Paulo" > /etc/php/5.6/fpm/conf.d/date_timezone.ini
-
 VOLUME /root/composer
 
 # Environmental Variables
@@ -69,9 +65,6 @@ ENV COMPOSER_HOME /root/composer
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Goto temporary directory.
-WORKDIR /tmp
 
 # Run phpunit installation.
 RUN composer global require hirak/prestissimo --prefer-dist --no-interaction && \   
