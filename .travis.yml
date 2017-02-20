@@ -1,0 +1,19 @@
+language: bash
+services: docker
+
+env:
+  - VERSION=7.1 VARIANT=  
+  - VERSION=7.0 VARIANT=  
+  - VERSION=5.6 VARIANT=  
+
+before_script:
+  - env | sort
+  - cd "$VERSION"
+  - image="edbizarro/gitlab-ci-pipeline-php:${VERSION}${VARIANT:+-$VARIANT}"
+  - image="${image//'/'/-}"
+
+script:
+  - docker build -t "$image" "${VARIANT:-.}"
+
+after_script:
+  - docker images
