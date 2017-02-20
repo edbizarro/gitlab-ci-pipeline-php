@@ -1,6 +1,6 @@
 # Build and test PHP applications with Gitlab CI Pipeline
 
-Docker image with everything you'll need to build and test PHP applications on GITLAB CI
+[![Build Status](https://travis-ci.org/edbizarro/gitlab-ci-pipeline-php.svg?branch=master)](https://travis-ci.org/edbizarro/gitlab-ci-pipeline-php) Docker image with everything you'll need to build and test PHP applications on GITLAB CI
 
 ![Logo](https://raw.githubusercontent.com/edbizarro/gitlab-ci-pipeline-php/master/gitlab-ci-pipeline-php.png)
 
