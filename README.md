@@ -29,7 +29,7 @@ All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
 
 #### Simple .gitlab-ci.yml using mysql service
 
-```
+```yaml
 # Variables
 variables:
   MYSQL_ROOT_PASSWORD: root
@@ -58,7 +58,7 @@ test:
 
 #### Advanced .gitlab-ci.yml using mysql service
 
-```
+```yaml
 stages:
   - test
   - deploy
