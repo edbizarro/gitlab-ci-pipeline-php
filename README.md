@@ -25,9 +25,9 @@ All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
 
 ---
 
-### Gitlab pipeline examples
+## Gitlab pipeline examples
 
-#### Simple ```.gitlab-ci.yml``` using mysql service
+### Simple ```.gitlab-ci.yml``` using mysql service
 
 ```yaml
 # Variables
@@ -56,7 +56,7 @@ test:
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
 ```
 
-#### Advanced ```.gitlab-ci.yml``` using mysql service
+### Advanced ```.gitlab-ci.yml``` using mysql service
 
 ```yaml
 stages:
