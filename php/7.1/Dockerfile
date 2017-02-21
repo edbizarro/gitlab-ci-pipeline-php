@@ -1,86 +1,57 @@
-FROM ubuntu:16.04
+FROM php:7.1
 
-LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \			
-			architecture "amd64" \
-			php "7.1" \
-      node "7"
+LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>"
+LABEL architecture "amd64"
+LABEL php "7.1"
+LABEL node "7"
 
 # Set correct environment variables
 ENV HOME="/root" \
     PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# Ensure UTF-8
-RUN locale-gen en_US.UTF-8
-ENV LANG       en_US.UTF-8
-ENV LC_ALL     en_US.UTF-8
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \    
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     software-properties-common \
     python-software-properties \
-    build-essential \
-    curl \
     git \
-    unzip \
-    mcrypt \
-    wget \
+    curl \
     openssl \
-    autoconf \
-    g++ \
-    make \
     --no-install-recommends
 
-# OpenSSL
-RUN mkdir -p /usr/local/openssl/include/openssl/ && \
-    ln -s /usr/include/openssl/evp.h /usr/local/openssl/include/openssl/evp.h && \
-    mkdir -p /usr/local/openssl/lib/ && \
-    ln -s /usr/lib/x86_64-linux-gnu/libssl.a /usr/local/openssl/lib/libssl.a && \
-    ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/local/openssl/lib/
-
-# NODE JS
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
-    apt-get install nodejs --no-install-recommends -yqq && \
-    npm install -g gulp
-
-# YARN
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
-
 # PHP Extensions
-RUN add-apt-repository -y ppa:ondrej/php && \
-    DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -yqq --no-install-recommends \
-    php-pear \
-    php7.1-dev \
-		php7.1-fpm \
-    php7.1-mcrypt \
-    php7.1-xml \
-    php7.1-mbstring \
-    php7.1-curl \
-    php7.1-json \
-    php7.1-mysql \
-    php7.1-tokenizer \
-    php7.1-cli \
-    php7.1-imap \
-    php7.1-gd && \
-    apt-get remove -y --purge php5 php5-common && \
-    rm -r /var/lib/apt/lists/*
+RUN apt-get install -y \
+    libmcrypt-dev \
+    libxml2-dev \
+    libcurl4-gnutls-dev \
+    mcrypt \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libpng12-dev \
+    libmcrypt-dev \
+    libssl-dev \
+    libicu-dev \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) \
+    gd \
+    curl \
+    mcrypt \
+    json \
+    xml \
+    mbstring \
+    pdo \
+    pdo_mysql \
+    iconv \
+    opcache \
+    intl
 
 # MONGO extension
-RUN pecl install mongodb && \
-    echo "extension=mongodb.so" > /etc/php/7.1/cli/conf.d/20-mongodb.ini && \
-    echo "extension=mongodb.so" > /etc/php/7.1/mods-available/mongodb.ini
+RUN pecl install mongodb \
+    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
 
 # Run xdebug installation.
-RUN wget --no-check-certificate https://xdebug.org/files/xdebug-2.5.0.tgz && \
-    tar -xzf xdebug-2.5.0.tgz && \
-    rm xdebug-2.5.0.tgz && \
-    cd xdebug-2.5.0 && \
-    phpize && \
-    ./configure --enable-xdebug && \
-    make && \
-    cp modules/xdebug.so /usr/lib/. && \
-    echo 'zend_extension="/usr/lib/xdebug.so"' > /etc/php/7.1/cli/conf.d/20-xdebug.ini && \
-    echo 'xdebug.remote_enable=1' >> /etc/php/7.1/cli/conf.d/20-xdebug.ini
+RUN pecl install xdebug-2.5.0 \
+    && docker-php-ext-enable xdebug
 
 VOLUME /root/composer
 
@@ -90,14 +61,19 @@ ENV COMPOSER_HOME /root/composer
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Run phpunit installation.
+# Install hirak/prestissimo to speedup composer installs.
 RUN composer global require hirak/prestissimo --prefer-dist --no-interaction && \
     rm -rf /root/.composer/cache/*
 
+# NODE JS
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
+    DEBIAN_FRONTEND=noninteractive apt-get install nodejs --no-install-recommends -yqq && \
+    npm install -g gulp
+
+# YARN
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get remove --purge -y \
-    autoconf \
-    g++ \
-    make \
     software-properties-common \
     python-software-properties \
     build-essential \
