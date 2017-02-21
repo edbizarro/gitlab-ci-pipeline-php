@@ -101,7 +101,6 @@ test:
   artifacts:
     paths:
       - ./storage/logs
-      - ./build
     expire_in: 7 days
     when: always
 
@@ -114,6 +113,8 @@ deploy:
     - master
   when: on_success
 ```
+
+---
 
 Special thanks to [Ambientum](https://github.com/codecasts/ambientum), an incredible brazilian project for the [build](https://github.com/codecasts/ambientum/blob/master/build.sh) script.
 
