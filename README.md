@@ -6,15 +6,8 @@
 
 ---
 
-### Laravel users
-
-These images come with PHP (with laravel required extensions), Composer, Node 7.x and [yarn](https://yarnpkg.com).
-
-Everything you need to test Laravel projects :D
-
 ## Based on [Official PHP images](https://hub.docker.com/_/php/)
 
-### Versions
 
 - ```7.1```, ```latest``` [(7.1/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php "Get your own image badge on microbadger.com")
 - ```7.0``` [(7.0/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.0/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.0.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.0 "Get your own image badge on microbadger.com")
@@ -24,6 +17,12 @@ Everything you need to test Laravel projects :D
 All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
 
 ---
+
+### Laravel users
+
+These images come with PHP (with laravel required extensions), Composer, Node 7.x and [yarn](https://yarnpkg.com).
+
+Everything you need to test Laravel projects :D
 
 ## Gitlab pipeline examples
 
