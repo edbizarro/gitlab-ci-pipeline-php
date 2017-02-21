@@ -24,6 +24,8 @@ These images come with PHP (with laravel required extensions), Composer, Node 7.
 
 Everything you need to test Laravel projects :D
 
+---
+
 ## Gitlab pipeline examples
 
 ### Simple ```.gitlab-ci.yml``` using mysql service
