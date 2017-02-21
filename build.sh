@@ -64,3 +64,5 @@ for REPOSITORY in $REPOSITORIES; do
     publish_repository $REPOSITORY
   fi
 done
+
+curl -XPOST https://hooks.microbadger.com/images/edbizarro/gitlab-ci-pipeline-php/rDYTTzaY7CxoUFxH5jqjPLS3Lyk=

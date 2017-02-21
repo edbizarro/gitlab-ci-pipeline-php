@@ -1,91 +1,56 @@
-FROM ubuntu:16.04
+FROM php:7.0
 
-LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \			
-			architecture "amd64" \
-			php "7.0" \
-      node "7"
+LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>"
+LABEL architecture "amd64"
+LABEL php "7.0"
+LABEL node "7"
 
 # Set correct environment variables
 ENV HOME="/root" \
     PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# Ensure UTF-8
-RUN locale-gen en_US.UTF-8
-ENV LANG       en_US.UTF-8
-ENV LC_ALL     en_US.UTF-8
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \    
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    software-properties-common \
-    python-software-properties \
-    build-essential \
-    curl \
+RUN apt-get update && \
+    apt-get install -yqq \
     git \
-    unzip \
-    mcrypt \		
-    wget \
+    curl \
     openssl \
-    autoconf \
-    g++ \
-    make \
-    --no-install-recommends && rm -r /var/lib/apt/lists/* \
-    && apt-get --purge autoremove -y
-
-# OpenSSL
-RUN mkdir -p /usr/local/openssl/include/openssl/ && \
-    ln -s /usr/include/openssl/evp.h /usr/local/openssl/include/openssl/evp.h && \
-    mkdir -p /usr/local/openssl/lib/ && \
-    ln -s /usr/lib/x86_64-linux-gnu/libssl.a /usr/local/openssl/lib/libssl.a && \
-    ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/local/openssl/lib/
-
-# NODE JS
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
-    apt-get install nodejs -qq && \
-    npm install -g gulp
-
-# YARN
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+    --no-install-recommends
 
 # PHP Extensions
-RUN add-apt-repository -y ppa:ondrej/php && \
-    DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
-    php-pear \
-		php-xml \
-		php-curl \
-		php-mbstring \
-		php-json \
-    php7.0-dev \
-		php7.1-fpm \
-    php7.0-mcrypt \
-    php7.0-xml \
-    php7.0-mbstring \
-    php7.0-curl \
-    php7.0-json \
-    php7.0-mysql \
-    php7.0-tokenizer \
-    php7.0-cli \
-    php7.0-imap \
-    php7.0-gd \
-    --no-install-recommends && rm -r /var/lib/apt/lists/* && \        
-    apt-get --purge autoremove -y
-    
+RUN apt-get install -y \
+    libmcrypt-dev \
+    libxml2-dev \
+    libcurl4-gnutls-dev \
+    mcrypt \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libpng12-dev \
+    libmcrypt-dev \
+    libssl-dev \
+    libicu-dev \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) \
+    gd \
+    curl \
+    mcrypt \
+    json \
+    xml \
+    mbstring \
+    pdo \
+    pdo_mysql \
+    iconv \
+    opcache \
+    intl \
+    zip
 
 # MONGO extension
-RUN pecl install mongodb && \
-    echo "extension=mongodb.so" > /etc/php/7.0/cli/conf.d/20-mongodb.ini && \
-    echo "extension=mongodb.so" > /etc/php/7.0/mods-available/mongodb.ini
+RUN pecl install mongodb \
+    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
 
-RUN wget --no-check-certificate https://xdebug.org/files/xdebug-2.5.0.tgz && \
-    tar -xzf xdebug-2.5.0.tgz && \
-    rm xdebug-2.5.0.tgz && \
-    cd xdebug-2.5.0 && \
-    phpize && \
-    ./configure --enable-xdebug && \
-    make && \
-    cp modules/xdebug.so /usr/lib/. && \
-    echo 'zend_extension="/usr/lib/xdebug.so"' > /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
-    echo 'xdebug.remote_enable=1' >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+# Run xdebug installation.
+RUN pecl install xdebug-2.5.0 \
+    && docker-php-ext-enable xdebug
 
 VOLUME /root/composer
 
@@ -95,17 +60,18 @@ ENV COMPOSER_HOME /root/composer
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Run phpunit installation.
+# Install hirak/prestissimo to speedup composer installs.
 RUN composer global require hirak/prestissimo --prefer-dist --no-interaction && \
     rm -rf /root/.composer/cache/*
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get remove --purge -y \
-    autoconf \
-    g++ \
-    make \
-    software-properties-common \
-    python-software-properties \
-    build-essential \
-    && apt-get autoclean -y \
+# NODE JS
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
+    DEBIAN_FRONTEND=noninteractive apt-get install nodejs --no-install-recommends -yqq && \
+    npm install -g gulp
+
+# YARN
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+
+RUN apt-get autoclean -y \
     && apt-get --purge autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

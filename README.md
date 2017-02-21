@@ -12,7 +12,7 @@ These images come with PHP (with laravel required extensions), Composer, Node 7.
 
 Everything you need to test Laravel projects :D
 
-## Based on Ubuntu 16.04
+## Based on [Official PHP images](https://hub.docker.com/_/php/)
 
 ### Versions
 
@@ -25,6 +25,94 @@ All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
 
 ---
 
+### Gitlab pipeline examples
+
+#### Simple .gitlab-ci.yml using mysql service
+
+```
+# Variables
+variables:
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_USER: homestead
+  MYSQL_PASSWORD: secret
+  MYSQL_DATABASE: homestead
+  DB_HOST: mysql
+
+test:
+  stage: test
+  services:
+    - mysql:5.7
+  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  script:
+    - yarn clean
+    - yarn
+    - gulp
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+    - php artisan key:generate
+    - php artisan config:clear
+    - php artisan migrate:refresh --seed
+    - php artisan serve >/dev/null 2>&1 & # for API testing
+    - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
+```
+
+#### Advanced .gitlab-ci.yml using mysql service
+
+```
+stages:
+  - test
+  - deploy
+
+# Variables
+variables:
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_USER: homestead
+  MYSQL_PASSWORD: secret
+  MYSQL_DATABASE: homestead
+  DB_HOST: mysql
+
+# Speed up builds
+cache:
+  key: $CI_BUILD_REF_NAME
+  paths:
+    - vendor
+    - node_modules
+    - public
+    - ~/.composer/cache/files
+    - ~/.yarn-cache
+
+test:
+  stage: test
+  services:
+    - mysql:5.7
+  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  script:
+    - yarn clean
+    - yarn
+    - gulp
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+    - php artisan key:generate
+    - php artisan config:clear
+    - php artisan migrate:refresh --seed
+    - php artisan serve >/dev/null 2>&1 & # for API testing
+    - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
+  artifacts:
+    paths:
+      - ./storage/logs
+      - ./build
+    expire_in: 7 days
+    when: always
+
+deploy:
+  stage: deploy
+  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  script:
+    - echo "Your deploy script"
+  only:
+    - master
+  when: on_success
+```
 
 Special thanks to [Ambientum](https://github.com/codecasts/ambientum), an incredible brazilian project for the [build](https://github.com/codecasts/ambientum/blob/master/build.sh) script.
 

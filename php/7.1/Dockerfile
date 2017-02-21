@@ -9,10 +9,8 @@ LABEL node "7"
 ENV HOME="/root" \
     PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
-    software-properties-common \
-    python-software-properties \
+RUN apt-get update && \
+    apt-get install -yqq \
     git \
     curl \
     openssl \
@@ -43,7 +41,8 @@ RUN apt-get install -y \
     pdo_mysql \
     iconv \
     opcache \
-    intl
+    intl \
+    zip
 
 # MONGO extension
 RUN pecl install mongodb \
@@ -73,10 +72,6 @@ RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
 # YARN
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get remove --purge -y \
-    software-properties-common \
-    python-software-properties \
-    build-essential \
-    && apt-get autoclean -y \
+RUN apt-get autoclean -y \
     && apt-get --purge autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
