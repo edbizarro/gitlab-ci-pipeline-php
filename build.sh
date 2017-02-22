@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+set -m
 
 # resulting images namespace on docker hub
 NAMESPACE=edbizarro/gitlab-ci-pipeline

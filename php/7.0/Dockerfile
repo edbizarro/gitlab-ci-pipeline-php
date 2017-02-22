@@ -14,6 +14,7 @@ RUN apt-get update && \
     git \
     curl \
     openssl \
+    openssh-client \
     --no-install-recommends
 
 # PHP Extensions
