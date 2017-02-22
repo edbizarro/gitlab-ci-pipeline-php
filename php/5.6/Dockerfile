@@ -25,14 +25,13 @@ RUN apt-get update && apt-get install -y \
     mcrypt \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libmcrypt-dev \
     libpng12-dev \
-    libmcrypt-dev \
     libssl-dev \
     libicu-dev \
     libbz2-dev \
     libc-client-dev \
     libkrb5-dev \
+    zlib1g-dev \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) \
