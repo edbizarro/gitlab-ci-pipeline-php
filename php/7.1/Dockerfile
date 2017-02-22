@@ -17,7 +17,7 @@ RUN apt-get update && \
     --no-install-recommends
 
 # PHP Extensions
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
     libxml2-dev \
     libcurl4-gnutls-dev \
