@@ -17,7 +17,7 @@ RUN apt-get update && \
     --no-install-recommends
 
 # PHP Extensions
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
     libxml2-dev \
     libcurl4-gnutls-dev \
@@ -29,6 +29,7 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libssl-dev \
     libicu-dev \
+    libbz2-dev \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) \
     gd \
@@ -42,7 +43,9 @@ RUN apt-get install -y \
     iconv \
     opcache \
     intl \
-    zip
+    zip \
+    bz2 \
+    bcmath
 
 # MONGO extension
 RUN pecl install mongodb \
