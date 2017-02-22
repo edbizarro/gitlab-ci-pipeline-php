@@ -20,7 +20,7 @@ All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
 
 ### Laravel users
 
-These images come with PHP (with laravel required extensions), Composer, Node 7.x and [yarn](https://yarnpkg.com).
+These images come with PHP (with all laravel required extensions), Composer, Node 7.x and [yarn](https://yarnpkg.com).
 
 Everything you need to test Laravel projects :D
 
@@ -101,7 +101,6 @@ test:
   artifacts:
     paths:
       - ./storage/logs
-      - ./build
     expire_in: 7 days
     when: always
 
@@ -114,6 +113,8 @@ deploy:
     - master
   when: on_success
 ```
+
+---
 
 Special thanks to [Ambientum](https://github.com/codecasts/ambientum), an incredible brazilian project for the [build](https://github.com/codecasts/ambientum/blob/master/build.sh) script.
 
