@@ -28,7 +28,34 @@ RUN apk add --update --no-cache \
 		openssh \
 		openssh-client \
     autoconf \
-    g++
+    g++ \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libltdl \
+    libmcrypt-dev \
+    libpng-dev \
+    imap-dev \
+    openssl-dev \
+    curl-dev
+
+# PHP Extensions
+RUN docker-php-ext-configure imap --with-imap --with-imap-ssl \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install \
+    gd \
+    curl \
+    mcrypt \
+    json \
+    xml \
+    mbstring \
+    pdo \
+    pdo_mysql \
+    iconv \
+    opcache \
+    intl \
+    zip \
+    bz2 \
+    bcmath
 
 # Run xdebug installation.
 RUN pecl install xdebug-2.5.0 \
@@ -98,4 +125,5 @@ RUN apk del --purge \
 		wget \
 		sed \
 		grep \
+    libltdl \
 		&& rm -rf /var/cache/apk/* /tmp/* /usr/share/man
