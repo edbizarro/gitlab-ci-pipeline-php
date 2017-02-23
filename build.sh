@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -m
-
 # resulting images namespace on docker hub
 NAMESPACE=edbizarro/gitlab-ci-pipeline
 
@@ -29,7 +27,7 @@ function build_repository {
       # some verbose
       echo $'\n\n'"--> Building $NAMESPACE-$REPOSITORY:$TAG"$'\n'
       cd $ROOT_DIRECTORY/$REPOSITORY/$TAG
-      docker build -t $NAMESPACE-$REPOSITORY:$TAG .
+      docker build --compress -t $NAMESPACE-$REPOSITORY:$TAG .
     done
 
     # create the latest tag
