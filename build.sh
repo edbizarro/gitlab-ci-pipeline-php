@@ -50,6 +50,11 @@ function publish_repository {
       echo $'\n\n'"--> Publishing $NAMESPACE-$REPOSITORY:$TAG"$'\n'
       # publish
       docker push $NAMESPACE-$REPOSITORY:$TAG
+
+      if [ -d "$ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT" ]; then
+        echo $'\n\n'"--> Building variant $NAMESPACE-$REPOSITORY:$TAG-$VARIANT"$'\n'
+        docker push $NAMESPACE-$REPOSITORY:$TAG-$VARIANT
+      fi
     done
 
     # create the latest tag
