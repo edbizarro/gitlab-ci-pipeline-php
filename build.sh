@@ -28,6 +28,12 @@ function build_repository {
       echo $'\n\n'"--> Building $NAMESPACE-$REPOSITORY:$TAG"$'\n'
       cd $ROOT_DIRECTORY/$REPOSITORY/$TAG
       docker build --compress -t $NAMESPACE-$REPOSITORY:$TAG .
+
+      if [ -d "$ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT" ]; then
+        echo $'\n\n'"--> Building variant $NAMESPACE-$REPOSITORY:$TAG-$VARIANT"$'\n'
+        cd $ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT
+        docker build --compress -t $NAMESPACE-$REPOSITORY:$TAG-$VARIANT .
+      fi
     done
 
     # create the latest tag

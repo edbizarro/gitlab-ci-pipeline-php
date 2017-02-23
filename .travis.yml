@@ -9,7 +9,7 @@ env:
 
 before_script:
   - env | sort
-  - cd php/"$VERSION${VARIANT:+-$VARIANT}"
+  - cd php/"$VERSION"
   - image="edbizarro/gitlab-ci-pipeline-php:${VERSION}${VARIANT:+-$VARIANT}"
   - image="${image//'/'/-}"
 
@@ -17,7 +17,5 @@ script:
   - docker build -t "$image" "${VARIANT:-.}"
 
 after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    bash ./build.sh
-  fi
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - bash ./build.sh
