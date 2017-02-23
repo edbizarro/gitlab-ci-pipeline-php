@@ -14,13 +14,13 @@ WORKDIR /tmp
 
 COPY ./php/packages.sh packages.sh
 RUN chmod +x packages.sh \
-    && ./packages.sh
+    && bash ./packages.sh
 
 # PHP Extensions
 
 COPY ./php/extensions.sh extensions.sh
 RUN chmod +x extensions.sh \
-    && ./extensions.sh
+    && bash ./extensions.sh
 
 # Composer
 
@@ -29,19 +29,19 @@ VOLUME /root/composer
 ENV COMPOSER_HOME /root/composer
 COPY ./php/composer.sh composer.sh
 RUN chmod +x composer.sh \
-    && ./composer.sh
+    && bash ./composer.sh
 
 # Node & Yarn
 
 COPY ./php/node.sh node.sh
 RUN chmod +x node.sh \
-    && ./node.sh
+    && bash ./node.sh
 
 
 # Clean up
 
 COPY ./php/cleanup.sh cleanup.sh
 RUN chmod +x cleanup.sh \
-    && ./cleanup.sh
+    && bash ./cleanup.sh
 
 WORKDIR /root
