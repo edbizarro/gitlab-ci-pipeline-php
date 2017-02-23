@@ -1,7 +1,6 @@
 FROM php:5.6
 
 LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>"
-LABEL architecture "amd64"
 LABEL php "5.6"
 LABEL node "7"
 

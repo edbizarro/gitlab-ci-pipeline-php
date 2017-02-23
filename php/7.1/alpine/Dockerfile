@@ -1,7 +1,6 @@
 FROM php:7.1-alpine
 
 LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>"
-LABEL architecture "amd64"
 LABEL php "7.1"
 
 # Set correct environment variables
