@@ -1,82 +1,47 @@
 FROM php:5.6
 
-LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>"
-LABEL php "5.6"
-LABEL node "7"
+LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
+      php="5.6" \
+      node="7"
 
 # Set correct environment variables
 ENV HOME="/root" \
     PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-RUN apt-get update && \
-    apt-get install -yqq \
-    git \
-    curl \
-    openssl \
-    openssh-client \
-    --no-install-recommends
+WORKDIR /tmp
+
+# System packages
+
+COPY ./php/packages.sh packages.sh
+RUN chmod +x packages.sh \
+    && ./packages.sh
 
 # PHP Extensions
-RUN apt-get update && apt-get install -y \
-    libmcrypt-dev \
-    libxml2-dev \
-    libcurl4-gnutls-dev \
-    mcrypt \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng12-dev \
-    libssl-dev \
-    libicu-dev \
-    libbz2-dev \
-    libc-client-dev \
-    libkrb5-dev \
-    zlib1g-dev \
-    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) \
-    gd \
-    curl \
-    mcrypt \
-    json \
-    xml \
-    mbstring \
-    pdo \
-    pdo_mysql \
-    iconv \
-    opcache \
-    intl \
-    zip \
-    bz2 \
-    bcmath
 
-# MONGO extension
-RUN pecl install mongodb \
-    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
+COPY ./php/extensions.sh extensions.sh
+RUN chmod +x extensions.sh \
+    && ./extensions.sh
 
-# Run xdebug installation.
-RUN pecl install xdebug-2.4.0 \
-    && docker-php-ext-enable xdebug
+# Composer
 
 VOLUME /root/composer
-
 # Environmental Variables
 ENV COMPOSER_HOME /root/composer
+COPY ./php/composer.sh composer.sh
+RUN chmod +x composer.sh \
+    && ./composer.sh
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Node & Yarn
 
-# Install hirak/prestissimo to speedup composer installs.
-RUN composer global require hirak/prestissimo --prefer-dist --no-interaction && \
-    rm -rf /root/.composer/cache/*
+COPY ./php/node.sh node.sh
+RUN chmod +x node.sh \
+    && ./node.sh
 
-# NODE JS
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
-    DEBIAN_FRONTEND=noninteractive apt-get install nodejs --no-install-recommends -yqq && \
-    npm install -g gulp
 
-# YARN
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+# Clean up
 
-RUN apt-get autoclean -y \
-    && apt-get --purge autoremove -y && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+COPY ./php/cleanup.sh cleanup.sh
+RUN chmod +x cleanup.sh \
+    && ./cleanup.sh
+
+WORKDIR /root

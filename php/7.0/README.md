@@ -5,7 +5,7 @@
 
 ### This image contains:
 
-- PHP 7.0 with: ```fpm``` ```mcrypt```, ```mongo```, ```xdebug```, ```xml```, ```mbstring```, ```curl```, ```json```, ```mysql```, ```gd```, ```imap``` and ```tokenizer``` extensions
+- PHP 7.0 with: ```mcrypt```, ```mongo```, ```xdebug```, ```xml```, ```mbstring```, ```curl```, ```json```, ```mysql```, ```gd```, ```imap```, ```iconv```, ```opcache```, ```intl```, ```zip```, ```bz2```, ```bcmath``` and ```tokenizer``` extensions
 - [Composer](https://getcomposer.org/)
 - [Yarn](https://yarnpkg.com)
-- Node 7.x / NPM / Gulp
+- Node 7.x / NPM

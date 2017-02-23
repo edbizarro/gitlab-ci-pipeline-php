@@ -36,7 +36,9 @@ RUN apk add --update --no-cache \
     libpng-dev \
     imap-dev \
     openssl-dev \
-    curl-dev
+    curl-dev \
+    icu-dev \
+    bzip2-dev
 
 # PHP Extensions
 RUN docker-php-ext-configure imap --with-imap --with-imap-ssl \

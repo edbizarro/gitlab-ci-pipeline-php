@@ -26,13 +26,11 @@ function build_repository {
     for TAG in $TAGS; do
       # some verbose
       echo $'\n\n'"--> Building $NAMESPACE-$REPOSITORY:$TAG"$'\n'
-      cd $ROOT_DIRECTORY/$REPOSITORY/$TAG
-      docker build --compress -t $NAMESPACE-$REPOSITORY:$TAG .
+      docker build --compress -t $NAMESPACE-$REPOSITORY:$TAG -f $ROOT_DIRECTORY/$REPOSITORY/$TAG/Dockerfile .
 
       if [ -d "$ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT" ]; then
         echo $'\n\n'"--> Building variant $NAMESPACE-$REPOSITORY:$TAG-$VARIANT"$'\n'
-        cd $ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT
-        docker build --compress -t $NAMESPACE-$REPOSITORY:$TAG-$VARIANT .
+        docker build --compress -t $NAMESPACE-$REPOSITORY:$TAG-$VARIANT -f $ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT/Dockerfile .
       fi
     done
 
