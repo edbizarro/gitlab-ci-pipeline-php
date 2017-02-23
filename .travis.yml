@@ -9,7 +9,7 @@ env:
 
 before_script:
   - env | sort
-  - cd php/"$VERSION"
+  - cd php/"$VERSION${VARIANT:+-$VARIANT}"
   - image="edbizarro/gitlab-ci-pipeline-php:${VERSION}${VARIANT:+-$VARIANT}"
   - image="${image//'/'/-}"
 
