@@ -1,6 +1,6 @@
 # Build and test PHP applications with Gitlab CI
 
-Docker image with everything you'll need to build and test PHP applications on Gitlab Continous Integration
+> Docker image with everything you'll need to build and test PHP applications on Gitlab Continous Integration
 
 ![Logo](https://raw.githubusercontent.com/edbizarro/gitlab-ci-pipeline-php/master/gitlab-ci-pipeline-php.png)
 
