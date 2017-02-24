@@ -1,6 +1,6 @@
 # Build and test PHP applications with Gitlab CI
 
-Docker image with everything you'll need to build and test PHP applications on Gitlab Continous Integration
+> Docker image with everything you'll need to build and test PHP applications on Gitlab Continous Integration
 
 ![Logo](https://raw.githubusercontent.com/edbizarro/gitlab-ci-pipeline-php/master/gitlab-ci-pipeline-php.png)
 
@@ -98,7 +98,6 @@ test:
     - cp .env.example .env
     - php artisan key:generate
     - php artisan migrate:refresh --seed
-    - php artisan serve >/dev/null 2>&1 & # for API testing
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
   artifacts:
     paths:
