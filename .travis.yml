@@ -1,6 +1,0 @@
-language: bash
-services: docker
-
-script:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - bash build.sh
