@@ -23,7 +23,6 @@ apt-get update && apt-get install -y \
         json \
         xml \
         mbstring \
-        pdo \
         pdo_mysql \
         iconv \
         opcache \
@@ -36,9 +35,7 @@ apt-get update && apt-get install -y \
 # MONGO extension
 pecl install mongodb \
   && docker-php-ext-enable mongodb
-#&& echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
 
 # Run xdebug installation.
-# /usr/local/lib/php/extensions/no-debug-non-zts-20160303/xdebug.so
 pecl install xdebug-2.5.0 \
   && docker-php-ext-enable xdebug

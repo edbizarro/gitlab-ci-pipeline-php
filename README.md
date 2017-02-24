@@ -23,7 +23,7 @@ All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
 
 ### Laravel users
 
-These images come with PHP (with all laravel required extensions), Composer, Node 7.x and [yarn](https://yarnpkg.com).
+These images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up), Node 7.x and [Yarn](https://yarnpkg.com).
 
 Everything you need to test Laravel projects :D
 
@@ -32,6 +32,8 @@ Everything you need to test Laravel projects :D
 ## Gitlab pipeline examples
 
 ### Simple ```.gitlab-ci.yml``` using mysql service
+
+This is a basic example to test Laravel apps
 
 ```yaml
 # Variables
@@ -54,13 +56,11 @@ test:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - cp .env.example .env
     - php artisan key:generate
-    - php artisan config:clear
     - php artisan migrate:refresh --seed
-    - php artisan serve >/dev/null 2>&1 & # for API testing
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
 ```
 
-### Advanced ```.gitlab-ci.yml``` using mysql service
+### Advanced ```.gitlab-ci.yml``` using mysql service, stages and cache
 
 ```yaml
 stages:
@@ -97,14 +97,13 @@ test:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - cp .env.example .env
     - php artisan key:generate
-    - php artisan config:clear
     - php artisan migrate:refresh --seed
     - php artisan serve >/dev/null 2>&1 & # for API testing
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
   artifacts:
     paths:
-      - ./storage/logs
-    expire_in: 7 days
+      - ./storage/logs # for debugging
+    expire_in: 1 days
     when: always
 
 deploy:
@@ -116,6 +115,13 @@ deploy:
     - master
   when: on_success
 ```
+---
+
+## Deploying Laravel applications with Gitlab
+
+Recommended
+
+- [Deployer](https://deployer.org/blog/how-to-deploy-laravel)
 
 ---
 
