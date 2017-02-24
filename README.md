@@ -98,7 +98,6 @@ test:
     - cp .env.example .env
     - php artisan key:generate
     - php artisan migrate:refresh --seed
-    - php artisan serve >/dev/null 2>&1 & # for API testing
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
   artifacts:
     paths:
