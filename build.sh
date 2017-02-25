@@ -28,10 +28,12 @@ function build_repository {
       echo $'\n\n'"--> Building $NAMESPACE-$REPOSITORY:$TAG"$'\n'
       docker build -t $NAMESPACE-$REPOSITORY:$TAG -f $ROOT_DIRECTORY/$REPOSITORY/$TAG/Dockerfile .
 
-      if [ -d "$ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT" ]; then
-        echo $'\n\n'"--> Building variant $NAMESPACE-$REPOSITORY:$TAG-$VARIANT"$'\n'
-        docker build -t $NAMESPACE-$REPOSITORY:$TAG-$VARIANT -f $ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT/Dockerfile .
-      fi
+        for VARI in $VARIANT; do
+          if [ -d "$ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARI" ]; then
+            echo $'\n\n'"--> Building variant $NAMESPACE-$REPOSITORY:$TAG-$VARI"$'\n'
+            docker build -t $NAMESPACE-$REPOSITORY:$TAG-$VARI -f $ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARI/Dockerfile .
+          fi
+        done
     done
 
     # create the latest tag
@@ -51,10 +53,12 @@ function publish_repository {
       # publish
       docker push $NAMESPACE-$REPOSITORY:$TAG
 
-      if [ -d "$ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARIANT" ]; then
-        echo $'\n\n'"--> Building variant $NAMESPACE-$REPOSITORY:$TAG-$VARIANT"$'\n'
-        docker push $NAMESPACE-$REPOSITORY:$TAG-$VARIANT
-      fi
+        for VARI in $VARIANT; do
+          if [ -d "$ROOT_DIRECTORY/$REPOSITORY/$TAG/$VARI" ]; then
+            echo $'\n\n'"--> Building variant $NAMESPACE-$REPOSITORY:$TAG-$VARI"$'\n'
+            docker push $NAMESPACE-$REPOSITORY:$TAG-$VARI
+          fi
+        done
     done
 
     # create the latest tag

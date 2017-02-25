@@ -1,6 +1,6 @@
 FROM php:7.1
 
-LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
+LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
       node="7"
 

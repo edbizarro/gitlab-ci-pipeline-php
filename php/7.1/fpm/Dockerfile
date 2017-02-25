@@ -1,7 +1,7 @@
-FROM php:5.6
+FROM php:7.1-fpm
 
-LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      php="5.6" \
+LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
+      php="7.1" \
       node="7"
 
 # Set correct environment variables
