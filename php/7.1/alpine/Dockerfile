@@ -8,27 +8,24 @@ ENV HOME="/root" \
     PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 RUN apk add --update --no-cache \
-		ca-certificates \
-		openssl \
-		autoconf \
-		gcc \
-		make \
-		bash \
-		sed \
-		grep \
+    ca-certificates \
+    openssl \
+    autoconf \
+    gcc \
+    g++ \
+    make \
+    bash \
+    sed \
+    grep \
     zlib-dev \
-		file \
-		libc-dev \
-		make \
-		pkgconf \
-		tar \
+    file \
+    libc-dev \
+    pkgconf \
+    tar \
+    openssh-client \
+    autoconf \
     libmcrypt-dev \
     libxml2-dev \
-    libxml2 \
-		openssh \
-		openssh-client \
-    autoconf \
-    g++ \
     freetype-dev \
     libjpeg-turbo-dev \
     libltdl \
@@ -43,21 +40,21 @@ RUN apk add --update --no-cache \
 # PHP Extensions
 RUN docker-php-ext-configure imap --with-imap --with-imap-ssl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install \
-    gd \
-    curl \
-    mcrypt \
-    json \
-    xml \
-    mbstring \
-    pdo \
-    pdo_mysql \
-    iconv \
-    opcache \
-    intl \
-    zip \
-    bz2 \
-    bcmath
+    && docker-php-ext-install -j$(nproc) \
+      gd \
+      curl \
+      mcrypt \
+      json \
+      xml \
+      mbstring \
+      pdo \
+      pdo_mysql \
+      iconv \
+      opcache \
+      intl \
+      zip \
+      bz2 \
+      bcmath
 
 # Run xdebug installation.
 RUN pecl install xdebug-2.5.0 \
@@ -112,16 +109,15 @@ RUN apk add --no-cache python linux-headers binutils-gold gnupg libstdc++ && \
 
 RUN apk del --purge \
 		.build-deps \
-		autoconf \
-		gcc \
-		make \
-		g++ \
-		file \
-		pkgconf \
-		build-base \
-		libtool \
-		wget \
-		sed \
-		grep \
+    autoconf \
+    gcc \
+    g++ \
+    make \
+    zlib-dev \
+    file \
+    libc-dev \
+    pkgconf \
+    tar \
+    autoconf \
     libltdl \
-		&& rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
