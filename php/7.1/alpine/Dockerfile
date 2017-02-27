@@ -82,9 +82,6 @@ RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 ENV VERSION=v7.6.0 NPM_VERSION=4
 
-# For base builds
-# ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
-
 RUN apk add --no-cache python linux-headers binutils-gold gnupg libstdc++ && \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
       9554F04D7259F04124DE6B476D5A82AC7E37093B \
@@ -121,7 +118,6 @@ RUN apk del --purge \
 		g++ \
 		file \
 		pkgconf \
-		*-dev \
 		build-base \
 		libtool \
 		wget \

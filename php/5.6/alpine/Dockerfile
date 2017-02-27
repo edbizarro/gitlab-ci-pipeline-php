@@ -121,7 +121,6 @@ RUN apk del --purge \
 		g++ \
 		file \
 		pkgconf \
-		*-dev \
 		build-base \
 		libtool \
 		wget \
