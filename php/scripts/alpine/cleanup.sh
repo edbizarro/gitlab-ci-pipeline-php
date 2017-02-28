@@ -1,7 +1,6 @@
 #!/bin/bash
 
 apk del --purge \
-		.persistent-deps \
     autoconf \
     gcc \
     g++ \
