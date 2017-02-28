@@ -20,7 +20,7 @@ RUN apk add --update --no-cache bash
 # Install
 RUN bash ./packages.sh \
     && bash ./composer.sh \
-    && bash ./node.sh
-    # && bash ./cleanup.sh
+    && bash ./node.sh \
+    && bash ./cleanup.sh
 
 WORKDIR /root
