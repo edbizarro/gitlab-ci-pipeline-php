@@ -1,7 +1,7 @@
 FROM php:5.6-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      php="5.6"
+      php="5.6" \
       node="7"
 
 # Set correct environment variables
