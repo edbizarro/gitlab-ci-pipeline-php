@@ -1,4 +1,4 @@
-FROM php:7.0-alpine
+FROM mhart/alpine-node
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.0" \
@@ -7,99 +7,82 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 # Set correct environment variables
 ENV HOME="/root" \
     PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
-    COMPOSER_HOME=/root/composer \
-    VERSION=v7.6.0 \
-    NPM_VERSION=4
+    COMPOSER_HOME=/root/composer
 
-RUN apk add --update --no-cache \
-    ca-certificates \
-    openssl \
-    autoconf \
-    gcc \
-    g++ \
-    make \
-    bash \
-    sed \
-    grep \
-    zlib-dev \
-    file \
-    libc-dev \
-    pkgconf \
-    tar \
-    openssh-client \
-    autoconf \
-    libmcrypt-dev \
-    libxml2-dev \
-    freetype-dev \
-    libjpeg-turbo-dev \
-    libltdl \
-    libmcrypt-dev \
-    libpng-dev \
-    imap-dev \
-    openssl-dev \
-    curl-dev \
-    icu-dev \
-    bzip2-dev \
-    && docker-php-ext-configure imap --with-imap --with-imap-ssl \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) \
-    gd \
-    curl \
-    mcrypt \
-    json \
-    xml \
-    mbstring \
-    pdo \
-    pdo_mysql \
-    iconv \
-    opcache \
-    intl \
-    zip \
-    bz2 \
-    bcmath \
-    && pecl install xdebug-2.5.0 \
-    && docker-php-ext-enable xdebug \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+RUN apk add --update wget curl bash \
+    && wget -O /etc/apk/keys/diego@hernandev.com-58b4c2e0.rsa.pub \
+    http://php-alpine.codecasts.rocks/repo/php-alpine.pub && \
+    echo "http://php.codecasts.rocks/7.0" >> /etc/apk/repositories && \
+    apk add --update \
+      php7 \
+      php7-bcmath \
+      php7-bz2 \
+      php7-calendar \
+      php7-ctype \
+      php7-curl \
+      php7-dba \
+      php7-dom \
+      php7-embed \
+      php7-enchant \
+      php7-exif \
+      php7-ftp \
+      php7-gd \
+      php7-gettext \
+      php7-gmp \
+      php7-iconv \
+      php7-imap \
+      php7-intl \
+      php7-json \
+      php7-ldap \
+      php7-litespeed \
+      php7-mbstring \
+      php7-mcrypt \
+      php7-mysqli \
+      php7-mysqlnd \
+      php7-odbc \
+      php7-opcache \
+      php7-openssl \
+      php7-pcntl \
+      php7-pdo \
+      php7-pdo_dblib \
+      php7-pdo_mysql \
+      php7-pdo_pgsql \
+      php7-pdo_sqlite \
+      php7-pear \
+      php7-pgsql \
+      php7-phar \
+      php7-phpdbg \
+      php7-posix \
+      php7-pspell \
+      php7-session \
+      php7-shmop \
+      php7-snmp \
+      php7-soap \
+      php7-sockets \
+      php7-sqlite3 \
+      php7-sysvmsg \
+      php7-sysvsem \
+      php7-sysvshm \
+      php7-tidy \
+      php7-wddx \
+      php7-xml \
+      php7-xmlreader \
+      php7-xmlrpc \
+      php7-xsl \
+      php7-zip \
+      php7-zlib \
+      php7-fpm \
+      php7-apcu \
+      php7-imagick \
+      php7-libsodium \
+      php7-memcached \
+      php7-mongodb \
+      php7-redis \
+      php7-xdebug \
+      && ln /usr/bin/php7 /usr/bin/php
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
     && curl -o- -L https://yarnpkg.com/install.sh | bash \
-    && apk add --no-cache python linux-headers binutils-gold gnupg libstdc++ && \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
-      9554F04D7259F04124DE6B476D5A82AC7E37093B \
-      94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
-      0034A06D9D9B0064CE8ADF6BF1747F4AD2306D93 \
-      FD3A5288F042B6850C66B31F09FE44734EB7990E \
-      71DCFD284A79C3B38668286BC97EC7A07EDE3FC1 \
-      DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
-      C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
-      B9AE9905FFD7803F25714661B63B535A4C206CA9 && \
-    curl -sSLO https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.xz && \
-    curl -sSL https://nodejs.org/dist/${VERSION}/SHASUMS256.txt.asc | gpg --batch --decrypt | \
-      grep " node-${VERSION}.tar.xz\$" | sha256sum -c | grep . && \
-    tar -xf node-${VERSION}.tar.xz && \
-    cd node-${VERSION} && \
-    ./configure --prefix=/usr ${CONFIG_FLAGS} && \
-    make -j$(getconf _NPROCESSORS_ONLN) && \
-    make install && \
-    cd / && \
-    if [ -x /usr/bin/npm ]; then \
-      npm install -g npm@${NPM_VERSION} && \
-      find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
-    fi && \
-    apk del curl make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS} && \
-    rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \
-      /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
-      /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts \
-    && apk del --purge \
-		.build-deps \
-    autoconf \
-    gcc \
-    g++ \
-    make \
-    zlib-dev \
-    file \
-    libc-dev \
-    pkgconf \
-    tar \
-    libltdl \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
