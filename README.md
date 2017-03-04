@@ -49,7 +49,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
   script:
     - yarn clean
     - yarn
@@ -90,7 +90,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
   script:
     - yarn clean
     - yarn
