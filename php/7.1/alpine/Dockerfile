@@ -9,7 +9,11 @@ ENV HOME="/root" \
     PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
     COMPOSER_HOME=/root/composer
 
-RUN apk add --update wget curl bash \
+RUN apk add --update \
+    wget \
+    curl \
+    bash \
+    openssh-client \
     && wget -O /etc/apk/keys/diego@hernandev.com-58b4c2e0.rsa.pub \
     http://php-alpine.codecasts.rocks/repo/php-alpine.pub && \
     echo "http://php.codecasts.rocks/7.1" >> /etc/apk/repositories && \
@@ -85,4 +89,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
     && curl -o- -L https://yarnpkg.com/install.sh | bash \
+    && apk del --purge wget \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man

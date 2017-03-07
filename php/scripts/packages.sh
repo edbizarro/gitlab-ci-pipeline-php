@@ -3,7 +3,6 @@
 apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
       openssh-client \
-      openssh \
       unzip \
       git \
       curl \
