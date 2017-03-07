@@ -17,5 +17,5 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
         bcmath
 
 # MONGO, xdebug and other extensions
-pecl install redis mongodb xdebug-2.5.0 pecl install apcu \
+pecl install redis mongodb xdebug-2.5.1 apcu \
   && docker-php-ext-enable redis mongodb xdebug apcu
