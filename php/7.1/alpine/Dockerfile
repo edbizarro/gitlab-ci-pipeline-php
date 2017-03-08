@@ -91,3 +91,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && curl -o- -L https://yarnpkg.com/install.sh | bash \
     && apk del --purge wget \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+
+RUN mkdir -p /var/www/html
+WORKDIR /var/www/html
