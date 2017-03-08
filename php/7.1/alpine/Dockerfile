@@ -92,3 +92,6 @@ RUN apk add --update \
     && curl -o- -L https://yarnpkg.com/install.sh | bash \
     && apk del --purge wget \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+
+RUN mkdir -p /var/www/html
+WORKDIR /var/www/html
