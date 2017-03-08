@@ -6,8 +6,8 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 
 # Set correct environment variables
 ENV HOME="/root" \
-    PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
-    COMPOSER_HOME="/root/composer"
+    PATH=$HOME/.yarn/bin:$PATH \
+    COMPOSER_HOME=$HOME/composer
 
 WORKDIR /tmp
 

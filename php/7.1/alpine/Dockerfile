@@ -6,10 +6,8 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 
 # Set correct environment variables
 ENV HOME="/root" \
-    PATH="$HOME:~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+    PATH=$HOME/.yarn/bin:$PATH \
     COMPOSER_HOME=$HOME/composer
-
-RUN touch /root/.bashrc
 
 RUN apk add --update \
     wget \
