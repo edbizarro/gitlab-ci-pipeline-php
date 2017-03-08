@@ -6,8 +6,10 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 
 # Set correct environment variables
 ENV HOME="/root" \
-    PATH="~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
-    COMPOSER_HOME=/root/composer
+    PATH="$HOME:~/.yarn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+    COMPOSER_HOME=$HOME/composer
+
+RUN touch /root/.bashrc
 
 RUN apk add --update \
     wget \
@@ -83,9 +85,8 @@ RUN apk add --update \
       php7-mongodb \
       php7-redis \
       php7-xdebug \
-      && ln /usr/bin/php7 /usr/bin/php
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && ln /usr/bin/php7 /usr/bin/php \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
     && curl -o- -L https://yarnpkg.com/install.sh | bash \
