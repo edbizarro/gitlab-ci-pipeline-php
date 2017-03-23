@@ -6,8 +6,9 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 
 # Set correct environment variables
 ENV HOME="/root" \
-    PATH=$HOME/.yarn/bin:$PATH \
     COMPOSER_HOME=$HOME/composer
+
+ENV PATH $HOME/.yarn/bin:$PATH
 
 RUN apk add --update \
     wget \
@@ -88,6 +89,7 @@ RUN apk add --update \
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
     && curl -o- -L https://yarnpkg.com/install.sh | bash \
+    && yarn --version \
     && apk del --purge wget \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
 
