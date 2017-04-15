@@ -79,7 +79,7 @@ variables:
 
 # Speed up builds
 cache:
-  key: $CI_BUILD_REF_NAME // changed to $CI_COMMIT_REF_NAME in Gitlab 9.x
+  key: $CI_BUILD_REF_NAME # changed to $CI_COMMIT_REF_NAME in Gitlab 9.x
   paths:
     - vendor
     - node_modules
