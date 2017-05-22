@@ -11,16 +11,17 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) \
-        imap \
-        gd \
-        mcrypt \
-        mbstring \
-        pdo_mysql \
-        opcache \
-        intl \
-        zip \
+        bcmath \
         bz2 \
-        bcmath
+        gd \
+        gmp \
+        imap \
+        intl \
+        mbstring \
+        mcrypt \
+        opcache \
+        pdo_mysql \
+        zip
 
 # MONGO, xdebug and other extensions
 pecl install redis mongodb xdebug-2.5.1 apcu \
