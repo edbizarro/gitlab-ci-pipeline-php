@@ -5,9 +5,11 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng12-dev \
+    libgmp-dev \
     libssl-dev \
     libicu-dev \
     libbz2-dev \
+    && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) \
