@@ -15,8 +15,8 @@ RUN apk add --update \
     curl \
     bash \
     openssh-client \
-    && wget -O /etc/apk/keys/diego@hernandev.com-58b4c2e0.rsa.pub \
-    http://php-alpine.codecasts.rocks/repo/php-alpine.pub && \
+    && wget -O /etc/apk/keys/php-alpine.rsa.pub \
+    http://php.codecasts.rocks/php-alpine.rsa.pub && \
     echo "http://php.codecasts.rocks/7.1" >> /etc/apk/repositories && \
     apk add --update \
       php7 \
