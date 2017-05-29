@@ -10,7 +10,8 @@ ENV HOME="/root" \
 
 ENV PATH $HOME/.yarn/bin:$PATH
 
-RUN apk add --update \
+RUN apk add --update --no-cache \
+    git \
     wget \
     curl \
     bash \
