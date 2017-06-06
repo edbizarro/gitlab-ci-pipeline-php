@@ -85,7 +85,6 @@ RUN apk add --update --no-cache \
       php7-mongodb \
       php7-redis \
       php7-xdebug \
-    && ln /usr/bin/php7 /usr/bin/php \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
