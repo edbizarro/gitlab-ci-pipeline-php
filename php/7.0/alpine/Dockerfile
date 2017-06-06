@@ -21,10 +21,11 @@ RUN apk add --update --no-cache \
     echo "http://php.codecasts.rocks/7.0" >> /etc/apk/repositories && \
     apk add --update \
       php7 \
-      php7-common \
+      php7-apcu \
       php7-bcmath \
       php7-bz2 \
       php7-calendar \
+      php7-common \
       php7-ctype \
       php7-curl \
       php7-dba \
@@ -32,18 +33,23 @@ RUN apk add --update --no-cache \
       php7-embed \
       php7-enchant \
       php7-exif \
+      php7-fpm \
       php7-ftp \
       php7-gd \
       php7-gettext \
       php7-gmp \
       php7-iconv \
+      php7-imagick \
       php7-imap \
       php7-intl \
       php7-json \
       php7-ldap \
+      php7-libsodium \
       php7-litespeed \
       php7-mbstring \
       php7-mcrypt \
+      php7-memcached \
+      php7-mongodb \
       php7-mysqli \
       php7-mysqlnd \
       php7-odbc \
@@ -61,6 +67,7 @@ RUN apk add --update --no-cache \
       php7-phpdbg \
       php7-posix \
       php7-pspell \
+      php7-redis \
       php7-session \
       php7-shmop \
       php7-snmp \
@@ -71,21 +78,16 @@ RUN apk add --update --no-cache \
       php7-sysvsem \
       php7-sysvshm \
       php7-tidy \
+      php7-tokenizer \
       php7-wddx \
+      php7-xdebug \
       php7-xml \
       php7-xmlreader \
       php7-xmlrpc \
+      php7-xmlwriter \
       php7-xsl \
       php7-zip \
       php7-zlib \
-      php7-fpm \
-      php7-apcu \
-      php7-imagick \
-      php7-libsodium \
-      php7-memcached \
-      php7-mongodb \
-      php7-redis \
-      php7-xdebug \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
