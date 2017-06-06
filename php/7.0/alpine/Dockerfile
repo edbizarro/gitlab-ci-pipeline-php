@@ -21,6 +21,7 @@ RUN apk add --update --no-cache \
     echo "http://php.codecasts.rocks/7.0" >> /etc/apk/repositories && \
     apk add --update \
       php7 \
+      php7-common \
       php7-bcmath \
       php7-bz2 \
       php7-calendar \
