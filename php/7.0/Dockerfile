@@ -2,7 +2,7 @@ FROM php:7.0
 
 LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.0" \
-      node="7"
+      node="8"
 
 # Set correct environment variables
 ENV HOME="/root" \

@@ -2,7 +2,7 @@ FROM php:5.6-fpm
 
 LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="5.6" \
-      node="7"
+      node="8"
 
 # Set correct environment variables
 ENV HOME="/root" \
