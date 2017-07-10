@@ -17,7 +17,7 @@
 - ```5.6``` [(5.6/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/5.6/Dockerfile) -  [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:5.6.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:5.6 "Get your own image badge on microbadger.com")
 - ```5.6-fpm``` [(5.6/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/5.6/fpm/Dockerfile) -  [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:5.6-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:5.6-fpm "Get your own image badge on microbadger.com")
 
-All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
+All versions come with Node 8.x, composer and [yarn](https://yarnpkg.com)
 
 [![Build Status](https://semaphoreci.com/api/v1/edbizarro/gitlab-ci-pipeline-php/branches/master/badge.svg)](https://semaphoreci.com/edbizarro/gitlab-ci-pipeline-php)
 
@@ -25,7 +25,7 @@ All versions come with Node 7.x, composer and [yarn](https://yarnpkg.com)
 
 ### Laravel users
 
-These images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up), Node 7.x and [Yarn](https://yarnpkg.com).
+These images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up), Node 8.x and [Yarn](https://yarnpkg.com).
 
 Everything you need to test Laravel projects :D
 
