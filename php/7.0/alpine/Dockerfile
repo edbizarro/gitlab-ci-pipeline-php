@@ -1,4 +1,4 @@
-FROM mhart/alpine-node
+FROM node:alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.0" \
@@ -11,17 +11,25 @@ ENV HOME="/root" \
 ENV PATH $HOME/.yarn/bin:$PATH
 
 RUN apk add --update --no-cache \
-    git \
-    wget \
-    curl \
     bash \
+    curl \
+    g++ \
+    gcc \
+    git \
+    grep \
+    make \
     openssh-client \
+    libressl-dev \
+    libwebp-dev \
+    libxml2-dev \
+    icu-libs \
+    tar \
+    wget \
     && wget -O /etc/apk/keys/php-alpine.rsa.pub \
     http://php.codecasts.rocks/php-alpine.rsa.pub && \
     echo "http://php.codecasts.rocks/7.0" >> /etc/apk/repositories && \
-    apk add --update \
+    apk add --update --no-cache \
       php7 \
-      php7-apcu \
       php7-bcmath \
       php7-bz2 \
       php7-calendar \
@@ -29,6 +37,7 @@ RUN apk add --update --no-cache \
       php7-ctype \
       php7-curl \
       php7-dba \
+      php7-dev \
       php7-dom \
       php7-embed \
       php7-enchant \
@@ -44,12 +53,10 @@ RUN apk add --update --no-cache \
       php7-intl \
       php7-json \
       php7-ldap \
-      php7-libsodium \
       php7-litespeed \
       php7-mbstring \
       php7-mcrypt \
       php7-memcached \
-      php7-mongodb \
       php7-mysqli \
       php7-mysqlnd \
       php7-odbc \
@@ -67,7 +74,6 @@ RUN apk add --update --no-cache \
       php7-phpdbg \
       php7-posix \
       php7-pspell \
-      php7-redis \
       php7-session \
       php7-shmop \
       php7-snmp \
@@ -80,7 +86,6 @@ RUN apk add --update --no-cache \
       php7-tidy \
       php7-tokenizer \
       php7-wddx \
-      php7-xdebug \
       php7-xml \
       php7-xmlreader \
       php7-xmlrpc \
@@ -88,11 +93,12 @@ RUN apk add --update --no-cache \
       php7-xsl \
       php7-zip \
       php7-zlib \
+    && pecl install redis mongodb xdebug-2.5.4 apcu \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
     && curl -o- -L https://yarnpkg.com/install.sh | bash \
-    && apk del --purge wget \
+    && apk del --purge wget gcc g++ make grep \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
 
 RUN mkdir -p /var/www/html
