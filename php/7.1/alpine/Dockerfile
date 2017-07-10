@@ -23,7 +23,7 @@ RUN apk add --update --no-cache \
     libzip \
     openssl-dev \
     && apk search -qe 'php7-*' | xargs apk add --update --no-cache \
-    && pecl install redis mongodb xdebug-2.5.5 apcu \
+    && pecl install redis mongodb xdebug apcu \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo --prefer-dist --no-interaction \
     && rm -rf /root/.composer/cache/* \
@@ -32,4 +32,5 @@ RUN apk add --update --no-cache \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
 
 RUN mkdir -p /var/www/html
+
 WORKDIR /var/www/html
