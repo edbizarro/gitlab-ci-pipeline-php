@@ -6,7 +6,8 @@ LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
 
 # Set correct environment variables
 ENV HOME="/root" \
-    COMPOSER_HOME=$HOME/composer
+    COMPOSER_HOME=$HOME/composer \
+    COMPOSER_ALLOW_SUPERUSER=1
 
 ENV PATH $HOME/.yarn/bin:$PATH
 
