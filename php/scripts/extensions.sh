@@ -19,6 +19,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
         bcmath \
         bz2 \
         curl \
+        exif \
         gd \
         gmp \
         imap \
