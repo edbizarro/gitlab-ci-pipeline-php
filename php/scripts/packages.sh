@@ -10,4 +10,5 @@ apt-get update \
       libkrb5-dev \
       zlib1g-dev \
       apt-utils \
+      rsync \
       --no-install-recommends
