@@ -22,6 +22,7 @@ RUN apk add --update --no-cache \
     libzip-dev \
     libzip \
     openssl-dev \
+    rsync \
     && apk search -qe 'php7-*' | xargs apk add --update --no-cache \
     && pecl install redis mongodb xdebug apcu \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
