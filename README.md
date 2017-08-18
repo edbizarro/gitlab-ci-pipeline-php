@@ -51,10 +51,8 @@ test:
   services:
     - mysql:5.7
   image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
-  script:
-    - yarn clean
-    - yarn
-    - gulp
+  script:    
+    - yarn    
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - cp .env.example .env
     - php artisan key:generate
@@ -84,8 +82,8 @@ cache:
     - vendor
     - node_modules
     - public
-    - ~/.composer/cache/files
-    - ~/.yarn-cache
+    - .yarn
+
 
 test:
   stage: test
@@ -93,9 +91,8 @@ test:
     - mysql:5.7
   image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
   script:
-    - yarn clean
-    - yarn
-    - gulp
+    - yarn config set cache-folder .yarn
+    - yarn install --pure-lockfile
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - cp .env.example .env
     - php artisan key:generate
