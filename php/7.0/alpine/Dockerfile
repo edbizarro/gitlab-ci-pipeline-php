@@ -26,6 +26,7 @@ RUN apk add --update --no-cache \
     icu-libs \
     tar \
     wget \
+    rsync \
     && wget -O /etc/apk/keys/php-alpine.rsa.pub \
     http://php.codecasts.rocks/php-alpine.rsa.pub && \
     echo "http://php.codecasts.rocks/7.0" >> /etc/apk/repositories && \
