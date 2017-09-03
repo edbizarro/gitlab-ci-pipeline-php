@@ -36,7 +36,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
         zip
 
 # MONGO, xdebug and other extensions
-pecl install redis mongodb xdebug-2.5.4 apcu \
+pecl install redis mongodb xdebug-2.5.5 apcu \
   && docker-php-ext-enable redis mongodb xdebug apcu
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
