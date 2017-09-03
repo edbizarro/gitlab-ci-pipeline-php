@@ -1,7 +1,7 @@
 #!/bin/bash
 
-apt-get update \
-&& DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
+DEBIAN_FRONTEND=noninteractive apt-get update \
+  &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
       openssh-client \
       unzip \
       git \

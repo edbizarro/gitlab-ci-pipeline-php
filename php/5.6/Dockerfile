@@ -20,6 +20,9 @@ RUN chmod +x /tmp/*.sh
 # Install
 RUN bash ./packages.sh \
     bash ./extensions.sh \
+      # MONGO, xdebug and other extensions
+      && pecl install mongodb xdebug-2.5.0 apcu-4.0.11 \
+      && docker-php-ext-enable mongodb xdebug apcu \
     && bash ./composer.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh
