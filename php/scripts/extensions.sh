@@ -28,6 +28,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
         mbstring \
         mcrypt \
         opcache \
+        pcntl \
         pdo_mysql \
         soap \
         xml \
