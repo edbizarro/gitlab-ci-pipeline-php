@@ -9,6 +9,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     libpng12-dev \
+    libpq-dev \
     libssl-dev \
     libxml2-dev \
     libzip-dev \
@@ -30,6 +31,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
         opcache \
         pcntl \
         pdo_mysql \
+        pdo_pgsql \
         soap \
         xml \
         xmlrpc \
