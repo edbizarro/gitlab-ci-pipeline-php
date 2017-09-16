@@ -7,30 +7,25 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 # Set correct environment variables
 ENV HOME="/root" \
     COMPOSER_HOME=$HOME/composer \
-    COMPOSER_ALLOW_SUPERUSER=1
+    COMPOSER_ALLOW_SUPERUSER=1 \
+    PATH=$HOME/.yarn/bin:$PATH
 
-ENV PATH $HOME/.yarn/bin:$PATH
+WORKDIR /tmp
 
-RUN apk add --update --no-cache \
-    bash \
-    curl \
-    git \
-    grep \
-    build-base \
-    openssh-client \
-    libxml2-dev \
-    libzip-dev \
-    libzip \
-    openssl-dev \
-    rsync \
-    && apk search -qe 'php7-*' | xargs apk add --update --no-cache \
-    && pecl install redis mongodb xdebug apcu \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer global require hirak/prestissimo --prefer-dist --no-interaction \
-    && rm -rf /root/.composer/cache/* \
-    && curl -o- -L https://yarnpkg.com/install.sh | bash \
-    && apk del --purge grep build-base \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+# COPY INSTALL SCRIPTS
+COPY ./php/scripts/alpine/*.sh /tmp/
+RUN chmod +x /tmp/*.sh
+
+ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+
+# Install
+RUN apk add --update --no-cache bash \
+    && bash ./packages.sh \
+    && echo "@php http://php.codecasts.rocks/v3.6/php-7.1" >> /etc/apk/repositories \
+    && bash ./extensions.sh \
+    && bash ./composer.sh \
+    && bash ./yarn.sh \
+    && bash ./cleanup.sh
 
 RUN mkdir -p /var/www/html
 
