@@ -121,6 +121,7 @@ deploy:
 Recommended
 
 - [Deployer](https://deployer.org/blog/how-to-deploy-laravel)
+- [Envoyer](https://envoyer.io)
 
 ---
 
