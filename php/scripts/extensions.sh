@@ -30,6 +30,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
         mcrypt \
         opcache \
         pcntl \
+        pdo \
         pdo_mysql \
         pdo_pgsql \
         soap \
