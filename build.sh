@@ -42,7 +42,7 @@ function build_repository {
 
     # create the latest tag
     echo $'\n\n'"--> Aliasing $LATEST as $LATEST_ALIAS "$'\n'
-    docker tag $NAMESPACE-$REPOSITORY:$LATEST_ALIAS $NAMESPACE-$REPOSITORY:$LATEST_ALIAS
+    docker tag $NAMESPACE-$REPOSITORY:$LATEST $NAMESPACE-$REPOSITORY:$LATEST_ALIAS
 }
 
 # function for publishing images
