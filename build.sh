@@ -39,6 +39,10 @@ function build_repository {
     # create the latest tag
     echo $'\n\n'"--> Aliasing $LATEST as 'latest'"$'\n'
     docker tag $NAMESPACE-$REPOSITORY:$LATEST $NAMESPACE-$REPOSITORY:latest
+
+    # create the latest tag
+    echo $'\n\n'"--> Aliasing $LATEST as $LATEST_ALIAS "$'\n'
+    docker tag $NAMESPACE-$REPOSITORY:$LATEST_ALIAS $NAMESPACE-$REPOSITORY:$LATEST_ALIAS
 }
 
 # function for publishing images
@@ -64,6 +68,10 @@ function publish_repository {
     # create the latest tag
     echo $'\n\n'"--> Publishing $NAMESPACE-$REPOSITORY:latest (from $LATEST)"$'\n'
     docker push $NAMESPACE-$REPOSITORY:latest
+
+    # create the latest alias tag
+    echo $'\n\n'"--> Publishing $NAMESPACE-$REPOSITORY:$LATEST_ALIAS (from $LATEST)"$'\n'
+    docker push $NAMESPACE-$REPOSITORY:$LATEST_ALIAS
 }
 
 # for each enabled repository
