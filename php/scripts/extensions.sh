@@ -13,6 +13,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     libssl-dev \
     libxml2-dev \
     libzip-dev \
+    libmemcached-dev \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -39,7 +40,8 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
         zip
 
 # MONGO, xdebug and other extensions
-pecl install redis mongodb xdebug-2.5.5 apcu memcached \
+pecl channel-update pecl.php.net \
+  && pecl install redis mongodb xdebug-2.5.5 apcu memcached \
   && docker-php-ext-enable redis mongodb xdebug apcu memcached
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini

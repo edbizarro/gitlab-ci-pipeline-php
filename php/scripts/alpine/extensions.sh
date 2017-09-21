@@ -1,5 +1,4 @@
 #!/bin/bash
-
 apk add --update --no-cache \
     php7@php \
     php7-apcu@php	\
@@ -67,5 +66,8 @@ apk add --update --no-cache \
     php7-xmlrpc@php \
     php7-xsl@php \
     php7-zip@php \
-    php7-zlib@php \
-    && ln -s /usr/bin/php7 /usr/bin/php
+    php7-zlib@php
+
+ln -s /usr/bin/php7 /usr/bin/php
+ln -s /usr/bin/phpize7 /usr/bin/phpize
+ln -s /usr/bin/php-fpm7 /usr/bin/php-fpm

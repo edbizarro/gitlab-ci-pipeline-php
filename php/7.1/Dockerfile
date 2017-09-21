@@ -16,16 +16,17 @@ WORKDIR /tmp
 COPY ./php/scripts/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
-RUN useradd -m -u 1000 $IMAGE_USER && \
-    mkdir -p /var/www/html && \
-    chown -R $IMAGE_USER:$IMAGE_USER /var/www
-
 # Install
 RUN bash ./packages.sh \
     && bash ./extensions.sh \
     && bash ./composer.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh
+
+RUN adduser --disabled-password --gecos "" $IMAGE_USER && \
+    echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
+    mkdir -p /var/www/html && \
+    chown -R $IMAGE_USER:$IMAGE_USER /var/www
 
 RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME
 

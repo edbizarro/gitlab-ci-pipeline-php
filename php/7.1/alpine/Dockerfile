@@ -11,6 +11,7 @@ ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 
 ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+
 WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
@@ -18,8 +19,7 @@ COPY ./php/scripts/alpine/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
 RUN adduser -D $IMAGE_USER && \
-    mkdir -p /var/www/html && \
-    chown -R $IMAGE_USER:$IMAGE_USER /var/www
+    mkdir -p /var/www/html
 
 # Install
 RUN apk add --update --no-cache bash \
@@ -30,7 +30,8 @@ RUN apk add --update --no-cache bash \
     && bash ./yarn.sh \
     && bash ./cleanup.sh
 
-RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME
+RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www
+RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $IMAGE_USER
 

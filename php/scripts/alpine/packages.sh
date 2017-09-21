@@ -10,4 +10,26 @@ apk add --update --no-cache \
     libzip-dev \
     libzip \
     openssl-dev \
-    rsync
+    rsync \
+    autoconf \
+    gcc \
+    g++
+
+apk add --no-cache --virtual .build-deps \
+        libstdc++ \
+        binutils-gold \
+        curl \
+        g++ \
+        gcc \
+        gnupg \
+        libgcc \
+        linux-headers \
+        make \
+        python \
+        pcre \
+        pcre-dev \
+        pcre-tools \
+        perl \
+        patch \
+        patchutils \
+        diffutils

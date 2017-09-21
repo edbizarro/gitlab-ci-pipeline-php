@@ -24,8 +24,8 @@ RUN useradd -m -u 1000 $IMAGE_USER && \
 RUN bash ./packages.sh \
     && bash ./extensions.sh \
       # MONGO, xdebug and other extensions
-      && pecl install mongodb memcached xdebug-2.5.0 apcu-4.0.11 \
-      && docker-php-ext-enable mongodb xdebug apcu memcached \
+      && pecl install mongodb xdebug-2.5.0 apcu-4.0.11 \
+      && docker-php-ext-enable mongodb xdebug apcu \
     && bash ./composer.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh
