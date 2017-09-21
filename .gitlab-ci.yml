@@ -13,12 +13,24 @@ before_script:
 
 debian:7.1:
   stage: build
+  variables:
+    VERSION: 7.1
   script:
-    - docker build -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
-    - docker push $NAMESPACE:7.1
+    - docker build -t $NAMESPACE:$VERSION -f php/$VERSION/Dockerfile .
+    - docker push $NAMESPACE:$VERSION
 
 debian:7.0:
   stage: build
+  variables:
+    VERSION: 7.0
   script:
-    - docker build -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
-    - docker push $NAMESPACE:7.0
+    - docker build -t $NAMESPACE:$VERSION -f php/$VERSION/Dockerfile .
+    - docker push $NAMESPACE:$VERSION
+
+debian:5.6:
+  stage: build
+  variables:
+    VERSION: 5.6
+  script:
+    - docker build -t $NAMESPACE:$VERSION -f php/$VERSION/Dockerfile .
+    - docker push $NAMESPACE:$VERSION
