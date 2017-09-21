@@ -1,6 +1,7 @@
 #!/bin/bash
 
 apk add --update --no-cache \
+    php7@php \
     php7-apcu@php	\
     php7-bcmath@php \
     php7-bz2@php \
@@ -51,7 +52,6 @@ apk add --update --no-cache \
     php7-redis@php \
     php7-session@php \
     php7-shmop@php \
-    php7-simplexml@php \
     php7-snmp@php \
     php7-soap@php \
     php7-sockets@php \
@@ -60,15 +60,12 @@ apk add --update --no-cache \
     php7-sysvsem@php \
     php7-sysvshm@php \
     php7-tidy@php \
-    php7-tokenizer@php \
     php7-wddx@php \
     php7-xdebug@php \
     php7-xml@php \
     php7-xmlreader@php \
     php7-xmlrpc@php \
-    php7-xmlwriter@php \
     php7-xsl@php \
     php7-zip@php \
     php7-zlib@php \
-    php7@php \
     && ln -s /usr/bin/php7 /usr/bin/php
