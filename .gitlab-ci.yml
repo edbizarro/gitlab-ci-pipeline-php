@@ -2,6 +2,7 @@ image: docker:git
 
 variables:
   DOCKER_DRIVER: overlay2
+  NAMESPACE: edbizarro/gitlab-ci-pipeline-php
 
 services:
   - docker:dind
@@ -10,7 +11,14 @@ before_script:
   - apk --update --no-cache add bash
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
-build:
+debian:7.1:
   stage: build
   script:
-  - bash build.sh
+    - docker build -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
+    - docker push $NAMESPACE:7.1
+
+debian:7.0:
+  stage: build
+  script:
+    - docker build -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
+    - docker push $NAMESPACE:7.0
