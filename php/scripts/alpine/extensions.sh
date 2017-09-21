@@ -1,7 +1,6 @@
 #!/bin/bash
 
 apk add --update --no-cache \
-    php7@php \
     php7-apcu@php	\
     php7-bcmath@php \
     php7-bz2@php \
@@ -38,11 +37,11 @@ apk add --update --no-cache \
     php7-opcache@php \
     php7-openssl@php \
     php7-pcntl@php \
-    php7-pdo@php \
     php7-pdo_dblib@php \
     php7-pdo_mysql@php \
     php7-pdo_pgsql@php \
     php7-pdo_sqlite@php \
+    php7-pdo@php \
     php7-pear@php \
     php7-pgsql@php \
     php7-phar@php \
@@ -52,8 +51,8 @@ apk add --update --no-cache \
     php7-redis@php \
     php7-session@php \
     php7-shmop@php \
-    php7-snmp@php \
     php7-simplexml@php \
+    php7-snmp@php \
     php7-soap@php \
     php7-sockets@php \
     php7-sqlite3@php \
@@ -70,4 +69,6 @@ apk add --update --no-cache \
     php7-xmlwriter@php \
     php7-xsl@php \
     php7-zip@php \
-    php7-zlib@php
+    php7-zlib@php \
+    php7@php \
+    && ln -s /usr/bin/php7 /usr/bin/php

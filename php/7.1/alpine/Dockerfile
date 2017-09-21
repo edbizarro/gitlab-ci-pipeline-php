@@ -5,10 +5,12 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       node="8"
 
 # Set correct environment variables
-ENV HOME="/root" \
-    COMPOSER_HOME=$HOME/composer \
-    COMPOSER_ALLOW_SUPERUSER=1 \
-    PATH=$HOME/.yarn/bin:$PATH
+ENV IMAGE_USER=php
+ENV HOME=/home/$IMAGE_USER
+ENV COMPOSER_HOME=$HOME/composer
+ENV PATH=$HOME/.yarn/bin:$PATH
+
+ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 WORKDIR /tmp
 
@@ -16,7 +18,9 @@ WORKDIR /tmp
 COPY ./php/scripts/alpine/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
-ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+RUN adduser -D $IMAGE_USER && \
+    mkdir -p /var/www/html && \
+    chown -R $IMAGE_USER:$IMAGE_USER /var/www
 
 # Install
 RUN apk add --update --no-cache bash \
@@ -27,6 +31,8 @@ RUN apk add --update --no-cache bash \
     && bash ./yarn.sh \
     && bash ./cleanup.sh
 
-RUN mkdir -p /var/www/html
+RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME
+
+USER $IMAGE_USER
 
 WORKDIR /var/www/html
