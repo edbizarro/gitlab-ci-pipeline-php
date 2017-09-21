@@ -7,7 +7,7 @@ services:
   - docker:dind
 
 before_script:
-  - docker info
+  - apk --update --no-cache add bash
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build:
