@@ -13,17 +13,25 @@ before_script:
 debian:7.1:
   stage: build
   script:
-    - docker build -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --compress --cache-from $NAMESPACE:7.1 -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
     - docker push $NAMESPACE:7.1
 
 debian:7.0:
   stage: build
   script:
-    - docker build -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:7.0 -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
     - docker push $NAMESPACE:7.0
 
 debian:5.6:
   stage: build
   script:
-    - docker build -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
     - docker push $NAMESPACE:5.6
+
+
+alpine:7.1:
+  stage: build
+  script:
+    - docker build --compress --cache-from $NAMESPACE:7.1-alpine -t $NAMESPACE:7.1-alpine -f php/7.1/alpine/Dockerfile .
+    - docker push $NAMESPACE:7.1-alpine
