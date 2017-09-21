@@ -7,7 +7,7 @@ LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
 # Set correct environment variables
 ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
-ENV COMPOSER_HOME=$HOME/composer
+ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 
 WORKDIR /tmp

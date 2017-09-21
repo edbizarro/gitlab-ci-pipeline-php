@@ -5,10 +5,10 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       node="8"
 
 # Set correct environment variables
-ENV HOME="/root" \
-    COMPOSER_HOME=$HOME/composer \
-    COMPOSER_ALLOW_SUPERUSER=1 \
-    PATH=$HOME/.yarn/bin:$PATH
+ENV IMAGE_USER=php
+ENV HOME=/home/$IMAGE_USER
+ENV COMPOSER_HOME=$HOME/composer
+ENV PATH=$HOME/.yarn/bin:$PATH
 
 ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 8.5.0
