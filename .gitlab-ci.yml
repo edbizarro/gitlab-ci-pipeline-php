@@ -14,7 +14,11 @@ debian:7.1:
   stage: build
   script:
     - docker build --compress --cache-from $NAMESPACE:7.1 -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
+    - docker tag $NAMESPACE:7.1 $NAMESPACE:latest
+    - docker tag $NAMESPACE:7.1 $NAMESPACE:7
+    - docker push $NAMESPACE:7
     - docker push $NAMESPACE:7.1
+    - docker push $NAMESPACE:latest
 
 debian:7.0:
   stage: build
