@@ -8,12 +8,12 @@ services:
   - docker:dind
 
 before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" index.docker.io
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
 debian:7.1:
   stage: build
   script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" index.docker.io
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
     - docker build --compress --cache-from $NAMESPACE:7.1 -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
     - docker push $NAMESPACE:7.1
 
