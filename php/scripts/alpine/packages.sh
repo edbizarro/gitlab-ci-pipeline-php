@@ -11,6 +11,7 @@ apk add --update --no-cache \
     libzip \
     openssl-dev \
     rsync \
+    sudo \
     autoconf \
     gcc \
     g++
