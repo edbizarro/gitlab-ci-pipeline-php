@@ -10,6 +10,8 @@ ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 
+USER root
+
 WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
@@ -21,14 +23,11 @@ RUN bash ./packages.sh \
     && bash ./extensions.sh \
     && bash ./composer.sh \
     && bash ./node.sh \
-    && bash ./cleanup.sh
-
-RUN adduser --disabled-password --gecos "" $IMAGE_USER && \
-    echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
-    mkdir -p /var/www/html && \
-    chown -R $IMAGE_USER:$IMAGE_USER /var/www
-
-RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME
+    && bash ./cleanup.sh \
+    && adduser --disabled-password --gecos "" $IMAGE_USER && \
+       echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
+       mkdir -p /var/www/html && \
+       chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME
 
 USER $IMAGE_USER
 
