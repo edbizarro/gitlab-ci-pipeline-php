@@ -1,4 +1,4 @@
-image: docker:git
+image: docker:latest
 
 variables:
   DOCKER_DRIVER: overlay2
@@ -27,7 +27,6 @@ debian:5.6:
   script:
     - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
     - docker push $NAMESPACE:5.6
-
 
 alpine:7.1:
   stage: build
