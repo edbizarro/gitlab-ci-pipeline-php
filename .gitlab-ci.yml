@@ -60,6 +60,6 @@ fpm:7.1:
   stage: build
   script:
     - docker build --compress --cache-from $NAMESPACE:7.1-fpm -t $NAMESPACE:7.1-fpm -f php/7.1/fpm/Dockerfile .
-    - docker tag $NAMESPACE:7.1 $NAMESPACE:fpm
+    - docker tag $NAMESPACE:7.1-fpm $NAMESPACE:fpm
     - docker push $NAMESPACE:7.1-fpm
     - docker push $NAMESPACE:fpm
