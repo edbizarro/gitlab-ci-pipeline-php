@@ -19,6 +19,7 @@ debian:7.1:
     - docker push $NAMESPACE:7
     - docker push $NAMESPACE:7.1
     - docker push $NAMESPACE:latest
+    - 'if docker run -it --rm edbizarro/gitlab-ci-pipeline-php:7.1 php -v | grep 7.1; then echo 1; else echo 0; fi'
 
 debian:7.0:
   stage: build
