@@ -24,6 +24,8 @@ RUN bash ./packages.sh \
     && bash ./composer.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh \
+    && mkdir -p /home/php \
+    && chown -R $IMAGE_USER:$IMAGE_USER $HOME \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
        mkdir -p /var/www/html && \
