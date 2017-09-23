@@ -7,7 +7,7 @@ LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
 # Set correct environment variables
 ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
-ENV COMPOSER_HOME=$HOME/composer
+ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 
 USER root
@@ -24,8 +24,6 @@ RUN bash ./packages.sh \
     && bash ./composer.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh \
-    && mkdir -p /home/php \
-    && chown -R $IMAGE_USER:$IMAGE_USER $HOME \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
        mkdir -p /var/www/html && \
