@@ -16,10 +16,10 @@ debian:7.1:
     - docker build --compress --cache-from $NAMESPACE:7.1 -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
     - docker tag $NAMESPACE:7.1 $NAMESPACE:latest
     - docker tag $NAMESPACE:7.1 $NAMESPACE:7
+    - 'if docker run -it --rm edbizarro/gitlab-ci-pipeline-php:7.1 php -v | grep 7.1; then echo 1; else echo 0; fi'
     - docker push $NAMESPACE:7
     - docker push $NAMESPACE:7.1
     - docker push $NAMESPACE:latest
-    - 'if docker run -it --rm edbizarro/gitlab-ci-pipeline-php:7.1 php -v | grep 7.1; then echo 1; else echo 0; fi'
 
 debian:7.0:
   stage: build
