@@ -30,6 +30,7 @@ apk add --update --no-cache \
     php7-mbstring@php \
     php7-mcrypt@php \
     php7-memcached@php \
+    php7-tokenizer@php \
     php7-mongodb@php \
     php7-mysqli@php \
     php7-mysqlnd@php \
