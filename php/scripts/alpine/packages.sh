@@ -4,21 +4,19 @@ apk add --update --no-cache \
     curl \
     git \
     grep \
-    build-base \
     openssh-client \
     libxml2-dev \
     libzip-dev \
     libzip \
     openssl-dev \
     rsync \
-    sudo \
-    autoconf \
-    gcc \
-    g++
+    sudo
 
 apk add --no-cache --virtual .build-deps \
         libstdc++ \
         binutils-gold \
+        build-base \
+        autoconf \
         curl \
         g++ \
         gcc \

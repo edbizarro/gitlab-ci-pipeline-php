@@ -59,6 +59,7 @@ apk add --update --no-cache \
     php7-sysvsem@php \
     php7-sysvshm@php \
     php7-tidy@php \
+    php7-tokenizer@php \
     php7-wddx@php \
     php7-xdebug@php \
     php7-xml@php \
