@@ -14,7 +14,8 @@ apk add --update --no-cache \
     sudo \
     autoconf \
     gcc \
-    g++
+    g++ \
+    file
 
 apk add --no-cache --virtual .build-deps \
         libstdc++ \
