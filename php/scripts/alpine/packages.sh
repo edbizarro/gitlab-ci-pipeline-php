@@ -10,8 +10,9 @@ apk add --update --no-cache \
     libzip \
     openssl-dev \
     rsync \
-    sudo
-
+    sudo \
+    file
+    
 apk add --no-cache --virtual .build-deps \
         libstdc++ \
         binutils-gold \
