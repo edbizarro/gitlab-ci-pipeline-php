@@ -14,9 +14,9 @@ debian:7.1:
   stage: build
   script:
     - docker build --compress --cache-from $NAMESPACE:7.1 -t $NAMESPACE:7.1 -f php/7.1/Dockerfile .
+    # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:7.1 php -v | grep "PHP 7.1"; then return 0; else return 1; fi'
     - docker tag $NAMESPACE:7.1 $NAMESPACE:latest
     - docker tag $NAMESPACE:7.1 $NAMESPACE:7
-    - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:7.1 php -v | grep "PHP 7.1"; then return 0; else return 1; fi'
     - docker push $NAMESPACE:7
     - docker push $NAMESPACE:7.1
     - docker push $NAMESPACE:latest
@@ -25,14 +25,14 @@ debian:7.0:
   stage: build
   script:
     - docker build --compress --cache-from $NAMESPACE:7.0 -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
-    - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:7.0 php -v | grep "PHP 7.0"; then return 0; else return 1; fi'
+    # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:7.0 php -v | grep "PHP 7.0"; then return 0; else return 1; fi'
     - docker push $NAMESPACE:7.0
 
 debian:5.6:
   stage: build
   script:
     - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
-    - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:5.6 php -v | grep "PHP 5.6"; then return 0; else return 1; fi'
+    # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:5.6 php -v | grep "PHP 5.6"; then return 0; else return 1; fi'
     - docker push $NAMESPACE:5.6
 
 alpine:7.1:
