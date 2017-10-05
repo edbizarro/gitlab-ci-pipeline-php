@@ -125,6 +125,6 @@ Recommended
 
 ---
 
-Special thanks to [Ambientum](https://github.com/codecasts/ambientum), an incredible Brazilian project, for the [build](https://github.com/codecasts/ambientum/blob/master/build.sh) script.
+Special thanks to [Ambientum](https://github.com/codecasts/ambientum), an incredible Brazilian project, for the inspiration.
 
 [![forthebadge](http://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)

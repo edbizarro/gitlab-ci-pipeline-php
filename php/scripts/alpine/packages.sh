@@ -4,15 +4,12 @@ apk add --update --no-cache \
     curl \
     git \
     grep \
-    openssh-client \
-    libxml2-dev \
-    libzip-dev \
-    libzip \
     openssl-dev \
+    openssh-client \
     rsync \
     sudo \
     file
-    
+
 apk add --no-cache --virtual .build-deps \
         libstdc++ \
         binutils-gold \

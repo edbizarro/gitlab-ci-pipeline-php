@@ -46,11 +46,3 @@ apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg li
   rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
     /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
-
-
-
-
-
-
-# Yarn
-curl -o- -L https://yarnpkg.com/install.sh | bash
