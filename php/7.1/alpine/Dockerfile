@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM php:7.1-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
@@ -9,8 +9,7 @@ ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
-
-ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+ENV PHP_VERSION="7.1"
 
 WORKDIR /tmp
 
@@ -24,10 +23,9 @@ RUN adduser -D $IMAGE_USER && \
 # Install
 RUN apk add --update --no-cache bash \
     && bash ./packages.sh \
-    && echo "@php http://php.codecasts.rocks/v3.6/php-7.1" >> /etc/apk/repositories \
     && bash ./extensions.sh \
     && bash ./composer.sh \
-    && bash ./yarn.sh \
+    && bash ./nodeyarn.sh \
     && bash ./cleanup.sh
 
 RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www
