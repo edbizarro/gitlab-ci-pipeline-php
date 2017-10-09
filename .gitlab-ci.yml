@@ -10,10 +10,10 @@ services:
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
   - apk --update --no-cache add curl
-  - curl -L https://github.com/aelsabbahy/goss/releases/download/v0.3.5/goss-linux-amd64 -o /usr/local/bin/goss
-  - chmod +rx /usr/local/bin/goss
-  - curl -L https://raw.githubusercontent.com/aelsabbahy/goss/v0.3.5/extras/dgoss/dgoss -o /usr/local/bin/dgoss
-  - chmod +rx /usr/local/bin/dgoss
+  - curl -L https://github.com/aelsabbahy/goss/releases/download/v0.3.5/goss-linux-amd64 -o /usr/bin/goss
+  - chmod +rx /usr/bin/goss
+  - curl -L https://raw.githubusercontent.com/aelsabbahy/goss/v0.3.5/extras/dgoss/dgoss -o /usr/bin/dgoss
+  - chmod +rx /usr/bin/dgoss
   - goss --version
   - dgoss --help
 
