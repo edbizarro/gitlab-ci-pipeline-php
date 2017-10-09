@@ -40,7 +40,7 @@ alpine:7.1:
   script:
     - docker build --compress --cache-from $NAMESPACE:7.1-alpine -t $NAMESPACE:7.1-alpine -f php/7.1/alpine/Dockerfile .
     - apk --update --no-cache add curl && curl -fsSL https://goss.rocks/install | sh
-    - dgoss run edbizarro/gitlab-ci-pipeline-php:7.1-alpine
+    - /usr/local/bin/dgoss run edbizarro/gitlab-ci-pipeline-php:7.1-alpine
     - docker push $NAMESPACE:7.1-alpine
 
 alpine:7.0:
