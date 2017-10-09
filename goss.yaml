@@ -1,0 +1,14 @@
+---
+package:
+  php:
+    installed: true
+    versions:
+      - 7.1
+  composer:
+    installed: true
+  node:
+    installed: true
+    versions:
+      - 6
+  yarn:
+    installed: true

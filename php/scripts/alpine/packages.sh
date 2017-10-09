@@ -8,7 +8,8 @@ apk add --update --no-cache \
     openssh-client \
     rsync \
     sudo \
-    file
+    file \
+    ca-certificates
 
 apk add --no-cache --virtual .build-deps \
         libstdc++ \

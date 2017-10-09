@@ -5,6 +5,7 @@ apk --update --no-cache add \
   freetype-dev \
   libjpeg-turbo-dev \
   libltdl \
+  libtool \
   libmcrypt-dev \
   libpng-dev \
   krb5-dev \
@@ -15,7 +16,8 @@ apk --update --no-cache add \
   libxslt-dev \
   imagemagick-dev \
   gmp-dev \
-  postgresql-dev
+  postgresql-dev \
+  sqlite3
 
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
 && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \

@@ -34,3 +34,5 @@ RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
 USER $IMAGE_USER
 
 WORKDIR /var/www/html
+
+CMD ["php", "-a"]
