@@ -1,14 +1,46 @@
 ---
 package:
-  php:
+  nodejs:
     installed: true
-    versions:
-      - 7.1
-  composer:
-    installed: true
-  node:
-    installed: true
-    versions:
-      - 6
   yarn:
     installed: true
+  curl:
+    installed: true
+
+command:
+  composer --version:
+    exit-status: 0
+  php --version:
+    exit-status: 0
+  php -m:
+    exit-status: 0
+    stdout:
+      - "bcmath"
+      - "bz2"
+      - "exif"
+      - "gd"
+      - "gmp"
+      - "iconv"
+      - "imap"
+      - "intl"
+      - "json"
+      - "mcrypt"
+      - "opcache"
+      - "pcntl"
+      - "pdo"
+      - "mysql"
+      - "mysqli"
+      - "pdo_pgsql"
+      - "pdo_sqlite"
+      - "pdo_mysql"
+      - "pgsql"
+      - "readline"
+      - "soap"
+      - "xml"
+      - "xmlrpc"
+      - "xsl"
+      - "zip"
+
+user:
+  php:
+    exists: true

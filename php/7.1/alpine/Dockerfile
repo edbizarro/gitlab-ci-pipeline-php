@@ -31,6 +31,10 @@ RUN apk add --update --no-cache bash \
 RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
 
+# Goss
+ENV GOSS_VERSION="0.3.5"
+RUN curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
+
 USER $IMAGE_USER
 
 WORKDIR /var/www/html

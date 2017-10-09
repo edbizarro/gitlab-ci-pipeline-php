@@ -17,8 +17,9 @@ apk --update --no-cache add \
   imagemagick-dev \
   gmp-dev \
   postgresql-dev \
-  sqlite3
-  
+  sqlite3 \
+  php-soap
+
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
 && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) \
@@ -35,9 +36,11 @@ docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     opcache \
     pcntl \
     pdo \
-    pdo_mysql \
+    mysql \
+    mysqli \
     pdo_pgsql \
     pdo_sqlite \
+    pdo_mysql \
     pgsql \
     readline \
     soap \

@@ -9,13 +9,6 @@ services:
 
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-  - apk --update --no-cache add curl
-  - curl -L https://github.com/aelsabbahy/goss/releases/download/v0.3.5/goss-linux-amd64 -o /usr/bin/goss
-  - chmod +rx /usr/bin/goss
-  - curl -L https://raw.githubusercontent.com/aelsabbahy/goss/v0.3.5/extras/dgoss/dgoss -o /usr/bin/dgoss
-  - chmod +rx /usr/bin/dgoss
-  - goss --version
-  - dgoss --help
 
 debian:7.1:
   stage: build
@@ -28,49 +21,49 @@ debian:7.1:
     - docker push $NAMESPACE:7.1
     - docker push $NAMESPACE:latest
 
-debian:7.0:
-  stage: build
-  script:
-    - docker build --compress --cache-from $NAMESPACE:7.0 -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
-    # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:7.0 php -v | grep "PHP 7.0"; then return 0; else return 1; fi'
-    - docker push $NAMESPACE:7.0
-
-debian:5.6:
-  stage: build
-  script:
-    - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
-    # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:5.6 php -v | grep "PHP 5.6"; then return 0; else return 1; fi'
-    - docker push $NAMESPACE:5.6
+# debian:7.0:
+#   stage: build
+#   script:
+#     - docker build --compress --cache-from $NAMESPACE:7.0 -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
+#     # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:7.0 php -v | grep "PHP 7.0"; then return 0; else return 1; fi'
+#     - docker push $NAMESPACE:7.0
+#
+# debian:5.6:
+#   stage: build
+#   script:
+#     - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
+#     # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:5.6 php -v | grep "PHP 5.6"; then return 0; else return 1; fi'
+#     - docker push $NAMESPACE:5.6
 
 alpine:7.1:
   stage: build
   script:
     - docker build --compress --cache-from $NAMESPACE:7.1-alpine -t $NAMESPACE:7.1-alpine -f php/7.1/alpine/Dockerfile .
-    - /usr/local/bin/dgoss run edbizarro/gitlab-ci-pipeline-php:7.1-alpine
+    - docker run -it --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:7.1-alpine goss v
     - docker push $NAMESPACE:7.1-alpine
 
-alpine:7.0:
-  stage: build
-  script:
-    - docker build --compress --cache-from $NAMESPACE:7.0-alpine -t $NAMESPACE:7.0-alpine -f php/7.0/alpine/Dockerfile .
-    - docker push $NAMESPACE:7.0-alpine
-
-fpm:5.6:
-  stage: build
-  script:
-    - docker build --compress --cache-from $NAMESPACE:5.6-fpm -t $NAMESPACE:5.6-fpm -f php/5.6/fpm/Dockerfile .
-    - docker push $NAMESPACE:5.6-fpm
-
-fpm:7.0:
-  stage: build
-  script:
-    - docker build --compress --cache-from $NAMESPACE:7.0-fpm -t $NAMESPACE:7.0-fpm -f php/7.0/fpm/Dockerfile .
-    - docker push $NAMESPACE:7.0-fpm
-
-fpm:7.1:
-  stage: build
-  script:
-    - docker build --compress --cache-from $NAMESPACE:7.1-fpm -t $NAMESPACE:7.1-fpm -f php/7.1/fpm/Dockerfile .
-    - docker tag $NAMESPACE:7.1-fpm $NAMESPACE:fpm
-    - docker push $NAMESPACE:7.1-fpm
-    - docker push $NAMESPACE:fpm
+# alpine:7.0:
+#   stage: build
+#   script:
+#     - docker build --compress --cache-from $NAMESPACE:7.0-alpine -t $NAMESPACE:7.0-alpine -f php/7.0/alpine/Dockerfile .
+#     - docker push $NAMESPACE:7.0-alpine
+#
+# fpm:5.6:
+#   stage: build
+#   script:
+#     - docker build --compress --cache-from $NAMESPACE:5.6-fpm -t $NAMESPACE:5.6-fpm -f php/5.6/fpm/Dockerfile .
+#     - docker push $NAMESPACE:5.6-fpm
+#
+# fpm:7.0:
+#   stage: build
+#   script:
+#     - docker build --compress --cache-from $NAMESPACE:7.0-fpm -t $NAMESPACE:7.0-fpm -f php/7.0/fpm/Dockerfile .
+#     - docker push $NAMESPACE:7.0-fpm
+#
+# fpm:7.1:
+#   stage: build
+#   script:
+#     - docker build --compress --cache-from $NAMESPACE:7.1-fpm -t $NAMESPACE:7.1-fpm -f php/7.1/fpm/Dockerfile .
+#     - docker tag $NAMESPACE:7.1-fpm $NAMESPACE:fpm
+#     - docker push $NAMESPACE:7.1-fpm
+#     - docker push $NAMESPACE:fpm
