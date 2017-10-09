@@ -17,14 +17,15 @@ apk --update --no-cache add \
   imagemagick-dev \
   gmp-dev \
   postgresql-dev \
-  sqlite3 \
-  php-soap
+  sqlite3-dev \
+  libintl
 
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
 && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) \
     bcmath \
     bz2 \
+    calendar \
     exif \
     gd \
     gmp \
@@ -65,13 +66,26 @@ if [[ $PHP_VERSION =~ "7.0" ]]; then
 fi
 
 docker-php-source extract \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz" \
+    && tar xfz /tmp/redis.tar.gz \
+    && rm -r /tmp/redis.tar.gz \
+    && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
+    && docker-php-ext-install redis \
+    && docker-php-source delete
+
+docker-php-source extract \
     && apk add --no-cache --virtual .phpize-deps-configure $PHPIZE_DEPS \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
     && apk del .phpize-deps-configure \
     && docker-php-source delete
 
-pecl install redis mongodb imagick \
-  && docker-php-ext-enable redis mongodb imagick
+apk add --update --no-cache autoconf g++ imagemagick-dev pcre-dev libtool make \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && apk del autoconf g++ libtool make pcre-dev
+
+pecl install mongodb \
+  && docker-php-ext-enable mongodb
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini

@@ -15,8 +15,10 @@ command:
   php -m:
     exit-status: 0
     stdout:
+      - "apcu"
       - "bcmath"
       - "bz2"
+      - "calendar"
       - "exif"
       - "gd"
       - "gmp"
@@ -40,6 +42,10 @@ command:
       - "xmlrpc"
       - "xsl"
       - "zip"
+      - "xdebug"
+      - "mongo"
+      - "redis"
+      - "memcached"
 
 user:
   php:
