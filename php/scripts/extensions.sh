@@ -16,6 +16,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     libmemcached-dev \
     libmagickwand-dev \
     imagemagick \
+    libxslt1-dev \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
