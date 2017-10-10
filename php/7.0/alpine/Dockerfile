@@ -8,8 +8,8 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
-ENV PATH=$HOME/.yarn/bin:$PATH
 ENV PHP_VERSION="7.0"
+ENV GOSS_VERSION="0.3.5"
 
 WORKDIR /tmp
 
@@ -30,6 +30,9 @@ RUN apk add --update --no-cache bash \
 
 RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
+
+# Goss
+RUN curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
 
 USER $IMAGE_USER
 
