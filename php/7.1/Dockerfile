@@ -8,6 +8,7 @@ LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
 ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
+ENV PATH=$HOME/.yarn/bin:$PATH
 ENV GOSS_VERSION="0.3.5"
 
 USER root
