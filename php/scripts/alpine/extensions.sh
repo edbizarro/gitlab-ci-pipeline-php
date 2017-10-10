@@ -52,13 +52,13 @@ if [[ $PHP_VERSION =~ "7.0" ]]; then
     && docker-php-ext-enable xdebug
 fi
 
-# docker-php-source extract \
-#     && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz" \
-#     && tar xfz /tmp/redis.tar.gz \
-#     && rm -r /tmp/redis.tar.gz \
-#     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
-#     && docker-php-ext-install redis \
-#     && docker-php-source delete
+docker-php-source extract \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/3.1.4.tar.gz" \
+    && tar xfz /tmp/redis.tar.gz \
+    && rm -r /tmp/redis.tar.gz \
+    && mv phpredis-3.1.4 /usr/src/php/ext/redis \
+    && docker-php-ext-install redis \
+    && docker-php-source delete
 
 docker-php-source extract \
     && apk add --no-cache --virtual .phpize-deps-configure $PHPIZE_DEPS \
