@@ -37,10 +37,12 @@ before_script:
 
 alpine:7.1:
   stage: build
+  variables:
+    IMAGE_VERSION: 7.1-alpine
   script:
-    - docker build --compress --cache-from $NAMESPACE:7.1-alpine -t $NAMESPACE:7.1-alpine -f php/7.1/alpine/Dockerfile .
-    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:7.1-alpine goss v
-    - docker push $NAMESPACE:7.1-alpine
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
+    - docker push $NAMESPACE:$IMAGE_VERSION
 
 # alpine:7.0:
 #   stage: build

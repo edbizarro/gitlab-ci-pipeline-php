@@ -1,13 +1,15 @@
 ---
 package:
-  nodejs:
-    installed: true
-  yarn:
-    installed: true
   curl:
     installed: true
 
 command:
+  node --version:
+    exit-status: 0
+  yarn --version:
+    exit-status: 0
+  npm --version:
+    exit-status: 0
   composer --version:
     exit-status: 0
   php --version:
@@ -27,11 +29,11 @@ command:
       - "intl"
       - "json"
       - "mcrypt"
-      - "opcache"
+      - "OPcache"
       - "pcntl"
       - "pdo"
       - "mysql"
-      - "mysqli"
+      - "imagick"
       - "pdo_pgsql"
       - "pdo_sqlite"
       - "pdo_mysql"
@@ -43,9 +45,19 @@ command:
       - "xsl"
       - "zip"
       - "xdebug"
-      - "mongo"
+      - "mongodb"
       - "redis"
       - "memcached"
+
+file:
+  /usr/local/etc/php/conf.d/zz-conf.ini:
+    exists: true
+    contains:
+      - memory_limit
+  /usr/local/etc/php/conf.d/opcache-recommended.ini:
+    exists: true
+  /usr/local/etc/php/conf.d/apcu-recommended.ini:
+    exists: true
 
 user:
   php:
