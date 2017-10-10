@@ -13,6 +13,4 @@ apk add --update --no-cache \
     file \
     ca-certificates
 
-apk add --no-cache --virtual .build-deps \
-        build-base \
-        autoconf
+apk add --no-cache --virtual .build-deps build-base autoconf

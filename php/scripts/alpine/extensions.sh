@@ -1,4 +1,4 @@
-export PHP_EXTENSIONS="bcmath bz2 calendar exif gmp iconv intl json mcrypt opcache pcntl pcre pdo pdo_pgsql pdo_sqlite pdo_mysql readline soap xml xmlrpc xsl zip"
+export PHP_EXTENSIONS="bcmath bz2 calendar exif gmp iconv intl json mcrypt opcache pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite readline soap xml xmlrpc xsl zip"
 
 apk --update --no-cache add \
   zlib-dev \
@@ -26,12 +26,15 @@ apk --update --no-cache add \
   postgresql-dev \
   libintl \
   pcre-dev \
-  sqlite-dev
+  sqlite-dev \
+  cyrus-sasl-dev \
+  libmemcached-dev
 
 # docker-php-ext-configure $PHP_EXTENSIONS
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) $PHP_EXTENSIONS
+docker-php-ext-enable $PHP_EXTENSIONS
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd imap
 
 if [[ $PHP_VERSION =~ "7.1" ]]; then
@@ -69,6 +72,15 @@ pecl install imagick \
 
 pecl install mongodb \
     && docker-php-ext-enable mongodb
+
+git clone "https://github.com/php-memcached-dev/php-memcached.git" \
+    && cd php-memcached \
+    && git checkout php7 \
+    && phpize \
+    && ./configure --disable-memcached-sasl \
+    && make \
+    && make install \
+    && docker-php-ext-enable memcached
 
 docker-php-source delete
 
