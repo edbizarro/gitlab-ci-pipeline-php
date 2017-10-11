@@ -57,22 +57,31 @@ alpine:7.0:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
 
-# fpm:5.6:
-#   stage: build
-#   script:
-#     - docker build --compress --cache-from $NAMESPACE:5.6-fpm -t $NAMESPACE:5.6-fpm -f php/5.6/fpm/Dockerfile .
-#     - docker push $NAMESPACE:5.6-fpm
-#
-# fpm:7.0:
-#   stage: build
-#   script:
-#     - docker build --compress --cache-from $NAMESPACE:7.0-fpm -t $NAMESPACE:7.0-fpm -f php/7.0/fpm/Dockerfile .
-#     - docker push $NAMESPACE:7.0-fpm
-#
-# fpm:7.1:
-#   stage: build
-#   script:
-#     - docker build --compress --cache-from $NAMESPACE:7.1-fpm -t $NAMESPACE:7.1-fpm -f php/7.1/fpm/Dockerfile .
-#     - docker tag $NAMESPACE:7.1-fpm $NAMESPACE:fpm
-#     - docker push $NAMESPACE:7.1-fpm
-#     - docker push $NAMESPACE:fpm
+fpm:5.6:
+  stage: build
+  variables:
+    IMAGE_VERSION: "5.6-fpm"
+  script:
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/5.6/fpm/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker push $NAMESPACE:$IMAGE_VERSION
+
+fpm:7.0:
+  stage: build
+  variables:
+    IMAGE_VERSION: "7.0-fpm"
+  script:
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/fpm/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker push $NAMESPACE:$IMAGE_VERSION
+
+fpm:7.1:
+  stage: build
+  variables:
+    IMAGE_VERSION: "7.1-fpm"
+  script:
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION-f php/7.1/fpm/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:fpm
+    - docker push $NAMESPACE:$IMAGE_VERSION
+    - docker push $NAMESPACE:fpm
