@@ -82,8 +82,6 @@ git clone "https://github.com/php-memcached-dev/php-memcached.git" \
     && make install \
     && docker-php-ext-enable memcached
 
-docker-php-source delete
-
 { \
 		echo 'opcache.memory_consumption=128'; \
 		echo 'opcache.interned_strings_buffer=8'; \
@@ -106,3 +104,7 @@ docker-php-source delete
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
+
+cd /
+
+docker-php-source delete

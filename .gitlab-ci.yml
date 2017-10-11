@@ -23,19 +23,21 @@ debian:7.1:
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:latest
 
-# debian:7.0:
-#   stage: build
-#   script:
-#     - docker build --compress --cache-from $NAMESPACE:7.0 -t $NAMESPACE:7.0 -f php/7.0/Dockerfile .
-#     # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:7.0 php -v | grep "PHP 7.0"; then return 0; else return 1; fi'
-#     - docker push $NAMESPACE:7.0
-#
-# debian:5.6:
-#   stage: build
-#   script:
-#     - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
-#     # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:5.6 php -v | grep "PHP 5.6"; then return 0; else return 1; fi'
-#     - docker push $NAMESPACE:5.6
+debian:7.0:
+  stage: build
+  variables:
+    IMAGE_VERSION: "7.0"
+  script:
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker push $NAMESPACE:$IMAGE_VERSION
+
+debian:5.6:
+  stage: build
+  script:
+    - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
+    # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:5.6 php -v | grep "PHP 5.6"; then return 0; else return 1; fi'
+    - docker push $NAMESPACE:5.6
 
 alpine:7.1:
   stage: build
@@ -43,7 +45,7 @@ alpine:7.1:
     IMAGE_VERSION: "7.1-alpine"
   script:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile .
-    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
 
 alpine:7.0:
@@ -52,7 +54,7 @@ alpine:7.0:
     IMAGE_VERSION: "7.0-alpine"
   script:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/alpine/Dockerfile .
-    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
 
 # fpm:5.6:

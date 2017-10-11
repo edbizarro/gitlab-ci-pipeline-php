@@ -1,14 +1,14 @@
 FROM php:7.0-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      php="7.0" \
-      node="8"
+      php="7.1" \
+      node="6"
 
 # Set correct environment variables
 ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
-ENV PHP_VERSION="7.0"
+ENV PHP_VERSION="7.1"
 ENV GOSS_VERSION="0.3.5"
 
 WORKDIR /tmp
@@ -37,3 +37,5 @@ RUN curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
 USER $IMAGE_USER
 
 WORKDIR /var/www/html
+
+CMD ["php", "-a"]

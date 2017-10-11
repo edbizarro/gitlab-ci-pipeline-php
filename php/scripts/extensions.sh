@@ -12,6 +12,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     libpq-dev \
     libssl-dev \
     libxml2-dev \
+    libkrb5-dev \
     libzip-dev \
     libmemcached-dev \
     libmagickwand-dev \
@@ -49,8 +50,6 @@ pecl channel-update pecl.php.net \
   && pecl install redis mongodb xdebug-2.5.5 apcu memcached imagick \
   && docker-php-ext-enable redis mongodb xdebug apcu memcached imagick
 
-docker-php-source delete
-
 { \
 		echo 'opcache.memory_consumption=128'; \
 		echo 'opcache.interned_strings_buffer=8'; \
@@ -73,3 +72,7 @@ docker-php-source delete
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
+
+cd /
+
+docker-php-source delete

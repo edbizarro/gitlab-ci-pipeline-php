@@ -23,7 +23,6 @@ DEBIAN_FRONTEND=noninteractive
       git \
       curl \
       libc-client-dev \
-      libkrb5-dev \
       zlib1g-dev \
       apt-utils \
       rsync \
