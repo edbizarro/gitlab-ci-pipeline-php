@@ -26,7 +26,7 @@ Debian versions come with Node 8.x, Alpine versions come with Node 6.x. All vers
 
 ### Laravel users
 
-These images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up), Node 8.x and [Yarn](https://yarnpkg.com).
+These images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up), Node and [Yarn](https://yarnpkg.com).
 
 Everything you need to test Laravel projects :D
 
