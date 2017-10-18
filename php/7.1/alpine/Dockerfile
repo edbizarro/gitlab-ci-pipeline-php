@@ -28,7 +28,7 @@ RUN apk add --update --no-cache bash \
     && bash ./nodeyarn.sh \
     && bash ./cleanup.sh
 
-RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www
+RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
 
 # Goss
