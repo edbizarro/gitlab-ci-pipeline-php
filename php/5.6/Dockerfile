@@ -29,7 +29,7 @@ RUN bash ./packages.sh \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
        mkdir -p /var/www/html && \
-       chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME
+       chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME /tmp
 
 USER $IMAGE_USER
 

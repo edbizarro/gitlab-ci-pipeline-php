@@ -2,6 +2,8 @@
 package:
   curl:
     installed: true
+  sudo:
+    installed: true
 
 command:
   node --version:
@@ -58,7 +60,11 @@ file:
     exists: true
   /usr/local/etc/php/conf.d/apcu-recommended.ini:
     exists: true
+  /home/php:
+    exists: true
+    owner: php
 
 user:
   php:
     exists: true
+    home: /home/php
