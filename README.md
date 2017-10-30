@@ -53,7 +53,7 @@ test:
     - mysql:5.7
   image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
   script:
-    - yarn
+    - sudo yarn
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - cp .env.example .env
     - php artisan key:generate
@@ -92,8 +92,8 @@ test:
     - mysql:5.7
   image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
   script:
-    - yarn config set cache-folder .yarn
-    - yarn install --pure-lockfile
+    - sudo yarn config set cache-folder .yarn
+    - sudo yarn install --pure-lockfile
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     - cp .env.example .env
     - php artisan key:generate
