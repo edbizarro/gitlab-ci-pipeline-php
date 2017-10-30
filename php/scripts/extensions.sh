@@ -1,6 +1,7 @@
 #!/bin/bash
 
 apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
+    bzip2 \
     libbz2-dev \
     libcurl4-gnutls-dev \
     libfreetype6-dev \
