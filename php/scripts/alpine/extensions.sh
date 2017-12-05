@@ -30,7 +30,6 @@ apk --update --no-cache add \
   cyrus-sasl-dev \
   libmemcached-dev
 
-# docker-php-ext-configure $PHP_EXTENSIONS
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) $PHP_EXTENSIONS

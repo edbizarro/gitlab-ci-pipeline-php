@@ -13,15 +13,23 @@ before_script:
 debian:7.1:
   stage: build
   variables:
-    IMAGE_VERSION: "7.1"
+    IMAGE_VERSION: "7.2"
   script:
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:latest
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:7
     - docker push $NAMESPACE:7
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:latest
+
+debian:7.1:
+  stage: build
+  variables:
+    IMAGE_VERSION: "7.1"
+  script:
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
 
 debian:7.0:
   stage: build
@@ -31,13 +39,6 @@ debian:7.0:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
-
-debian:5.6:
-  stage: build
-  script:
-    - docker build --compress --cache-from $NAMESPACE:5.6 -t $NAMESPACE:5.6 -f php/5.6/Dockerfile .
-    # - 'if docker run -t --rm edbizarro/gitlab-ci-pipeline-php:5.6 php -v | grep "PHP 5.6"; then return 0; else return 1; fi'
-    - docker push $NAMESPACE:5.6
 
 alpine:7.1:
   stage: build
@@ -54,15 +55,6 @@ alpine:7.0:
     IMAGE_VERSION: "7.0-alpine"
   script:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/alpine/Dockerfile .
-    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
-    - docker push $NAMESPACE:$IMAGE_VERSION
-
-fpm:5.6:
-  stage: build
-  variables:
-    IMAGE_VERSION: "5.6-fpm"
-  script:
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/5.6/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
 

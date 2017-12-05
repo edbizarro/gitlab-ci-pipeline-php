@@ -9,7 +9,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     libicu-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
-    libpng12-dev \
+    libpng-dev \
     libpq-dev \
     libssl-dev \
     libxml2-dev \
@@ -48,7 +48,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
 
 # MONGO, xdebug and other extensions
 pecl channel-update pecl.php.net \
-  && pecl install redis mongodb xdebug-2.5.5 apcu memcached imagick \
+  && pecl install redis mongodb xdebug apcu memcached imagick \
   && docker-php-ext-enable redis mongodb xdebug apcu memcached imagick
 
 { \
