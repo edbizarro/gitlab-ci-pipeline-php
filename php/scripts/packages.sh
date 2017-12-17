@@ -27,4 +27,5 @@ DEBIAN_FRONTEND=noninteractive
       apt-utils \
       rsync \
       sudo \
+      gnupg2 \
       --no-install-recommends

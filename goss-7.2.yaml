@@ -1,0 +1,106 @@
+---
+package:
+  curl:
+    installed: true
+  sudo:
+    installed: true
+
+command:
+  node --version:
+    exit-status: 0
+  yarn --version:
+    exit-status: 0
+  npm --version:
+    exit-status: 0
+  composer --version:
+    exit-status: 0
+  php --version:
+    exit-status: 0
+    stdout:
+      - 7.2
+  php -m:
+    exit-status: 0
+    stdout:
+      - bcmath
+      - bz2
+      - calendar
+      - ctype
+      - curl
+      - dba
+      - dom
+      - enchant
+      - exif
+      - fileinfo
+      - filter
+      - ftp
+      - gd
+      - gettext
+      - gmp
+      - hash
+      - iconv
+      - imap
+      - interbase
+      - intl
+      - json
+      - ldap
+      - mbstring
+      - mysqli
+      - oci8
+      - odbc
+      - opcache
+      - pcntl
+      - pdo
+      - pdo_dblib
+      - pdo_firebird
+      - pdo_mysql
+      - pdo_oci
+      - pdo_odbc
+      - pdo_pgsql
+      - pdo_sqlite
+      - pgsql
+      - phar
+      - posix
+      - pspell
+      - readline
+      - recode
+      - reflection
+      - session
+      - shmop
+      - simplexml
+      - snmp
+      - soap
+      - sockets
+      - sodium
+      - spl
+      - standard
+      - sysvmsg
+      - sysvsem
+      - sysvshm
+      - tidy
+      - tokenizer
+      - wddx
+      - xml
+      - xmlreader
+      - xmlrpc
+      - xmlwriter
+      - xsl
+      - zend_test
+      - zip
+
+file:
+  /usr/local/etc/php/conf.d/zz-conf.ini:
+    exists: true
+    contains:
+      - memory_limit
+  /usr/local/etc/php/conf.d/opcache-recommended.ini:
+    exists: true
+  /usr/local/etc/php/conf.d/apcu-recommended.ini:
+    exists: true
+  /home/php:
+    exists: true
+    owner: php
+
+user:
+  php:
+    exists: true
+    home: /home/php
