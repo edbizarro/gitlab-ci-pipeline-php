@@ -9,9 +9,11 @@
 ## Based on [Official PHP images](https://hub.docker.com/_/php/)
 
 
-- ```7```, ```7.1```, ```latest``` [(7.1/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php "Get your own image badge on microbadger.com")
+- ```7```, ```7.1```, ```7.2```, ```latest``` [(7.2/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.2/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php "Get your own image badge on microbadger.com")
+- ```7.2-alpine``` [(7.2/alpine/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.2/alpine/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.2-alpine.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.2-alpine "Get your own image badge on microbadger.com")
 - ```7.1-alpine``` [(7.1/alpine/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/alpine/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.1-alpine.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.1-alpine "Get your own image badge on microbadger.com")
 - ```7.1-fpm```, ```fpm``` [(7.1/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/fpm/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.1-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.1-fpm "Get your own image badge on microbadger.com")
+- ```7.2-fpm```, ```7.1-fpm```, ```fpm``` [(7.1/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/fpm/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.1-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.1-fpm "Get your own image badge on microbadger.com")
 - ```7.0``` [(7.0/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.0/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.0.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.0 "Get your own image badge on microbadger.com")
 - ```7.0-alpine``` [(7.0/alpine/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.0/alpine/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.0-alpine.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.0-alpine "Get your own image badge on microbadger.com")
 - ```7.0-fpm``` [(7.0/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.0/fpm/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.0-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.0-fpm "Get your own image badge on microbadger.com")
@@ -51,7 +53,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
   script:
     - yarn
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
@@ -90,7 +92,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
   script:
     - yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
@@ -107,7 +109,7 @@ test:
 
 deploy:
   stage: deploy
-  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  image: edbizarro/gitlab-ci-pipeline-php:7.2
   script:
     - echo "Your deploy script"
   only:
