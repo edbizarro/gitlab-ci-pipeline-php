@@ -26,6 +26,7 @@ debian:7.2:
     - docker push $NAMESPACE:7
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:latest
+  when: always
 
 debian:7.1:
   stage: cli
@@ -34,6 +35,7 @@ debian:7.1:
   script:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
+  when: always
 
 debian:7.0:
   stage: cli
@@ -43,6 +45,7 @@ debian:7.0:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
 
 alpine:7.2:
   stage: cli
@@ -52,6 +55,7 @@ alpine:7.2:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
 
 alpine:7.1:
   stage: cli
@@ -61,6 +65,7 @@ alpine:7.1:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
 
 alpine:7.0:
   stage: cli
@@ -70,6 +75,7 @@ alpine:7.0:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
 
 fpm:7.0:
   stage: fpm
@@ -79,6 +85,7 @@ fpm:7.0:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
 
 fpm:7.1:
   stage: fpm
@@ -87,8 +94,8 @@ fpm:7.1:
   script:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
-    - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:fpm
     - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
 
 fpm:7.2:
   stage: fpm
@@ -100,3 +107,4 @@ fpm:7.2:
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:fpm
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:fpm
+  when: always
