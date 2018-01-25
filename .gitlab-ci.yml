@@ -36,6 +36,7 @@ debian:7.1:
   script:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
+    - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
 debian:7.0:
