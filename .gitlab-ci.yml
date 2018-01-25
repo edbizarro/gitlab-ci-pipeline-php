@@ -44,6 +44,15 @@ debian:7.0:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
 
+alpine:7.2:
+  stage: cli
+  variables:
+    IMAGE_VERSION: "7.2-alpine"
+  script:
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker push $NAMESPACE:$IMAGE_VERSION
+
 alpine:7.1:
   stage: cli
   variables:
