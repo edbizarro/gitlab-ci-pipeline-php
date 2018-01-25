@@ -22,7 +22,6 @@ RUN chmod +x /tmp/*.sh
 # Install
 RUN bash ./packages.sh \
     && bash ./extensions.sh \
-    && bash ./composer.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
