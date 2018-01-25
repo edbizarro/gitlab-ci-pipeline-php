@@ -29,6 +29,8 @@ RUN bash ./packages.sh \
        mkdir -p /var/www/html && \
        chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME /tmp
 
+COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
+
 # Goss
 RUN curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
 
