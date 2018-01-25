@@ -21,7 +21,7 @@ command:
     stdout:
       - 7.2
   python --version:
-      exit-status: 0
+    exit-status: 0
   php -m:
     exit-status: 0
     stdout:
