@@ -1,8 +1,8 @@
-FROM php:7.0-alpine
+FROM php:7.2-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      php="7.1" \
-      node="6"
+      php="7.2" \
+      node="9"
 
 # Set correct environment variables
 ENV IMAGE_USER=php

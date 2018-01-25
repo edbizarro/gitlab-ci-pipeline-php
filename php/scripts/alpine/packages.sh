@@ -11,6 +11,7 @@ apk add --update --no-cache \
     rsync \
     sudo \
     file \
-    ca-certificates
+    ca-certificates \
+    python
 
 apk add --no-cache --virtual .build-deps build-base autoconf

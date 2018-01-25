@@ -24,9 +24,10 @@ RUN adduser -D $IMAGE_USER && \
 RUN apk add --update --no-cache bash \
     && bash ./packages.sh \
     && bash ./extensions.sh \
-    && bash ./composer.sh \
     && bash ./nodeyarn.sh \
     && bash ./cleanup.sh
+
+COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
 RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers

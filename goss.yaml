@@ -8,6 +8,8 @@ package:
 command:
   node --version:
     exit-status: 0
+    stdout:
+      - 9
   yarn --version:
     exit-status: 0
   npm --version:
@@ -41,7 +43,6 @@ command:
       - Zend OPcache
       - zip
       - mongodb
-      - redis
       - apcu
       - imap
 

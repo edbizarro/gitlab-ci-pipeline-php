@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PHP_EXTENSIONS="bcmath bz2 calendar exif gmp iconv intl json mcrypt opcache pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite readline soap xml xmlrpc xsl zip"
+export PHP_EXTENSIONS="bcmath bz2 calendar exif gmp iconv intl json mysqli mcrypt opcache pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite readline soap xml xmlrpc xsl zip"
 
 apk --update --no-cache add \
   zlib-dev \
@@ -33,10 +33,13 @@ apk --update --no-cache add \
   libmemcached-dev
 
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) imap
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) $PHP_EXTENSIONS
-docker-php-ext-enable $PHP_EXTENSIONS
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd imap
+docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
+docker-php-ext-install -j$(nproc) ldap
+docker-php-source delete
 
 if [[ $PHP_VERSION =~ "7.1" ]]; then
   git clone --depth 1 "https://github.com/xdebug/xdebug" \
@@ -54,10 +57,10 @@ if [[ $PHP_VERSION =~ "7.0" ]]; then
 fi
 
 docker-php-source extract \
-    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/3.1.4.tar.gz" \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/3.1.6.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-3.1.4 /usr/src/php/ext/redis \
+    && mv phpredis-3.1.6 /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
     && docker-php-source delete
 
@@ -76,7 +79,7 @@ pecl install mongodb \
 
 git clone "https://github.com/php-memcached-dev/php-memcached.git" \
     && cd php-memcached \
-    && git checkout php7 \
+    && git checkout REL3_0 \
     && phpize \
     && ./configure --disable-memcached-sasl \
     && make \
@@ -105,7 +108,3 @@ git clone "https://github.com/php-memcached-dev/php-memcached.git" \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
-
-cd /
-
-docker-php-source delete
