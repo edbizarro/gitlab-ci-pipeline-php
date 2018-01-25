@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export PHP_EXTENSIONS="bcmath bz2 calendar exif gmp iconv intl json mcrypt opcache pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite readline soap xml xmlrpc xsl zip"
 
 apk --update --no-cache add \

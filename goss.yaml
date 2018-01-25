@@ -14,42 +14,36 @@ command:
     exit-status: 0
   composer --version:
     exit-status: 0
+  python --version:
+    exit-status: 0
   php --version:
     exit-status: 0
+    stdout:
+      - 7
   php -m:
     exit-status: 0
     stdout:
-      - "apcu"
-      - "bcmath"
-      - "bz2"
-      - "calendar"
-      - "exif"
-      - "gd"
-      - "gmp"
-      - "iconv"
-      - "imap"
-      - "intl"
-      - "json"
-      - "mcrypt"
-      - "OPcache"
-      - "pcntl"
-      - "pdo"
-      - "mysql"
-      - "imagick"
-      - "pdo_pgsql"
-      - "pdo_sqlite"
-      - "pdo_mysql"
-      - "pgsql"
-      - "readline"
-      - "soap"
-      - "xml"
-      - "xmlrpc"
-      - "xsl"
-      - "zip"
-      - "xdebug"
-      - "mongodb"
-      - "redis"
-      - "memcached"
+      - bcmath
+      - bz2
+      - calendar
+      - iconv
+      - intl
+      - gd
+      - ldap
+      - mbstring
+      - memcached
+      - mysqli
+      - pdo_mysql
+      - pdo_pgsql
+      - pgsql
+      - redis
+      - soap
+      - Zend OPcache
+      - zip
+      - mongodb
+      - redis
+      - apcu
+      - imap
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:

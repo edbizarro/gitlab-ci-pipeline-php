@@ -28,4 +28,6 @@ DEBIAN_FRONTEND=noninteractive
       rsync \
       sudo \
       gnupg2 \
+      python \
+      python-dev \
       --no-install-recommends

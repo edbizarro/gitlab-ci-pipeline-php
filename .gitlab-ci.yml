@@ -1,3 +1,7 @@
+stages:
+  - cli
+  - fpm
+
 image: docker:latest
 
 variables:
@@ -11,7 +15,7 @@ before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
 debian:7.2:
-  stage: build
+  stage: cli
   variables:
     IMAGE_VERSION: "7.2"
   script:
@@ -24,7 +28,7 @@ debian:7.2:
     - docker push $NAMESPACE:latest
 
 debian:7.1:
-  stage: build
+  stage: cli
   variables:
     IMAGE_VERSION: "7.1"
   script:
@@ -32,7 +36,7 @@ debian:7.1:
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
 
 debian:7.0:
-  stage: build
+  stage: cli
   variables:
     IMAGE_VERSION: "7.0"
   script:
@@ -41,7 +45,7 @@ debian:7.0:
     - docker push $NAMESPACE:$IMAGE_VERSION
 
 alpine:7.1:
-  stage: build
+  stage: cli
   variables:
     IMAGE_VERSION: "7.1-alpine"
   script:
@@ -50,7 +54,7 @@ alpine:7.1:
     - docker push $NAMESPACE:$IMAGE_VERSION
 
 alpine:7.0:
-  stage: build
+  stage: cli
   variables:
     IMAGE_VERSION: "7.0-alpine"
   script:
@@ -59,7 +63,7 @@ alpine:7.0:
     - docker push $NAMESPACE:$IMAGE_VERSION
 
 fpm:7.0:
-  stage: build
+  stage: fpm
   variables:
     IMAGE_VERSION: "7.0-fpm"
   script:
@@ -68,12 +72,22 @@ fpm:7.0:
     - docker push $NAMESPACE:$IMAGE_VERSION
 
 fpm:7.1:
-  stage: build
+  stage: fpm
   variables:
     IMAGE_VERSION: "7.1-fpm"
   script:
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:fpm
+    - docker push $NAMESPACE:$IMAGE_VERSION
+
+fpm:7.2:
+  stage: fpm
+  variables:
+    IMAGE_VERSION: "7.2-fpm"
+  script:
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/fpm/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:fpm
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:fpm

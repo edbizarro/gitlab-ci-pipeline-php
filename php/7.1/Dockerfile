@@ -2,7 +2,7 @@ FROM php:7.1
 
 LABEL maintainer "Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
-      node="8"
+      node="9"
 
 # Set correct environment variables
 ENV IMAGE_USER=php
@@ -22,13 +22,14 @@ RUN chmod +x /tmp/*.sh
 # Install
 RUN bash ./packages.sh \
     && bash ./extensions.sh \
-    && bash ./composer.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
        mkdir -p /var/www/html && \
        chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME /tmp
+
+COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
 # Goss
 RUN curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
