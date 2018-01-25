@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export PHP_EXTENSIONS="bcmath bz2 calendar exif gmp iconv intl json mysqli mcrypt opcache pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite readline soap xml xmlrpc xsl zip"
-
 apk --update --no-cache add \
   zlib-dev \
   libbz2 \
@@ -11,8 +9,6 @@ apk --update --no-cache add \
   libjpeg-turbo-dev \
   libltdl \
   libtool \
-  libmcrypt-dev \
-  libmcrypt \
   libedit-dev \
   libpng-dev \
   krb5-dev \
@@ -39,7 +35,7 @@ docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) imap
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) $PHP_EXTENSIONS
+docker-php-ext-install -j$(nproc) bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
 docker-php-source delete
 
 if [[ $PHP_VERSION =~ "7.1" ]]; then
@@ -55,6 +51,16 @@ fi
 if [[ $PHP_VERSION =~ "7.0" ]]; then
   pecl install xdebug \
     && docker-php-ext-enable xdebug
+fi
+
+if [[ $PHP_VERSION =~ "7.2" ]]; then
+  echo "7.2"
+else
+  apk --update --no-cache add \
+    libmcrypt-dev \
+    libmcrypt \
+
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) mcrypt
 fi
 
 docker-php-source extract \
