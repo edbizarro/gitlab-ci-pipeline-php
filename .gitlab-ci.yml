@@ -1,5 +1,6 @@
 stages:
-  - cli
+  - debian
+  - alpine
   - fpm
 
 image: docker:latest
@@ -15,7 +16,7 @@ before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
 debian:7.2:
-  stage: cli
+  stage: debian
   variables:
     IMAGE_VERSION: "7.2"
   script:
@@ -29,7 +30,7 @@ debian:7.2:
   when: always
 
 debian:7.1:
-  stage: cli
+  stage: debian
   variables:
     IMAGE_VERSION: "7.1"
   script:
@@ -38,7 +39,7 @@ debian:7.1:
   when: always
 
 debian:7.0:
-  stage: cli
+  stage: debian
   variables:
     IMAGE_VERSION: "7.0"
   script:
@@ -48,7 +49,7 @@ debian:7.0:
   when: always
 
 alpine:7.2:
-  stage: cli
+  stage: alpine
   variables:
     IMAGE_VERSION: "7.2-alpine"
   script:
@@ -58,7 +59,7 @@ alpine:7.2:
   when: always
 
 alpine:7.1:
-  stage: cli
+  stage: alpine
   variables:
     IMAGE_VERSION: "7.1-alpine"
   script:
@@ -68,7 +69,7 @@ alpine:7.1:
   when: always
 
 alpine:7.0:
-  stage: cli
+  stage: alpine
   variables:
     IMAGE_VERSION: "7.0-alpine"
   script:
