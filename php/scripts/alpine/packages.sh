@@ -6,7 +6,7 @@ apk add --update --no-cache \
     curl \
     git \
     grep \
-    libressl-dev \
+    openssl-dev \
     openssh-client \
     rsync \
     sudo \
