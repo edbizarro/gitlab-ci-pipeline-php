@@ -8,6 +8,7 @@
 
 ## Based on [Official PHP images](https://hub.docker.com/_/php/)
 
+> PHP 7.2 is available but yet without xDebug support.
 
 - ```7```, ```7.2```, ```latest``` [(7.2/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.2/Dockerfile)
 - ```7.2-alpine``` [(7.2/alpine/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.2/alpine/Dockerfile)
@@ -21,7 +22,7 @@
 - ```5.6``` [(5.6/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/5.6/Dockerfile) -  [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:5.6.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:5.6 "Get your own image badge on microbadger.com")
 - ```5.6-fpm``` [(5.6/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/5.6/fpm/Dockerfile) -  [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:5.6-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:5.6-fpm "Get your own image badge on microbadger.com")
 
-Debian versions come with Node 8.x, Alpine versions come with Node 6.x. All versions come with composer and [yarn](https://yarnpkg.com)
+All versions come with [Node 9](https://nodejs.org/en/), [composer](https://getcomposer.org/) and [yarn](https://yarnpkg.com)
 
 [![Build Status](https://semaphoreci.com/api/v1/edbizarro/gitlab-ci-pipeline-php/branches/master/badge.svg)](https://semaphoreci.com/edbizarro/gitlab-ci-pipeline-php)
 
@@ -54,7 +55,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
   script:
     - yarn
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
@@ -93,7 +94,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.1-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
   script:
     - yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
@@ -112,7 +113,7 @@ deploy:
   stage: deploy
   image: edbizarro/gitlab-ci-pipeline-php:7.1
   script:
-    - echo "Your deploy script"
+    - echo "Deploy all the things!"
   only:
     - master
   when: on_success
@@ -130,4 +131,7 @@ Recommended
 
 Special thanks to [Ambientum](https://github.com/codecasts/ambientum), an incredible Brazilian project, for the inspiration.
 
+Also https://github.com/Chialab/docker-php for php 7.2 build scripts 
+
 [![forthebadge](http://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/powered-by-netflix.svg)](http://forthebadge.com)
