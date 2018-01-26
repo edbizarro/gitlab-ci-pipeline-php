@@ -86,7 +86,6 @@ pecl install mongodb \
 
 git clone "https://github.com/php-memcached-dev/php-memcached.git" \
     && cd php-memcached \
-    && git checkout REL3_0 \
     && phpize \
     && ./configure --disable-memcached-sasl \
     && make \
