@@ -15,8 +15,10 @@ apk add --update --no-cache \
 
 if [[ $PHP_VERSION =~ "7.2" ]]
 then
+  echo $PHP_VERSION
   apk add --update --no-cache libressl-dev
 else
+  echo $PHP_VERSION
   apk add --update --no-cache openssl-dev
 fi
 
