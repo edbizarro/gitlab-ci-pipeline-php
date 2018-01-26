@@ -6,7 +6,6 @@ apk add --update --no-cache \
     curl \
     git \
     grep \
-    libressl-dev \
     openssh-client \
     rsync \
     sudo \
@@ -15,3 +14,9 @@ apk add --update --no-cache \
     python
 
 apk add --no-cache --virtual .build-deps build-base autoconf
+
+if [[ $PHP_VERSION =~ "7.2" ]]; then
+  apk add --update --no-cache libressl-dev
+else
+  apk add --update --no-cache openssl-dev
+fi
