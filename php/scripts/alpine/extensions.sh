@@ -91,6 +91,7 @@ git clone "https://github.com/php-memcached-dev/php-memcached.git" \
     && ./configure --disable-memcached-sasl \
     && make \
     && make install \
+    && cd ../ && rm -rf php-memcached \
     && docker-php-ext-enable memcached
 
 { \
