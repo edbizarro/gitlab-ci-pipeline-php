@@ -54,7 +54,7 @@ if [[ $PHP_VERSION =~ "7.0" ]]; then
 fi
 
 if [[ $PHP_VERSION =~ "7.2" ]]; then
-  echo "7.2"
+  echo "PHP 7.2"
 else
   apk --update --no-cache add \
     libmcrypt-dev \

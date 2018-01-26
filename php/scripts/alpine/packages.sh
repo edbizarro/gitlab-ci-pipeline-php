@@ -13,7 +13,8 @@ apk add --update --no-cache \
     ca-certificates \
     python
 
-if [[ $PHP_VERSION =~ "7.2" ]]; then
+if [[ $PHP_VERSION =~ "7.2" ]]
+then
   apk add --update --no-cache libressl-dev
 else
   apk add --update --no-cache openssl-dev
