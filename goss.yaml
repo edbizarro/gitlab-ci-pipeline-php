@@ -47,6 +47,8 @@ command:
       - mongodb
       - apcu
       - imap
+      - xml
+      - xmlrpc
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:
