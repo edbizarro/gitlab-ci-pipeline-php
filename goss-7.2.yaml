@@ -25,6 +25,7 @@ command:
   php -m:
     exit-status: 0
     stdout:
+      - pcntl
       - bcmath
       - bz2
       - calendar
