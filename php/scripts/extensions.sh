@@ -1,55 +1,76 @@
 #!/bin/bash
+if [[ $PHP_VERSION =~ "7.2" ]]; then
+  buildDeps=" \
+          default-libmysqlclient-dev \
+          libbz2-dev \
+          libsasl2-dev \
+      " \
+      runtimeDeps=" \
+          libfreetype6-dev \
+          libicu-dev \
+          libjpeg-dev \
+          libldap2-dev \
+          libmemcachedutil2 \
+          libmemcached-dev \
+          libpng-dev \
+          libpq-dev \
+          libxml2-dev \
+          libmagickwand-dev \
+          imagemagick \
+          libssl-dev \
+          libkrb5-dev \
+      "
+else
 
-apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
-    bzip2 \
-    libbz2-dev \
-    libcurl4-gnutls-dev \
-    libfreetype6-dev \
-    libgmp-dev \
-    libicu-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
-    libpng12-dev \
-    libpq-dev \
-    libssl-dev \
-    libxml2-dev \
-    libkrb5-dev \
-    libzip-dev \
-    libmemcached-dev \
-    libmagickwand-dev \
-    imagemagick \
-    libxslt1-dev \
-    && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
-    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+  buildDeps=" \
+        libbz2-dev \
+        libmysqlclient-dev \
+        libsasl2-dev \
+    " \
+    runtimeDeps=" \
+        libfreetype6-dev \
+        libicu-dev \
+        libjpeg-dev \
+        libldap2-dev \
+        libmcrypt-dev \
+        libmemcached-dev \
+        libmemcachedutil2 \
+        libpng12-dev \
+        libpq-dev \
+        libxml2-dev \
+        libkrb5-dev \
+    "
+fi
+
+    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps $runtimeDeps --no-install-recommends \
+    && docker-php-ext-install -j$(nproc) xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) \
-        bcmath \
-        bz2 \
-        calendar \
-        curl \
-        exif \
-        gd \
-        gmp \
-        imap \
-        intl \
-        json \
-        mbstring \
-        mcrypt \
-        opcache \
-        pcntl \
-        pdo \
-        pdo_mysql \
-        pdo_pgsql \
-        soap \
-        xml \
-        xmlrpc \
-        xsl \
-        zip
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+    && docker-php-ext-install -j$(nproc) ldap \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+    && docker-php-ext-install -j$(nproc) imap \
+    && docker-php-source delete \
+    && rm -r /var/lib/apt/lists/*
 
-# MONGO, xdebug and other extensions
-pecl channel-update pecl.php.net \
-  && pecl install redis mongodb xdebug-2.5.5 apcu memcached imagick \
-  && docker-php-ext-enable redis mongodb xdebug apcu memcached imagick
+if [[ $PHP_VERSION =~ "7.2" ]]; then
+  docker-php-source extract \
+    && git clone --branch REL3_0 https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
+    && docker-php-ext-install memcached \
+    && docker-php-ext-enable memcached \
+    && docker-php-source delete \
+
+  pecl channel-update pecl.php.net \
+    && pecl install redis apcu mongodb \
+    && docker-php-ext-enable redis apcu mongodb
+else
+
+  apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y mcrypt
+  docker-php-ext-install -j$(nproc) mcrypt
+  pecl channel-update pecl.php.net \
+    && pecl install redis mongodb xdebug apcu memcached \
+    && docker-php-ext-enable redis mongodb xdebug apcu memcached
+fi
 
 { \
 		echo 'opcache.memory_consumption=128'; \
@@ -74,6 +95,3 @@ pecl channel-update pecl.php.net \
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
 
-cd /
-
-docker-php-source delete

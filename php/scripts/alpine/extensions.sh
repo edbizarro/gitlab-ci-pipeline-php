@@ -1,4 +1,4 @@
-export PHP_EXTENSIONS="bcmath bz2 calendar exif gmp iconv intl json mcrypt opcache pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite readline soap xml xmlrpc xsl zip"
+#!/bin/bash
 
 apk --update --no-cache add \
   zlib-dev \
@@ -9,8 +9,6 @@ apk --update --no-cache add \
   libjpeg-turbo-dev \
   libltdl \
   libtool \
-  libmcrypt-dev \
-  libmcrypt \
   libedit-dev \
   libpng-dev \
   krb5-dev \
@@ -28,14 +26,17 @@ apk --update --no-cache add \
   pcre-dev \
   sqlite-dev \
   cyrus-sasl-dev \
-  libmemcached-dev
+  libmemcached-dev \
+  openldap-dev
 
-# docker-php-ext-configure $PHP_EXTENSIONS
+docker-php-ext-configure ldap
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) ldap
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) imap
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) $PHP_EXTENSIONS
-docker-php-ext-enable $PHP_EXTENSIONS
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd imap
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
+docker-php-source delete
 
 if [[ $PHP_VERSION =~ "7.1" ]]; then
   git clone --depth 1 "https://github.com/xdebug/xdebug" \
@@ -52,11 +53,21 @@ if [[ $PHP_VERSION =~ "7.0" ]]; then
     && docker-php-ext-enable xdebug
 fi
 
+if [[ $PHP_VERSION =~ "7.2" ]]; then
+  echo "PHP 7.2"
+else
+  apk --update --no-cache add \
+    libmcrypt-dev \
+    libmcrypt \
+
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) mcrypt
+fi
+
 docker-php-source extract \
-    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/3.1.4.tar.gz" \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/3.1.6.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-3.1.4 /usr/src/php/ext/redis \
+    && mv phpredis-3.1.6 /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
     && docker-php-source delete
 
@@ -75,11 +86,11 @@ pecl install mongodb \
 
 git clone "https://github.com/php-memcached-dev/php-memcached.git" \
     && cd php-memcached \
-    && git checkout php7 \
     && phpize \
     && ./configure --disable-memcached-sasl \
     && make \
     && make install \
+    && cd ../ && rm -rf php-memcached \
     && docker-php-ext-enable memcached
 
 { \
@@ -104,7 +115,3 @@ git clone "https://github.com/php-memcached-dev/php-memcached.git" \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
-
-cd /
-
-docker-php-source delete

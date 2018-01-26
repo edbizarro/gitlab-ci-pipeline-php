@@ -2,7 +2,7 @@ FROM php:7.1-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
-      node="6"
+      node="9"
 
 # Set correct environment variables
 ENV IMAGE_USER=php
@@ -24,9 +24,10 @@ RUN adduser -D $IMAGE_USER && \
 RUN apk add --update --no-cache bash \
     && bash ./packages.sh \
     && bash ./extensions.sh \
-    && bash ./composer.sh \
     && bash ./nodeyarn.sh \
     && bash ./cleanup.sh
+
+COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
 RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
