@@ -64,7 +64,6 @@ if [[ $PHP_VERSION =~ "7.2" ]]; then
     && pecl install redis apcu mongodb \
     && docker-php-ext-enable redis apcu mongodb
 else
-
   apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y mcrypt
   docker-php-ext-install -j$(nproc) mcrypt
   pecl channel-update pecl.php.net \
