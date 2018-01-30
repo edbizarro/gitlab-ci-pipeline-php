@@ -39,6 +39,8 @@ else
         libpq-dev \
         libxml2-dev \
         libkrb5-dev \
+        libmagickwand-dev \
+        imagemagick \
     "
 fi
 
@@ -61,14 +63,14 @@ if [[ $PHP_VERSION =~ "7.2" ]]; then
     && docker-php-source delete \
 
   pecl channel-update pecl.php.net \
-    && pecl install redis apcu mongodb \
-    && docker-php-ext-enable redis apcu mongodb
+    && pecl install redis apcu mongodb imagemagick \
+    && docker-php-ext-enable redis apcu mongodb imagemagick
 else
   apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y mcrypt
   docker-php-ext-install -j$(nproc) mcrypt
   pecl channel-update pecl.php.net \
-    && pecl install redis mongodb xdebug apcu memcached \
-    && docker-php-ext-enable redis mongodb xdebug apcu memcached
+    && pecl install redis mongodb xdebug apcu memcached imagemagick \
+    && docker-php-ext-enable redis mongodb xdebug apcu memcached imagemagick
 fi
 
 { \
