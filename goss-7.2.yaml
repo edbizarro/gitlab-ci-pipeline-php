@@ -50,6 +50,7 @@ command:
       - xml
       - xmlrpc
       - exif
+      - imagemagick
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:

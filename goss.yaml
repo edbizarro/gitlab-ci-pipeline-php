@@ -51,6 +51,7 @@ command:
       - xmlrpc
       - xdebug
       - exif
+      - imagemagick
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:
