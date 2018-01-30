@@ -50,6 +50,7 @@ command:
       - xml
       - xmlrpc
       - xdebug
+      - exif
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:

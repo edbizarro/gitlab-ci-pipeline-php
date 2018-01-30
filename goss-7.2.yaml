@@ -49,6 +49,7 @@ command:
       - imap
       - xml
       - xmlrpc
+      - exif
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:
