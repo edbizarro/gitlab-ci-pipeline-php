@@ -63,8 +63,8 @@ if [[ $PHP_VERSION =~ "7.2" ]]; then
     && docker-php-source delete \
 
   pecl channel-update pecl.php.net \
-    && pecl install redis apcu mongodb imagick \
-    && docker-php-ext-enable redis apcu mongodb imagick
+    && pecl install redis apcu mongodb imagick xdebug \
+    && docker-php-ext-enable redis apcu mongodb imagick xdebug
 else
   apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y mcrypt
   docker-php-ext-install -j$(nproc) mcrypt
@@ -95,4 +95,3 @@ fi
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
-

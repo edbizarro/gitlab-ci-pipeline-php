@@ -49,6 +49,7 @@ command:
       - imap
       - xml
       - xmlrpc
+      - xdebug
       - exif
       - imagick
 
