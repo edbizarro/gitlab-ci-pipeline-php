@@ -54,7 +54,13 @@ if [[ $PHP_VERSION =~ "7.0" ]]; then
 fi
 
 if [[ $PHP_VERSION =~ "7.2" ]]; then
-  echo "PHP 7.2"
+  git clone --depth 1 "https://github.com/xdebug/xdebug" \
+    && cd xdebug \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
+    && docker-php-ext-enable xdebug
 else
   apk --update --no-cache add \
     libmcrypt-dev \
