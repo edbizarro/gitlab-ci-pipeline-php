@@ -38,20 +38,9 @@ docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
 docker-php-source delete
 
-if [[ $PHP_VERSION =~ "7.1" ]]; then
-  git clone --depth 1 "https://github.com/xdebug/xdebug" \
-    && cd xdebug \
-    && phpize \
-    && ./configure \
-    && make \
-    && make install \
-    && docker-php-ext-enable xdebug
-fi
 
-if [[ $PHP_VERSION =~ "7.0" ]]; then
-  pecl install xdebug \
-    && docker-php-ext-enable xdebug
-fi
+pecl install xdebug \
+  && docker-php-ext-enable xdebug
 
 if [[ $PHP_VERSION =~ "7.2" ]]; then
   git clone --depth 1 "https://github.com/xdebug/xdebug" \
