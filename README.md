@@ -3,6 +3,7 @@
 > Docker images with everything you'll need to build and test PHP applications on Gitlab Continous Integration
 
 ![Logo](https://raw.githubusercontent.com/edbizarro/gitlab-ci-pipeline-php/master/gitlab-ci-pipeline-php.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedbizarro%2Fgitlab-ci-pipeline-php.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedbizarro%2Fgitlab-ci-pipeline-php?ref=badge_shield)
 
 ---
 
@@ -135,3 +136,7 @@ Also https://github.com/Chialab/docker-php for php 7.2 build scripts
 
 [![forthebadge](http://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/powered-by-netflix.svg)](http://forthebadge.com)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fedbizarro%2Fgitlab-ci-pipeline-php.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fedbizarro%2Fgitlab-ci-pipeline-php?ref=badge_large)
