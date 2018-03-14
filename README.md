@@ -23,7 +23,8 @@
 
 All versions come with [Node 9](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
 
-[![Build Status](https://semaphoreci.com/api/v1/edbizarro/gitlab-ci-pipeline-php/branches/master/badge.svg)](https://semaphoreci.com/edbizarro/gitlab-ci-pipeline-php)
+[![Docker Pulls](https://img.shields.io/docker/pulls/edbizarro/gitlab-ci-pipeline-php.svg?style=for-the-badge)](https://hub.docker.com/r/edbizarro/gitlab-ci-pipeline-php/)
+
 
 ---
 
