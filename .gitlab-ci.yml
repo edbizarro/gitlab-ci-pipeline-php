@@ -15,7 +15,7 @@ services:
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
-debian:7.2:
+Debian 7.2:
   stage: debian
   variables:
     IMAGE_VERSION: "7.2"
@@ -29,7 +29,7 @@ debian:7.2:
     - docker push $NAMESPACE:latest
   when: always
 
-debian:7.1:
+Debian 7.1:
   stage: debian
   variables:
     IMAGE_VERSION: "7.1"
@@ -39,7 +39,7 @@ debian:7.1:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-debian:7.0:
+Debian 7.0:
   stage: debian
   variables:
     IMAGE_VERSION: "7.0"
@@ -49,7 +49,7 @@ debian:7.0:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-alpine:7.2:
+Alpine 7.2:
   stage: alpine
   variables:
     IMAGE_VERSION: "7.2-alpine"
@@ -59,7 +59,7 @@ alpine:7.2:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-alpine:7.1:
+Alpine 7.1:
   stage: alpine
   variables:
     IMAGE_VERSION: "7.1-alpine"
@@ -69,7 +69,7 @@ alpine:7.1:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-alpine:7.0:
+Alpine 7.0:
   stage: alpine
   variables:
     IMAGE_VERSION: "7.0-alpine"
@@ -79,7 +79,7 @@ alpine:7.0:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-fpm:7.0:
+FPM 7.0:
   stage: fpm
   variables:
     IMAGE_VERSION: "7.0-fpm"
@@ -89,7 +89,7 @@ fpm:7.0:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-fpm:7.1:
+FPM 7.1:
   stage: fpm
   variables:
     IMAGE_VERSION: "7.1-fpm"
@@ -99,7 +99,7 @@ fpm:7.1:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-fpm:7.2:
+FPM 7.2:
   stage: fpm
   variables:
     IMAGE_VERSION: "7.2-fpm"
