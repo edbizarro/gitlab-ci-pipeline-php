@@ -60,7 +60,7 @@ test:
   image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
   script:
     - yarn
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     - cp .env.example .env
     - php artisan key:generate
     - php artisan migrate:refresh --seed
@@ -100,7 +100,7 @@ test:
   script:
     - sudo yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     - cp .env.example .env
     - php artisan key:generate
     - php artisan migrate:refresh --seed
