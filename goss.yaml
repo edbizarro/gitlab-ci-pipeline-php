@@ -8,8 +8,6 @@ package:
 command:
   node --version:
     exit-status: 0
-    stdout:
-      - 9
   yarn --version:
     exit-status: 0
   npm --version:
