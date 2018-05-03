@@ -55,8 +55,7 @@ fi
     && docker-php-ext-install -j$(nproc) ldap \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install -j$(nproc) imap \
-    && docker-php-source delete \
-    && rm -r /var/lib/apt/lists/*
+    && docker-php-source delete
 
 if [[ $PHP_VERSION =~ "7.2" ]]; then
   docker-php-source extract \
