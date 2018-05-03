@@ -2,13 +2,14 @@
 
 set -euf -o pipefail
 
-export VERSION=v9.11.1
-export NPM_VERSION=5
+export VERSION=v10.0.0
+export NPM_VERSION=6
 export YARN_VERSION=latest
 export DEL_PKGS="libstdc++"
+export CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
 apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
-  for server in pgp.mit.edu keyserver.pgp.com ha.pool.sks-keyservers.net; do \
+  for server in ipv4.pool.sks-keyservers.net keyserver.pgp.com ha.pool.sks-keyservers.net; do \
     gpg --keyserver $server --recv-keys \
       94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
       FD3A5288F042B6850C66B31F09FE44734EB7990E \
@@ -34,7 +35,7 @@ apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg li
     fi; \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
     if [ -n "$YARN_VERSION" ]; then \
-      for server in pgp.mit.edu keyserver.pgp.com ha.pool.sks-keyservers.net; do \
+      for server in ipv4.pool.sks-keyservers.net keyserver.pgp.com ha.pool.sks-keyservers.net; do \
         gpg --keyserver $server --recv-keys \
           6A010C5166006599AA17F08146C2130DFD2497F5 && break; \
       done && \

@@ -21,7 +21,7 @@
 - ```5.6``` (Deprecated*) [(5.6/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/5.6/Dockerfile) -  [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:5.6.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:5.6 "Get your own image badge on microbadger.com")
 - ```5.6-fpm``` (Deprecated*) [(5.6/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/5.6/fpm/Dockerfile) -  [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:5.6-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:5.6-fpm "Get your own image badge on microbadger.com")
 
-All versions come with [Node 9](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
+All versions come with [Node 10](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
 
 > *Deprecated images won't get any update.
 
