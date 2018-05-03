@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euf -o pipefail
+
 apk --update --no-cache add \
   zlib-dev \
   libbz2 \

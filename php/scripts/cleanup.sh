@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euf -o pipefail
+
 apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     build-essential \
     apt-utils \

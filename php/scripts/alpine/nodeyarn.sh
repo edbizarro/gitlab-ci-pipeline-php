@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euf -o pipefail
+
 export VERSION=v9.11.1
 export NPM_VERSION=5
 export YARN_VERSION=latest

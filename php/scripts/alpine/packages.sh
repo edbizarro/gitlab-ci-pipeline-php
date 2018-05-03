@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euf -o pipefail
+
 apk update && apk upgrade
 
 apk add --update --no-cache \

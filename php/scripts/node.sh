@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euf -o pipefail
+
 # NODE JS
 curl -sL https://deb.nodesource.com/setup_9.x | bash - \
     && DEBIAN_FRONTEND=noninteractive apt-get install nodejs --no-install-recommends -yqq \

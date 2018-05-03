@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -euf -o pipefail
+
 if [[ $PHP_VERSION =~ "7.2" ]]; then
   buildDeps=" \
           default-libmysqlclient-dev \
