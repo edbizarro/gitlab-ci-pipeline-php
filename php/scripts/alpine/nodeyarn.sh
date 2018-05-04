@@ -10,7 +10,7 @@ export YARN_VERSION=latest
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
 { \
-  echo 'export NVM_DIR="/home/root/.nvm"'; \
+  echo 'export NVM_DIR="/home/www-data/.nvm"'; \
   echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm'; \
 
 } > ~/.profile
