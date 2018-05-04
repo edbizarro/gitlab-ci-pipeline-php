@@ -34,7 +34,8 @@ Debian 7.1:
   stage: debian
   variables:
     IMAGE_VERSION: "7.1"
-  script:
+  script:i
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -45,6 +46,7 @@ Debian 7.0:
   variables:
     IMAGE_VERSION: "7.0"
   script:
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -55,6 +57,7 @@ Alpine 7.2:
   variables:
     IMAGE_VERSION: "7.2-alpine"
   script:
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -65,6 +68,7 @@ Alpine 7.1:
   variables:
     IMAGE_VERSION: "7.1-alpine"
   script:
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -75,6 +79,7 @@ Alpine 7.0:
   variables:
     IMAGE_VERSION: "7.0-alpine"
   script:
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -85,6 +90,7 @@ FPM 7.0:
   variables:
     IMAGE_VERSION: "7.0-fpm"
   script:
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -95,6 +101,7 @@ FPM 7.1:
   variables:
     IMAGE_VERSION: "7.1-fpm"
   script:
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -105,6 +112,7 @@ FPM 7.2:
   variables:
     IMAGE_VERSION: "7.2-fpm"
   script:
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:fpm
