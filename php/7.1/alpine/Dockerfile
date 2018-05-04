@@ -6,7 +6,7 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 
 # Set correct environment variables
 ENV IMAGE_USER=php
-ENV HOME=/home/$IMAGE_USER
+# ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PHP_VERSION="7.1"
 ENV GOSS_VERSION="0.3.5"
