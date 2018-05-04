@@ -22,9 +22,10 @@ RUN adduser -D $IMAGE_USER && \
 
 # Install
 RUN apk add --update --no-cache bash \
-    && bash ./packages.sh
-RUN bash ./nodeyarn.sh
-RUN bash ./cleanup.sh
+    && bash ./packages.sh \
+    && bash ./extensions.sh \
+    && bash ./nodeyarn.sh \
+    && bash ./cleanup.sh
 
 COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
