@@ -2,7 +2,7 @@ FROM php:7.2
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.2" \
-      node="9"
+      node="10"
 
 # Set correct environment variables
 ENV IMAGE_USER=php
