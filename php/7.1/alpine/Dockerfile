@@ -17,10 +17,13 @@ WORKDIR /tmp
 COPY ./php/scripts/alpine/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
+# CREATE PHP USER
 RUN adduser -D $IMAGE_USER && \
     mkdir -p /var/www/html
 
-# Install
+RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
+
+# INSTALL SCRIPTS
 RUN apk add --update --no-cache bash \
     && bash ./packages.sh \
     && bash ./extensions.sh \
@@ -31,7 +34,6 @@ COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
 RUN composer global require "hirak/prestissimo:^0.3"
 
-RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
 
 # Goss
