@@ -4,7 +4,7 @@ set -euf -o pipefail
 
 export VERSION=v10.0.0 NPM_VERSION=6 YARN_VERSION=latest
 
-export CONFIG_FLAGS="" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
+export DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
 
 apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
@@ -48,7 +48,7 @@ apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg li
     fi; \
   fi && \
   apk del curl make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS} && \
-  rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \
+  rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
     /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
 curl -o- -L https://yarnpkg.com/install.sh | bash
