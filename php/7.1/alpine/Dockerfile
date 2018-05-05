@@ -6,7 +6,6 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
 
 # Set correct environment variables
 ENV IMAGE_USER=php
-# ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PHP_VERSION="7.1"
 ENV GOSS_VERSION="0.3.5"
@@ -28,9 +27,11 @@ RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
 # INSTALL SCRIPTS
 RUN apk add --update --no-cache bash \
     && bash ./packages.sh \
-    # && bash ./extensions.sh \
+    && bash ./extensions.sh \
     && bash ./nodeyarn.sh \
     && bash ./cleanup.sh
+
+ENV HOME=/home/$IMAGE_USER
 
 COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
