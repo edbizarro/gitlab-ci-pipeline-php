@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euf -o pipefail
-
 export VERSION=v10.0.0 NPM_VERSION=6 YARN_VERSION=latest
 
 export DEL_PKGS="libstdc++" RM_DIRS=/usr/include
