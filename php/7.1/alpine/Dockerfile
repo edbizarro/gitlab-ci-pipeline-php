@@ -10,9 +10,6 @@ ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PHP_VERSION="7.1"
 ENV GOSS_VERSION="0.3.5"
-ENV PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-USER root
 
 WORKDIR /tmp
 
@@ -20,13 +17,10 @@ WORKDIR /tmp
 COPY ./php/scripts/alpine/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
-# CREATE PHP USER
 RUN adduser -D $IMAGE_USER && \
     mkdir -p /var/www/html
 
-RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
-
-# INSTALL SCRIPTS
+# Install
 RUN apk add --update --no-cache bash \
     && bash ./packages.sh \
     && bash ./extensions.sh \
@@ -36,9 +30,7 @@ RUN apk add --update --no-cache bash \
 COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
 RUN composer global require "hirak/prestissimo:^0.3"
-
 RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
-
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
 
 # Goss
