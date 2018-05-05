@@ -11,7 +11,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 
 source ~/.nvm/nvm.sh
 
-nvm install -s node
+nvm install -s node >/dev/null
 nvm use --delete-prefix $VERSION
 nvm alias default node
 npm i -g npm
