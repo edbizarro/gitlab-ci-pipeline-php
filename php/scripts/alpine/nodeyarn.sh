@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export VERSION=v10.0.0 NPM_VERSION=6 YARN_VERSION=latest
-
-export DEL_PKGS="libstdc++" RM_DIRS=/usr/include
+export VERSION=v10.0.0
+export NPM_VERSION=6
+export YARN_VERSION=latest
 
 apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
   for server in ipv4.pool.sks-keyservers.net keyserver.pgp.com ha.pool.sks-keyservers.net; do \
