@@ -11,6 +11,8 @@ ENV COMPOSER_HOME=$HOME/.composer
 ENV PHP_VERSION="7.1"
 ENV GOSS_VERSION="0.3.5"
 
+USER root
+
 WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
@@ -26,7 +28,7 @@ RUN chown -R $IMAGE_USER:$IMAGE_USER $HOME /var/www /tmp
 # INSTALL SCRIPTS
 RUN apk add --update --no-cache bash \
     && bash ./packages.sh \
-    && bash ./extensions.sh \
+    # && bash ./extensions.sh \
     && bash ./nodeyarn.sh \
     && bash ./cleanup.sh
 
