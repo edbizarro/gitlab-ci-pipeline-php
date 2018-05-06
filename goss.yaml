@@ -68,6 +68,9 @@ file:
   /home/php/.composer:
     exists: true
     owner: php
+  /home/php/.config:
+    exists: true
+    owner: php
 
 user:
   php:
