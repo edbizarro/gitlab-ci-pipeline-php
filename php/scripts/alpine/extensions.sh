@@ -112,10 +112,3 @@ git clone "https://github.com/php-memcached-dev/php-memcached.git" \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
-
-apk del --purge  \
-  libltdl \
-  libtool \
-  bzip2 \
-  imagemagick \
-  libintl
