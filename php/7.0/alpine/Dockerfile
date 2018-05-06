@@ -30,7 +30,7 @@ RUN apk add --update --no-cache bash \
 COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
 RUN composer global require "hirak/prestissimo:^0.3" \
-    && chown -R $IMAGE_USER:$IMAGE_USER $COMPOSER_HOME $HOME
+    && chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME
 
 RUN echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers
 
