@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     build-essential \
     apt-utils \

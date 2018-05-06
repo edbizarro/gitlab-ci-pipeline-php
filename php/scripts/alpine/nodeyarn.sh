@@ -4,7 +4,7 @@ export VERSION=v10.0.0
 export NPM_VERSION=6
 export YARN_VERSION=latest
 
-apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
+apk add --no-cache make gcc g++ linux-headers binutils-gold gnupg libstdc++ && \
   for server in ipv4.pool.sks-keyservers.net keyserver.pgp.com ha.pool.sks-keyservers.net; do \
     gpg --keyserver $server --recv-keys \
       94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
@@ -48,3 +48,5 @@ apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg li
   rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
     /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
+
+npm i -g gulp

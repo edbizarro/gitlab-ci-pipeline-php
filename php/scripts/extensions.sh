@@ -85,15 +85,15 @@ fi
 } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 { \
-        echo 'apc.shm_segments=1'; \
-        echo 'apc.shm_size=256M'; \
-        echo 'apc.num_files_hint=7000'; \
-        echo 'apc.user_entries_hint=4096'; \
-        echo 'apc.ttl=7200'; \
-        echo 'apc.user_ttl=7200'; \
-        echo 'apc.gc_ttl=3600'; \
-        echo 'apc.max_file_size=1M'; \
-        echo 'apc.stat=1'; \
+    echo 'apc.shm_segments=1'; \
+    echo 'apc.shm_size=256M'; \
+    echo 'apc.num_files_hint=7000'; \
+    echo 'apc.user_entries_hint=4096'; \
+    echo 'apc.ttl=7200'; \
+    echo 'apc.user_ttl=7200'; \
+    echo 'apc.gc_ttl=3600'; \
+    echo 'apc.max_file_size=1M'; \
+    echo 'apc.stat=1'; \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
