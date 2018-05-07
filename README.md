@@ -26,7 +26,7 @@
 
 All versions (except `lts`) come with [Node 10](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
 
-** `lts` version come with node v8 **
+> `lts` version come with node v8
 
 > *Deprecated images won't get any update.
 
