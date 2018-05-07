@@ -7,11 +7,8 @@ apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     autoconf \
     dpkg-dev \
     file \
-    g++ \
-    gcc \
     libc-dev \
     libpcre3-dev \
-    make \
     pkg-config \
     re2c
 

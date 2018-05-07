@@ -18,6 +18,12 @@ command:
     exit-status: 0
   python --version:
     exit-status: 0
+  make --version:
+    exit-status: 0
+  gcc --version:
+    exit-status: 0
+  g++ --version:
+    exit-status: 0
   php --version:
     exit-status: 0
     stdout:

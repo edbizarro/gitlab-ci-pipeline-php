@@ -2,7 +2,9 @@ FROM php:7.1-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
-      node="10"
+      node="10.0.0" \
+      npm="6" \
+      yarn="latest"
 
 # Set correct environment variables
 ENV IMAGE_USER=php
@@ -11,12 +13,17 @@ ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 ENV PHP_VERSION="7.1"
 ENV GOSS_VERSION="0.3.5"
+ENV NODE_VERSION="v10.0.0"
+ENV NPM_VERSION=6
+ENV YARN_VERSION=latest
 
 WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
 COPY ./php/scripts/alpine/*.sh /tmp/
 COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
+COPY --from=mhart/alpine-node:10 /usr/bin/node /usr/bin/
+COPY --from=mhart/alpine-node:10 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/
 
 RUN chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \

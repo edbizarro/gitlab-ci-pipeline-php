@@ -65,14 +65,14 @@ Alpine 7.2:
     - docker push $NAMESPACE:alpine
   when: always
 
-Alpine 7.2 LST:
+Alpine 7.2 LTS:
   stage: alpine
   variables:
     IMAGE_VERSION: "7.2-alpine-lts"
   script:
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile-lts .
-    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2.yaml v
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2-lts.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:alpine-lts
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:alpine-lts
@@ -96,7 +96,7 @@ Alpine 7.1 LTS:
   script:
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile-lts .
-    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-lts.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
@@ -118,7 +118,7 @@ Alpine 7.0 LTS:
   script:
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/alpine/Dockerfile-lts .
-    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
+    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-lts.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 

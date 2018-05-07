@@ -9,17 +9,13 @@ command:
   node --version:
     exit-status: 0
     stdout:
-      - v10.0.0
+      - v8
   yarn --version:
     exit-status: 0
   npm --version:
     exit-status: 0
   composer --version:
     exit-status: 0
-  php --version:
-    exit-status: 0
-    stdout:
-      - 7.2
   python --version:
     exit-status: 0
   make --version:
@@ -27,6 +23,11 @@ command:
   gcc --version:
     exit-status: 0
   g++ --version:
+    exit-status: 0
+  php --version:
+    exit-status: 0
+    stdout:
+      - 7
   php -m:
     exit-status: 0
     stdout:
@@ -40,6 +41,7 @@ command:
       - ldap
       - mbstring
       - memcached
+      - mcrypt
       - mysqli
       - pdo_mysql
       - pdo_pgsql
@@ -49,7 +51,6 @@ command:
       - Zend OPcache
       - zip
       - mongodb
-      - redis
       - apcu
       - imap
       - xml
