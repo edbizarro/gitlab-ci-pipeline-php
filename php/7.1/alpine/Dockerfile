@@ -25,7 +25,7 @@ COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 COPY --from=mhart/alpine-node:10 /usr/bin/node /usr/bin/
 COPY --from=mhart/alpine-node:10 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
-RUN chown -R /usr root:root && chmod +x /tmp/*.sh \
+RUN chown -R root:root /usr && chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \
     && mkdir -p /var/www/html \
     && apk add --update --no-cache bash \
