@@ -35,13 +35,7 @@ apk add --no-cache linux-headers binutils-gold gnupg libstdc++ && \
         gpg --keyserver $server --recv-keys \
           6A010C5166006599AA17F08146C2130DFD2497F5 && break; \
       done && \
-      curl -sfSL -O https://yarnpkg.com/${YARN_VERSION}.tar.gz -O https://yarnpkg.com/${YARN_VERSION}.tar.gz.asc && \
-      gpg --batch --verify ${YARN_VERSION}.tar.gz.asc ${YARN_VERSION}.tar.gz && \
-      mkdir /usr/local/share/yarn && \
-      tar -xf ${YARN_VERSION}.tar.gz -C /usr/local/share/yarn --strip 1 && \
-      ln -s /usr/local/share/yarn/bin/yarn /usr/local/bin/ && \
-      ln -s /usr/local/share/yarn/bin/yarnpkg /usr/local/bin/ && \
-      rm ${YARN_VERSION}.tar.gz*; \
+      curl -o- -L https://yarnpkg.com/install.sh | bash; \
     fi; \
   fi && \
   apk del --purge linux-headers binutils-gold gnupg ${DEL_PKGS} && \
