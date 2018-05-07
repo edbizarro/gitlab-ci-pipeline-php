@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ln -s /usr/lib/npm/bin/npm-cli.js /usr/bin/npm
+
 npm install -g npm@${NPM_VERSION}
 
 curl -o- -L https://yarnpkg.com/install.sh | bash
