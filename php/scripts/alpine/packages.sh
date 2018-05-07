@@ -23,3 +23,5 @@ else
 fi
 
 apk add --no-cache --virtual .build-deps build-base autoconf
+
+rm -rf /usr/share/man /var/cache/apk/*
