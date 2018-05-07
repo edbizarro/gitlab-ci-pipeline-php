@@ -16,11 +16,11 @@ apk add --no-cache linux-headers binutils-gold gnupg libstdc++ && \
       56730D5401028683275BD23C23EFEFE93C4CFFFE \
       77984A986EBC2AA786BC0F66B01FBB92821C587A && break; \
   done && \
-  curl -sfSLO https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.xz && \
-  curl -sfSL https://nodejs.org/dist/${VERSION}/SHASUMS256.txt.asc | gpg --batch --decrypt | \
-    grep " node-${VERSION}.tar.xz\$" | sha256sum -c | grep ': OK$' && \
-  tar -xf node-${VERSION}.tar.xz && \
-  cd node-${VERSION} && \
+  curl -sfSLO https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}.tar.xz && \
+  curl -sfSL https://nodejs.org/dist/${NODE_VERSION}/SHASUMS256.txt.asc | gpg --batch --decrypt | \
+    grep " node-${NODE_VERSION}.tar.xz\$" | sha256sum -c | grep ': OK$' && \
+  tar -xf node-${NODE_VERSION}.tar.xz && \
+  cd node-${NODE_VERSION} && \
   ./configure --prefix=/usr ${CONFIG_FLAGS} && \
   make -j$(getconf _NPROCESSORS_ONLN) && \
   make install && \
@@ -39,7 +39,7 @@ apk add --no-cache linux-headers binutils-gold gnupg libstdc++ && \
     fi; \
   fi && \
   apk del --purge linux-headers binutils-gold gnupg ${DEL_PKGS} && \
-  rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /var/cache/apk/* \
+  rm -rf ${RM_DIRS} /node-${NODE_VERSION}* /usr/share/man /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
     /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts \
   && npm i -g gulp

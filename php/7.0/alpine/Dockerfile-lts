@@ -2,7 +2,9 @@ FROM php:7.0-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.0" \
-      node="10"
+      node="8.11.1" \
+      npm="5" \
+      yarn="latest" \
 
 # Set correct environment variables
 ENV IMAGE_USER=php
@@ -11,8 +13,8 @@ ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 ENV PHP_VERSION="7.0"
 ENV GOSS_VERSION="0.3.5"
-ENV NODE_VERSION=v10.0.0
-ENV NPM_VERSION=6
+ENV NODE_VERSION="v8.11.1"
+ENV NPM_VERSION=5
 ENV YARN_VERSION=latest
 
 WORKDIR /tmp
