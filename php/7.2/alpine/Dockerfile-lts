@@ -4,7 +4,7 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.2" \
       node="8.11.1" \
       npm="5" \
-      yarn="latest" \
+      yarn="latest"
 
 # Set correct environment variables
 ENV IMAGE_USER=php
