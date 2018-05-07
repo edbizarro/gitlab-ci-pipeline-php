@@ -1,3 +1,7 @@
 .git
 LICENSE
 README.md
+.gitignore
+.gitlab-ci.yml
+.idea
+.editorconfig

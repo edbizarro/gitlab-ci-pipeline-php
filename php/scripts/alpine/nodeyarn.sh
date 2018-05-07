@@ -44,9 +44,8 @@ apk add --no-cache make gcc g++ linux-headers binutils-gold gnupg libstdc++ && \
       rm ${YARN_VERSION}.tar.gz*; \
     fi; \
   fi && \
-  apk del gcc g++ linux-headers binutils-gold gnupg ${DEL_PKGS} && \
+  apk del --purge gcc g++ linux-headers binutils-gold gnupg ${DEL_PKGS} && \
   rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
-    /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
-
-npm i -g gulp
+    /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts \
+  && npm i -g gulp
