@@ -13,7 +13,9 @@ apk add --update --no-cache \
     sudo \
     file \
     ca-certificates \
-    python
+    python \
+    gcc \
+    g++
 
 if [[ $PHP_VERSION =~ "7.2" ]]
 then
