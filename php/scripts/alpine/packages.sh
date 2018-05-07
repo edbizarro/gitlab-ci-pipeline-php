@@ -15,7 +15,8 @@ apk add --update --no-cache \
     ca-certificates \
     python \
     gcc \
-    g++
+    g++ \
+    make
 
 if [[ $PHP_VERSION =~ "7.2" ]]
 then
