@@ -25,8 +25,8 @@ Debian 7.2:
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:latest
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:7
-    - docker push $NAMESPACE:7
     - docker push $NAMESPACE:$IMAGE_VERSION
+    - docker push $NAMESPACE:7
     - docker push $NAMESPACE:latest
   when: always
 
@@ -60,7 +60,9 @@ Alpine 7.2:
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
     - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2.yaml v
+    - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:alpine
     - docker push $NAMESPACE:$IMAGE_VERSION
+    - docker push $NAMESPACE:alpine
   when: always
 
 Alpine 7.1:
