@@ -32,4 +32,5 @@ DEBIAN_FRONTEND=noninteractive
       gnupg2 \
       python \
       python-dev \
-      --no-install-recommends
+      --no-install-recommends \
+      && rm -rf /var/lib/apt/lists/*
