@@ -17,6 +17,7 @@ USER root
 WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
+COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 COPY ./php/scripts/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
@@ -28,16 +29,11 @@ RUN bash ./packages.sh \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
        mkdir -p /var/www/html && \
-       chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME
-
-COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
-
-RUN composer global require "hirak/prestissimo:^0.3"  \
+       chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
+    && composer global require "hirak/prestissimo:^0.3"  \
     && rm -rf ~/.composer/cache/* \
-    && chown -R $IMAGE_USER:$IMAGE_USER $COMPOSER_HOME
-
-# Goss
-RUN curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
+    && chown -R $IMAGE_USER:$IMAGE_USER $COMPOSER_HOME \
+    && curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
 
 USER $IMAGE_USER
 
