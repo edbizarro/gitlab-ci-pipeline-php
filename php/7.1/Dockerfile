@@ -33,6 +33,7 @@ RUN bash ./packages.sh \
 COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 
 RUN composer global require "hirak/prestissimo:^0.3"  \
+    && rm -rf ~/.composer/cache/* \
     && chown -R $IMAGE_USER:$IMAGE_USER $COMPOSER_HOME
 
 # Goss
