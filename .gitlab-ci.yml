@@ -29,8 +29,6 @@ Debian 7.2:
     - docker push $NAMESPACE:7
     - docker push $NAMESPACE:latest
   when: always
-  tags:
-    - docker
 
 Debian 7.1:
   stage: debian
@@ -42,8 +40,6 @@ Debian 7.1:
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 Debian 7.0:
   stage: debian
@@ -55,8 +51,6 @@ Debian 7.0:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 Alpine 7.2:
   stage: alpine
@@ -70,8 +64,6 @@ Alpine 7.2:
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:alpine
   when: always
-  tags:
-    - docker
 
 Alpine 7.2 LTS:
   stage: alpine
@@ -85,8 +77,6 @@ Alpine 7.2 LTS:
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:alpine-lts
   when: always
-  tags:
-    - docker
 
 Alpine 7.1:
   stage: alpine
@@ -98,8 +88,6 @@ Alpine 7.1:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 Alpine 7.1 LTS:
   stage: alpine
@@ -111,8 +99,6 @@ Alpine 7.1 LTS:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-lts.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 Alpine 7.0:
   stage: alpine
@@ -124,8 +110,6 @@ Alpine 7.0:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 Alpine 7.0 LTS:
   stage: alpine
@@ -137,8 +121,6 @@ Alpine 7.0 LTS:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-lts.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 FPM 7.0:
   stage: fpm
@@ -150,8 +132,6 @@ FPM 7.0:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 FPM 7.1:
   stage: fpm
@@ -163,8 +143,6 @@ FPM 7.1:
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
-  tags:
-    - docker
 
 FPM 7.2:
   stage: fpm
@@ -178,5 +156,3 @@ FPM 7.2:
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:fpm
   when: always
-  tags:
-    - docker
