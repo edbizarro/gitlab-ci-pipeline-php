@@ -3,7 +3,7 @@ stages:
   - alpine
   - fpm
 
-image: debian:9
+image: docker:latest
 
 variables:
   DOCKER_DRIVER: overlay2
