@@ -4,7 +4,7 @@ NAMESPACE=edbizarro/gitlab-ci-pipeline-php
 .PHONY: push
 .PHONY: build
 
-all: pull build test
+all: pull build test push
 
 pull:
 	docker pull ${NAMESPACE}:7.0
