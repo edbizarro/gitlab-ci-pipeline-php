@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-if [[ $PHP_VERSION =~ "7.2" ]]; then
+if [[ $PHP_VERSION = "7.2" ]]; then
   buildDeps=" \
           default-libmysqlclient-dev \
           libbz2-dev \
@@ -60,7 +60,7 @@ fi
     && docker-php-ext-install -j$(nproc) imap \
     && docker-php-source delete
 
-if [[ $PHP_VERSION =~ "7.2" ]]; then
+if [[ $PHP_VERSION = "7.2" ]]; then
   docker-php-source extract \
     && git clone --branch REL3_0 https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
