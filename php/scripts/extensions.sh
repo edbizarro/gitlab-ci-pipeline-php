@@ -27,7 +27,7 @@ else
 
   buildDeps=" \
         libbz2-dev \
-        libmysqlclient-dev \
+        default-libmysqlclient-dev \
         libsasl2-dev \
     " \
     runtimeDeps=" \
