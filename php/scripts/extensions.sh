@@ -39,7 +39,7 @@ else
       libmcrypt-dev \
       libmemcached-dev \
       libmemcachedutil2 \
-      libpng12-dev \
+      libpng-dev \
       libpq-dev \
       libxml2-dev \
       libkrb5-dev \
