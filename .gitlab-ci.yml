@@ -3,7 +3,7 @@ stages:
   - alpine
   - fpm
 
-image: docker:stable
+image: docker:latest
 
 variables:
   DOCKER_DRIVER: overlay2
@@ -122,7 +122,7 @@ Alpine 7.2 LTS:
 #     - docker push $NAMESPACE:$IMAGE_VERSION
 #   when: always
 
-Alpine (make)):
+Alpine (make):
   stage: alpine
   script:
     - apk add --no-cache make
