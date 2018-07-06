@@ -122,12 +122,12 @@ Alpine 7.2 LTS:
 #     - docker push $NAMESPACE:$IMAGE_VERSION
 #   when: always
 
-Alpine (make):
-  stage: alpine
-  script:
-    - apk add --no-cache make
-    - make all
-  when: always
+# Alpine (make):
+#   stage: alpine
+#   script:
+#     - apk add --no-cache make
+#     - make all
+#   when: always
 
 FPM 7.0:
   stage: fpm
