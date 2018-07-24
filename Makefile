@@ -1,8 +1,6 @@
 NAMESPACE=edbizarro/gitlab-ci-pipeline-php
 
-.PHONY: pull
-.PHONY: push
-.PHONY: build
+.PHONY: pull build push
 
 all: pull build test push
 
