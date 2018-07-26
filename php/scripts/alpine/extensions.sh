@@ -37,7 +37,7 @@ docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) imap
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
+docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pdo_sqlsrv sqlsrv pgsql soap zip
 docker-php-source delete
 
 
