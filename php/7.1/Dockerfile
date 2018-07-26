@@ -28,6 +28,7 @@ RUN bash ./packages.sh \
     && bash ./cleanup.sh \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
+       echo "PATH=$PATH:/home/php/.yarn/bin" >> /root/.bashrc && \
        mkdir -p /var/www/html && \
        chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
     && composer global require "hirak/prestissimo:^0.3"  \
