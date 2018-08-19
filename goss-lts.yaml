@@ -12,8 +12,8 @@ command:
       - v8
   yarn --version:
     exit-status: 0
-  sudo yarn --version:
-    exit-status: 0
+  # sudo yarn --version:
+  #   exit-status: 0
   npm --version:
     exit-status: 0
   sudo npm --version:
