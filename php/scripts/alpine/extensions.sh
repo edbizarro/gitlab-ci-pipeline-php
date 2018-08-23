@@ -44,8 +44,8 @@ docker-php-source delete
 pecl install xdebug \
   && docker-php-ext-enable xdebug
 
-pecl install pdo_sqlsrv sqlsrv \
-  && docker-php-ext-enable pdo_sqlsrv sqlsrv
+# pecl install pdo_sqlsrv sqlsrv \
+#   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 if [[ $PHP_VERSION = "7.2" ]]; then
   git clone --depth 1 "https://github.com/xdebug/xdebug" \

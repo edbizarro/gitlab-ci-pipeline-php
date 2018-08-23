@@ -48,8 +48,8 @@ command:
       - mysqli
       - pdo_mysql
       - pdo_pgsql
-      - pdo_sqlsrv
-      - sqlsrv
+      # - pdo_sqlsrv
+      # - sqlsrv
       - pgsql
       - redis
       - soap

@@ -37,7 +37,7 @@ All versions (except `lts`) come with [Node 10](https://nodejs.org/en/), [Compos
 
 ### Laravel users
 
-These images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up), Node and [Yarn](https://yarnpkg.com).
+All images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up installs), Node and [Yarn](https://yarnpkg.com).
 
 Everything you need to test Laravel projects :D
 
