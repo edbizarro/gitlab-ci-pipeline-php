@@ -28,7 +28,7 @@ All versions (except `lts`) come with [Node 10](https://nodejs.org/en/), [Compos
 
 > `lts` version come with node v8
 
-> *Deprecated images won't get any update.
+> *Deprecated images will not receive any update.
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/edbizarro/gitlab-ci-pipeline-php.svg?style=for-the-badge)](https://hub.docker.com/r/edbizarro/gitlab-ci-pipeline-php/)
 
