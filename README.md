@@ -118,7 +118,7 @@ test:
 
 deploy:
   stage: deploy
-  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
   script:
     - echo "Deploy all the things!"
   only:
