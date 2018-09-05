@@ -14,4 +14,4 @@ apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
 
 apt-get autoremove -y
 apt-get autoclean -y
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/man /usr/share/doc /usr/share/doc-base
