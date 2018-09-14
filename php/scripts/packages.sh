@@ -20,17 +20,18 @@ DEBIAN_FRONTEND=noninteractive
   && apt-get upgrade -y \
   &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
       apt-transport-https \
-      openssh-client \
-      unzip \
-      git \
-      curl \
-      libc-client-dev \
-      zlib1g-dev \
       apt-utils \
-      rsync \
-      sudo \
+      build-essential \
+      curl \
+      git \
       gnupg2 \
+      libc-client-dev \
+      openssh-client \
       python \
       python-dev \
+      rsync \
+      sudo \
+      unzip \
+      zlib1g-dev \
       --no-install-recommends \
       && rm -rf /var/lib/apt/lists/*

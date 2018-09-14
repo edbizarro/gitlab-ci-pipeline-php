@@ -1,7 +1,9 @@
+.editorconfig
 .git
-LICENSE
-README.md
 .gitignore
 .gitlab-ci.yml
 .idea
-.editorconfig
+gitlab-ci-pipeline-php.png
+LICENSE
+Makefile
+README.md

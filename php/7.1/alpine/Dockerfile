@@ -11,7 +11,7 @@ ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
-ENV GOSS_VERSION="0.3.5"
+ENV GOSS_VERSION="0.3.6"
 ENV NODE_VERSION="v10.10.0"
 ENV NPM_VERSION=6
 ENV YARN_VERSION=latest
@@ -21,7 +21,7 @@ WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
 COPY ./php/scripts/alpine/*.sh /tmp/
-COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 COPY --from=mhart/alpine-node:10 /usr/bin/node /usr/bin/
 COPY --from=mhart/alpine-node:10 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 

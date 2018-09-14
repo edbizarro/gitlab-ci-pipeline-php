@@ -9,7 +9,7 @@ ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
-ENV GOSS_VERSION="0.3.5"
+ENV GOSS_VERSION="0.3.6"
 ENV PHP_VERSION=7.2
 
 USER root
@@ -17,17 +17,17 @@ USER root
 WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
-COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 COPY ./php/scripts/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
 # Install
-RUN bash ./packages.sh \
-    && bash ./extensions.sh \
-    && bash ./node.sh \
-    && bash ./cleanup.sh \
-    && adduser --disabled-password --gecos "" $IMAGE_USER && \
-       echo "PATH=$PATH:/home/php/.yarn/bin" >> /root/.bashrc && \
+RUN bash ./packages.sh
+RUN bash ./extensions.sh
+RUN bash ./node.sh
+RUN bash ./cleanup.sh
+RUN adduser --disabled-password --gecos "" $IMAGE_USER && \
+       echo "PATH=$PATH:/home/php/.yarn/bin" >> /root/.profile && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
        mkdir -p /var/www/html && \
        chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \

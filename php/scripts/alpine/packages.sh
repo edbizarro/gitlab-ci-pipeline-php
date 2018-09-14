@@ -3,18 +3,18 @@
 apk update && apk upgrade
 
 apk add --no-cache \
+    ca-certificates \
     curl \
+    file \
+    g++ \
+    gcc \
     git \
     grep \
+    make \
     openssh-client \
-    rsync \
-    sudo \
-    file \
-    ca-certificates \
     python \
-    gcc \
-    g++ \
-    make
+    rsync \
+    sudo
 
 if [[ $PHP_VERSION = "7.2" ]]; then
   apk add --no-cache libressl-dev

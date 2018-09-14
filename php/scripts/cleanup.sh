@@ -1,12 +1,12 @@
 #!/bin/bash
 
 apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-    build-essential \
     apt-utils \
-    libc-client-dev\
     autoconf \
+    build-essential \
     dpkg-dev \
     file \
+    libc-client-dev \
     libc-dev \
     libpcre3-dev \
     pkg-config \

@@ -3,33 +3,33 @@
 set -euf -o pipefail
 
 apk --update --no-cache add \
-  zlib-dev \
-  libbz2 \
-  libxml2-dev \
-  imap-dev \
-  freetype-dev \
-  libjpeg-turbo-dev \
-  libltdl \
-  libtool \
-  libedit-dev \
-  libpng-dev \
-  krb5-dev \
-  icu-dev \
-  readline-dev \
   bzip2 \
   bzip2-dev \
   curl-dev \
-  libxslt-dev \
-  imagemagick-dev \
-  imagemagick \
-  gmp-dev \
-  postgresql-dev \
-  libintl \
-  pcre-dev \
-  sqlite-dev \
   cyrus-sasl-dev \
+  freetype-dev \
+  gmp-dev \
+  icu-dev \
+  imagemagick \
+  imagemagick-dev \
+  imap-dev \
+  krb5-dev \
+  libbz2 \
+  libedit-dev \
+  libintl \
+  libjpeg-turbo-dev \
+  libltdl \
   libmemcached-dev \
-  openldap-dev
+  libpng-dev \
+  libtool \
+  libxml2-dev \
+  libxslt-dev \
+  openldap-dev \
+  pcre-dev \
+  postgresql-dev \
+  readline-dev \
+  sqlite-dev \
+  zlib-dev
 
 docker-php-ext-configure ldap
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) ldap

@@ -2,67 +2,88 @@
 
 set -euf -o pipefail
 
+extensions=" \
+bcmath \
+bz2 \
+calendar \
+exif \
+iconv \
+intl \
+mbstring \
+mysqli \
+opcache \
+pcntl \
+pdo_mysql \
+pdo_pgsql \
+pgsql \
+soap \
+xml \
+xmlrpc \
+zip
+"
+
 if [[ $PHP_VERSION = "7.2" ]]; then
   buildDeps=" \
-          default-libmysqlclient-dev \
-          libbz2-dev \
-          libsasl2-dev \
-      " \
-    runtimeDeps=" \
-        libfreetype6-dev \
-        libicu-dev \
-        libjpeg-dev \
-        libldap2-dev \
-        libmemcachedutil2 \
-        libmemcached-dev \
-        libpng-dev \
-        libpq-dev \
-        libxml2-dev \
-        libmagickwand-dev \
-        imagemagick \
-        libssl-dev \
-        libkrb5-dev \
+    default-libmysqlclient-dev \
+    libbz2-dev \
+    libsasl2-dev \
+    " \
+  runtimeDeps=" \
+    imagemagick \
+    libfreetype6-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libkrb5-dev \
+    libldap2-dev \
+    libmagickwand-dev \
+    libmemcached-dev \
+    libmemcachedutil2 \
+    libpng-dev \
+    libpq-dev \
+    libssl-dev \
+    libxml2-dev \
     "
+
 else
 
   buildDeps=" \
-        libbz2-dev \
-        default-libmysqlclient-dev \
-        libsasl2-dev \
+    default-libmysqlclient-dev \
+    libbz2-dev \
+    libsasl2-dev \
     " \
   runtimeDeps=" \
-      libfreetype6-dev \
-      libicu-dev \
-      libjpeg-dev \
-      libldap2-dev \
-      mcrypt \
-      libmcrypt-dev \
-      libmemcached-dev \
-      libmemcachedutil2 \
-      libpng-dev \
-      libpq-dev \
-      libxml2-dev \
-      libkrb5-dev \
-      libmagickwand-dev \
-      imagemagick \
+    imagemagick \
+    libfreetype6-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libkrb5-dev \
+    libldap2-dev \
+    libmagickwand-dev \
+    libmcrypt-dev \
+    libmemcached-dev \
+    libmemcachedutil2 \
+    libpng-dev \
+    libpq-dev \
+    libxml2-dev \
+    mcrypt \
     "
 fi
 
-    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps --no-install-recommends \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y $runtimeDeps --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install -j$(nproc) exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-    && docker-php-ext-install -j$(nproc) ldap \
-    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-install -j$(nproc) imap \
-    && docker-php-source delete
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps --no-install-recommends \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y $runtimeDeps --no-install-recommends \
+  && rm -rf /var/lib/apt/lists/* \
+  && docker-php-ext-install -j$(nproc) $extensions \
+  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install -j$(nproc) gd \
+  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+  && docker-php-ext-install -j$(nproc) ldap \
+  && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+  && docker-php-ext-install -j$(nproc) imap \
+  && docker-php-source delete
 
 if [[ $PHP_VERSION = "7.2" ]]; then
   docker-php-source extract \
-    && git clone --branch REL3_0 https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
+    && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
     && docker-php-ext-enable memcached \
     && docker-php-source delete \

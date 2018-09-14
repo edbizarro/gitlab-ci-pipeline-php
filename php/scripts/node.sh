@@ -8,3 +8,5 @@ curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && npm i -g npm \
     && npm i -g gulp \
     && curl -o- -L https://yarnpkg.com/install.sh | bash
+
+xargs sudo chmod a+x $HOME/.yarn/bin/yarn
