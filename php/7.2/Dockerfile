@@ -27,7 +27,8 @@ RUN bash ./extensions.sh
 RUN bash ./node.sh
 RUN bash ./cleanup.sh
 RUN adduser --disabled-password --gecos "" $IMAGE_USER && \
-       echo "PATH=$PATH:/home/php/.yarn/bin" >> /root/.profile && \
+       echo "PATH=$(yarn global bin):$PATH" >> /root/.profile && \
+       echo "PATH=$(yarn global bin):$PATH" >> /root/.bashrc && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
        mkdir -p /var/www/html && \
        chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
