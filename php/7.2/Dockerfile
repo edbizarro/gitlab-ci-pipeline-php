@@ -22,11 +22,11 @@ COPY ./php/scripts/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
 # Install
-RUN bash ./packages.sh
-RUN bash ./extensions.sh
-RUN bash ./node.sh
-RUN bash ./cleanup.sh
-RUN adduser --disabled-password --gecos "" $IMAGE_USER && \
+RUN bash ./packages.sh \
+    && bash ./extensions.sh \
+    && bash ./node.sh \
+    && bash ./cleanup.sh \
+    && adduser --disabled-password --gecos "" $IMAGE_USER && \
        echo "PATH=$(yarn global bin):$PATH" >> /root/.profile && \
        echo "PATH=$(yarn global bin):$PATH" >> /root/.bashrc && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
