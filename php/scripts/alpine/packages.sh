@@ -16,7 +16,9 @@ apk add --no-cache \
     rsync \
     sudo
 
-if [[ $PHP_VERSION = "7.2" ]]; then
+if [[ $PHP_VERSION = "7.3" ]]; then
+  apk add --no-cache libressl-dev
+elif [[ $PHP_VERSION = "7.2" ]]; then
   apk add --no-cache libressl-dev
 else
   apk add --no-cache openssl-dev

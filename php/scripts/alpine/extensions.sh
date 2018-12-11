@@ -47,7 +47,15 @@ pecl install xdebug \
 # pecl install pdo_sqlsrv sqlsrv \
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
-if [[ $PHP_VERSION = "7.2" ]]; then
+if [[ $PHP_VERSION = "7.3" ]]; then
+  git clone --depth 1 "https://github.com/xdebug/xdebug" \
+    && cd xdebug \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
+    && docker-php-ext-enable xdebug
+elif [[ $PHP_VERSION = "7.2" ]]; then
   git clone --depth 1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \

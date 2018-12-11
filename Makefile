@@ -8,11 +8,11 @@ pull:
 	docker pull ${NAMESPACE}:7.0-alpine || true
 	docker pull ${NAMESPACE}:7.1-alpine || true
 	docker pull ${NAMESPACE}:7.2-alpine || true
-  docker pull ${NAMESPACE}:7.3-alpine || true
+	docker pull ${NAMESPACE}:7.3-alpine || true
 	docker pull ${NAMESPACE}:7.0-alpine-lts || true
 	docker pull ${NAMESPACE}:7.1-alpine-lts || true
 	docker pull ${NAMESPACE}:7.2-alpine-lts || true
-  docker pull ${NAMESPACE}:7.3-alpine-lts || true
+	docker pull ${NAMESPACE}:7.3-alpine-lts || true
 
 build:
 	docker build --compress --cache-from ${NAMESPACE}:7.0-alpine -t ${NAMESPACE}:7.0-alpine -f php/7.0/alpine/Dockerfile .
