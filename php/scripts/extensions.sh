@@ -22,7 +22,7 @@ xmlrpc \
 zip
 "
 
-if [[ $PHP_VERSION = "7.2" ]]; then
+if [[ $PHP_VERSION = "7.3" ]]; then
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
@@ -44,6 +44,28 @@ if [[ $PHP_VERSION = "7.2" ]]; then
     libxml2-dev \
     "
 
+elif [[ $PHP_VERSION = "7.2" ]]; then
+
+  buildDeps=" \
+    default-libmysqlclient-dev \
+    libbz2-dev \
+    libsasl2-dev \
+    " \
+  runtimeDeps=" \
+    imagemagick \
+    libfreetype6-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libkrb5-dev \
+    libldap2-dev \
+    libmagickwand-dev \
+    libmemcached-dev \
+    libmemcachedutil2 \
+    libpng-dev \
+    libpq-dev \
+    libssl-dev \
+    libxml2-dev \
+    "
 else
 
   buildDeps=" \
