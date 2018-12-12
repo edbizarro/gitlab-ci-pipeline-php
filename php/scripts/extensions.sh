@@ -42,6 +42,7 @@ if [[ $PHP_VERSION = "7.3" ]]; then
     libpq-dev \
     libssl-dev \
     libxml2-dev \
+    libzip-dev \
     "
 
 elif [[ $PHP_VERSION = "7.2" ]]; then
