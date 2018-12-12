@@ -24,7 +24,6 @@ apk --update --no-cache add \
   libtool \
   libxml2-dev \
   libxslt-dev \
-  libzip-dev \
   openldap-dev \
   pcre-dev \
   postgresql-dev \
@@ -49,6 +48,7 @@ docker-php-source delete
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 if [[ $PHP_VERSION = "7.3" ]]; then
+  apk --update --no-cache add libzip-dev
   git clone --depth 1 -b 2.7.0beta1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
