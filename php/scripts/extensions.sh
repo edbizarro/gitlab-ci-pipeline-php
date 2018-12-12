@@ -23,6 +23,7 @@ zip
 "
 
 if [[ $PHP_VERSION = "7.3" ]]; then
+  echo "============ BUILDING PHP 7.3 ============"
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
@@ -46,7 +47,7 @@ if [[ $PHP_VERSION = "7.3" ]]; then
     "
 
 elif [[ $PHP_VERSION = "7.2" ]]; then
-
+echo "============ BUILDING PHP 7.2 ============"
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
@@ -68,7 +69,7 @@ elif [[ $PHP_VERSION = "7.2" ]]; then
     libxml2-dev \
     "
 else
-
+echo "============ BUILDING PHP 7.0 ============"
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
