@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-apk del --purge grep build-base .build-deps
+apk del --purge grep build-base .build-deps postgresql-dev
 
 rm -rf \
         /tmp/* \

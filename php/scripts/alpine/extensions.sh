@@ -24,6 +24,7 @@ apk --update --no-cache add \
   libtool \
   libxml2-dev \
   libxslt-dev \
+  libzip-dev \
   openldap-dev \
   pcre-dev \
   postgresql-dev \
@@ -39,22 +40,16 @@ docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include \
         --with-jpeg-dir=/usr/include \
-        --with-png-dir=/usr/include \
-        --with-webp-dir=/usr/include \
-        --with-xpm-dir=no \
-        --with-zlib-dir=/usr/include
+        --with-png-dir=/usr/include
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
 docker-php-source delete
-
-pecl install xdebug \
-  && docker-php-ext-enable xdebug
 
 # pecl install pdo_sqlsrv sqlsrv \
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 if [[ $PHP_VERSION = "7.3" ]]; then
-  git clone --depth 1 "https://github.com/xdebug/xdebug" \
+  git clone --depth 1 -b 2.7.0beta1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
     && ./configure \
@@ -75,6 +70,9 @@ else
     libmcrypt \
 
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) mcrypt
+
+    pecl install xdebug \
+      && docker-php-ext-enable xdebug
 fi
 
 docker-php-source extract \
