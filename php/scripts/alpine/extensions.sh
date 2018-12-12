@@ -47,7 +47,7 @@ docker-php-source delete
 # pecl install pdo_sqlsrv sqlsrv \
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
-if [[ $PHP_VERSION -eq "7.3" ]]; then
+if [[ $PHP_VERSION == "7.3" ]]; then
   apk --update --no-cache add libzip-dev
   git clone --depth 1 -b 2.7.0beta1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
@@ -56,7 +56,7 @@ if [[ $PHP_VERSION -eq "7.3" ]]; then
     && make \
     && make install \
     && docker-php-ext-enable xdebug
-elif [[ $PHP_VERSION -eq "7.2" ]]; then
+elif [[ $PHP_VERSION == "7.2" ]]; then
   git clone --depth 1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \

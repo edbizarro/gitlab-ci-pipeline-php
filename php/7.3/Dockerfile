@@ -22,8 +22,8 @@ COPY ./php/scripts/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
 # Install
-RUN bash ./packages.sh
-RUN bash ./extensions.sh \
+RUN bash ./packages.sh \
+    && bash ./extensions.sh \
     && bash ./node.sh \
     && bash ./cleanup.sh \
     && adduser --disabled-password --gecos "" $IMAGE_USER && \
