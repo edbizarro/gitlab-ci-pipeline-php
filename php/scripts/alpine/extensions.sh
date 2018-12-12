@@ -35,11 +35,17 @@ docker-php-ext-configure ldap
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) ldap
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) imap
-docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+docker-php-ext-configure gd \
+        --with-gd \
+        --with-freetype-dir=/usr/include \
+        --with-jpeg-dir=/usr/include \
+        --with-png-dir=/usr/include \
+        --with-webp-dir=/usr/include \
+        --with-xpm-dir=no \
+        --with-zlib-dir=/usr/include
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
 docker-php-source delete
-
 
 pecl install xdebug \
   && docker-php-ext-enable xdebug
@@ -72,10 +78,10 @@ else
 fi
 
 docker-php-source extract \
-    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz" \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/4.2.0.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-4.1.1 /usr/src/php/ext/redis \
+    && mv phpredis-4.2.0 /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
     && docker-php-source delete
 
