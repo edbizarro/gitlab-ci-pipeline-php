@@ -28,8 +28,8 @@ RUN chown -R root:root /usr && chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \
     && mkdir -p /var/www/html \
     && apk add --update --no-cache bash \
-    && bash ./packages.sh \
-    && bash ./extensions.sh \
+    && bash ./packages.sh
+RUN bash ./extensions.sh \
     && bash ./nodeyarn.sh \
     && bash ./cleanup.sh \
     && composer global require "hirak/prestissimo:^0.3" \

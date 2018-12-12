@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo $PHP_VERSION
-
 set -euf -o pipefail
 
 extensions=" \
@@ -24,8 +22,7 @@ xmlrpc \
 zip
 "
 
-if [[ $PHP_VERSION = "7.3" ]]; then
-  echo "============ BUILDING PHP 7.3 ============"
+if [[ $PHP_VERSION -eq "7.3" ]]; then
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
@@ -48,8 +45,7 @@ if [[ $PHP_VERSION = "7.3" ]]; then
     libzip-dev \
     "
 
-elif [[ $PHP_VERSION = "7.2" ]]; then
-echo "============ BUILDING PHP 7.2 ============"
+elif [[ $PHP_VERSION -eq "7.2" ]]; then
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
@@ -71,7 +67,6 @@ echo "============ BUILDING PHP 7.2 ============"
     libxml2-dev \
     "
 else
-echo "============ BUILDING PHP 7.0 ============"
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
@@ -107,7 +102,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps -
   && docker-php-ext-install -j$(nproc) imap \
   && docker-php-source delete
 
-if [[ $PHP_VERSION = "7.2" ]]; then
+if [[ $PHP_VERSION -eq "7.2" ]]; then
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
