@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo $PHP_VERSION
+
 set -euf -o pipefail
 
 extensions=" \
