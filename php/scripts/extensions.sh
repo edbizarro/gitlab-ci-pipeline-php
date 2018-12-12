@@ -80,7 +80,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps -
   && docker-php-ext-install -j$(nproc) imap \
   && docker-php-source delete
 
-if [[ $PHP_VERSION -eq "7.2" ]]; then
+if [[ $PHP_VERSION == "7.2" ]]; then
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
