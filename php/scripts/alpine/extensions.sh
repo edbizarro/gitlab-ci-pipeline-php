@@ -29,7 +29,8 @@ apk --update --no-cache add \
   postgresql-dev \
   readline-dev \
   sqlite-dev \
-  zlib-dev
+  zlib-dev \
+  libzip-dev
 
 docker-php-ext-configure ldap
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) ldap
@@ -48,7 +49,6 @@ docker-php-source delete
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 if [[ $PHP_VERSION == "7.3" ]]; then
-  apk --update --no-cache add libzip-dev
   git clone --depth 1 -b 2.7.0beta1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
