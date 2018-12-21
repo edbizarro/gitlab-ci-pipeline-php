@@ -18,12 +18,6 @@ command:
     exit-status: 0
   composer --version:
     exit-status: 0
-  php --version:
-    exit-status: 0
-    stdout:
-      or:
-        - 7.2
-        - 7.3
   python --version:
     exit-status: 0
   make --version:
