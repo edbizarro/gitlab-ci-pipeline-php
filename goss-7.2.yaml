@@ -21,8 +21,9 @@ command:
   php --version:
     exit-status: 0
     stdout:
-      - 7.2
-      - 7.3
+      or:
+        - 7.2
+        - 7.3
   python --version:
     exit-status: 0
   make --version:
