@@ -2,7 +2,7 @@ FROM php:7.1-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
-      node="10.14.2" \
+      node="10" \
       npm="5" \
       yarn="latest"
 
