@@ -17,13 +17,12 @@ ENV PHP_VERSION="7.3"
 
 WORKDIR /tmp
 
-
-# COPY INSTALL SCRIPTS
 COPY ./php/scripts/alpine/*.sh /tmp/
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 COPY --from=mhart/alpine-node:11 /usr/bin/node /usr/bin/
 COPY --from=mhart/alpine-node:11 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
+# COPY INSTALL SCRIPTS
 RUN chown -R root:root /usr && chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \
     && mkdir -p /var/www/html \

@@ -9,7 +9,7 @@ command:
   node --version:
     exit-status: 0
     stdout:
-      - v10
+      - v11
   yarn --version:
     exit-status: 0
   npm --version:
@@ -22,6 +22,7 @@ command:
     exit-status: 0
     stdout:
       - 7.2
+      - 7.3
   python --version:
     exit-status: 0
   make --version:

@@ -32,6 +32,10 @@ apk --update --no-cache add \
   zlib-dev \
   libzip-dev
 
+if [[ $PHP_VERSION == "7.3" ]]; then
+  apk --update --no-cache add libzip-dev
+fi
+
 docker-php-ext-configure ldap
 docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) ldap
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl
@@ -56,6 +60,7 @@ if [[ $PHP_VERSION == "7.3" ]]; then
     && make \
     && make install \
     && docker-php-ext-enable xdebug
+
 elif [[ $PHP_VERSION == "7.2" ]]; then
   git clone --depth 1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
