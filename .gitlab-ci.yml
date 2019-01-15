@@ -133,27 +133,6 @@ Alpine 7.1 LTS:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-Alpine 7.0:
-  stage: alpine
-  variables:
-    IMAGE_VERSION: "7.0-alpine"
-  script:
-    - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/alpine/Dockerfile .
-    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
-    - docker push $NAMESPACE:$IMAGE_VERSION
-  when: always
-
-Alpine 7.0 LTS:
-  stage: alpine
-  variables:
-    IMAGE_VERSION: "7.0-alpine-lts"
-  script:
-    - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/alpine/Dockerfile-lts .
-    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-lts.yaml v
-    - docker push $NAMESPACE:$IMAGE_VERSION
-  when: always
 
 # Alpine (make):
 #   stage: alpine
@@ -161,17 +140,6 @@ Alpine 7.0 LTS:
 #     - apk add --no-cache make
 #     - make all
 #   when: always
-
-FPM 7.0:
-  stage: fpm
-  variables:
-    IMAGE_VERSION: "7.0-fpm"
-  script:
-    - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.0/fpm/Dockerfile .
-    - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
-    - docker push $NAMESPACE:$IMAGE_VERSION
-  when: always
 
 FPM 7.1:
   stage: fpm
