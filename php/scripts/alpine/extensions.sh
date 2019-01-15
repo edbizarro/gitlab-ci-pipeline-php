@@ -29,11 +29,13 @@ apk --update --no-cache add \
   postgresql-dev \
   readline-dev \
   sqlite-dev \
-  zlib-dev \
-  libzip-dev
+  zlib-dev
+
 
 if [[ $PHP_VERSION == "7.3" ]]; then
   apk --update --no-cache add libzip-dev
+else
+  apk --no-cache add --repository http://dl-cdn.alpinelinux.org/alpine/v3.5/community libzip-dev
 fi
 
 docker-php-ext-configure ldap
