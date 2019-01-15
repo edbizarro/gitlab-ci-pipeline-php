@@ -80,7 +80,7 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps
   && docker-php-ext-install -j$(nproc) imap \
   && docker-php-source delete
 
-if [[ $PHP_VERSION == "7.2" || $PHP_VERSION == "7.3" ]]; then
+if [[ $PHP_VERSION == "7.2" ]]; then
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
@@ -90,6 +90,18 @@ if [[ $PHP_VERSION == "7.2" || $PHP_VERSION == "7.3" ]]; then
   pecl channel-update pecl.php.net \
     && pecl install redis apcu mongodb imagick xdebug \
     && docker-php-ext-enable redis apcu mongodb imagick xdebug
+
+elif [[ $PHP_VERSION == "7.3" ]]; then
+  docker-php-source extract \
+    && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
+    && docker-php-ext-install memcached \
+    && docker-php-ext-enable memcached \
+    && docker-php-source delete \
+
+  pecl channel-update pecl.php.net \
+    && pecl install redis apcu mongodb imagick xdebug-beta \
+    && docker-php-ext-enable redis apcu mongodb imagick xdebug
+
 else
   apt-get update && docker-php-ext-install -j$(nproc) mcrypt
   pecl channel-update pecl.php.net \
