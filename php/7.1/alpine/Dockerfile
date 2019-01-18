@@ -2,7 +2,7 @@ FROM php:7.1-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
-      node="11.6.0" \
+      node="11.7.0" \
       npm="6" \
       yarn="latest"
 
@@ -12,7 +12,7 @@ ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 ENV GOSS_VERSION="0.3.6"
-ENV NODE_VERSION="v11.6.0"
+ENV NODE_VERSION="v11.7.0"
 ENV NPM_VERSION=6
 ENV YARN_VERSION=latest
 ENV PHP_VERSION=7.1
