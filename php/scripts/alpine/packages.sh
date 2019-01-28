@@ -17,7 +17,7 @@ apk add --no-cache \
     sudo
 
 if [[ $PHP_VERSION == "7.1" ]]; then
-  apk add --no-cache openssl-dev
+  apk add --no-cache openssl openssl-dev
 else
   apk add --no-cache libressl-dev
 fi
