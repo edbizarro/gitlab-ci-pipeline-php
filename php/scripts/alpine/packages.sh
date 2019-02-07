@@ -13,9 +13,10 @@ apk add --no-cache \
     make \
     python \
     rsync \
-    sudo
-
-apk add --no-cache openssl openssl-dev
+    sudo \
+    openssl \
+    openssl-dev\
+    openssh-client
 
 apk add --no-cache --virtual .build-deps build-base autoconf
 
