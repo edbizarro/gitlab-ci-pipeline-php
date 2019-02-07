@@ -2,7 +2,7 @@ FROM php:7.1-alpine
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       php="7.1" \
-      node="11.7.0" \
+      node="11.9.0" \
       npm="6" \
       yarn="latest"
 
@@ -11,8 +11,8 @@ ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
-ENV GOSS_VERSION="0.3.6"
-ENV NODE_VERSION="v11.7.0"
+ENV GOSS_VERSION=0.3.6
+ENV NODE_VERSION=11.9.0
 ENV NPM_VERSION=6
 ENV YARN_VERSION=latest
 ENV PHP_VERSION=7.1
@@ -21,8 +21,8 @@ WORKDIR /tmp
 
 COPY ./php/scripts/alpine/*.sh /tmp/
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
-COPY --from=mhart/alpine-node:11 /usr/bin/node /usr/bin/
-COPY --from=mhart/alpine-node:11 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
+COPY --from=mhart/alpine-node:11.9.0 /usr/bin/node /usr/bin/
+COPY --from=mhart/alpine-node:11.9.0 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
 # COPY INSTALL SCRIPTS
 RUN chown -R root:root /usr && chmod +x /tmp/*.sh \
