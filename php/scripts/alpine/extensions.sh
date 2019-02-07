@@ -39,23 +39,23 @@ else
 fi
 
 docker-php-ext-configure ldap
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) ldap
+docker-php-ext-install -j "$(nproc)" ldap
 docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) imap
+docker-php-ext-install -j "$(nproc)" imap
 docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include \
         --with-jpeg-dir=/usr/include \
         --with-png-dir=/usr/include
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd
-docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
+docker-php-ext-install -j "$(nproc)" gd
+docker-php-ext-install -j "$(nproc)" exif xml xmlrpc pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
 docker-php-source delete
 
 # pecl install pdo_sqlsrv sqlsrv \
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 if [[ $PHP_VERSION == "7.3" ]]; then
-  git clone --depth 1 -b 2.7.0beta1 "https://github.com/xdebug/xdebug" \
+  git clone --depth 1 -b 2.7.0RC1 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
     && ./configure \
