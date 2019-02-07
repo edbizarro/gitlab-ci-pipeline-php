@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apk update && apk upgrade
+apk update && apk upgrade --no-cache
 
 apk add --no-cache \
     ca-certificates \
@@ -11,16 +11,11 @@ apk add --no-cache \
     git \
     grep \
     make \
-    openssh-client \
     python \
     rsync \
     sudo
 
-if [[ $PHP_VERSION == "7.1" ]]; then
-  apk add --no-cache openssl openssl-dev
-else
-  apk add --no-cache libressl-dev
-fi
+apk add --no-cache openssl openssl-dev
 
 apk add --no-cache --virtual .build-deps build-base autoconf
 
