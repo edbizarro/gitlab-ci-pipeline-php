@@ -1,4 +1,7 @@
 stages:
+  - build
+  - test
+  - publish
   - debian
   - alpine
   - fpm
@@ -16,7 +19,7 @@ before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
 Debian 7.3:
-  stage: debian
+  stage: build
   variables:
     IMAGE_VERSION: "7.3"
   script:
@@ -32,7 +35,7 @@ Debian 7.3:
   when: always
 
 Debian 7.2:
-  stage: debian
+  stage: build
   variables:
     IMAGE_VERSION: "7.2"
   script:
@@ -44,7 +47,7 @@ Debian 7.2:
   when: always
 
 Debian 7.1:
-  stage: debian
+  stage: build
   variables:
     IMAGE_VERSION: "7.1"
   script:
@@ -56,7 +59,7 @@ Debian 7.1:
   when: always
 
 Alpine 7.3:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.3-alpine"
   script:
@@ -70,7 +73,7 @@ Alpine 7.3:
   when: always
 
 Alpine 7.3 LTS:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.3-alpine-lts"
   script:
@@ -84,7 +87,7 @@ Alpine 7.3 LTS:
   when: always
 
 Alpine 7.2:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.2-alpine"
   script:
@@ -96,7 +99,7 @@ Alpine 7.2:
   when: always
 
 Alpine 7.2 LTS:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.2-alpine-lts"
   script:
@@ -108,7 +111,7 @@ Alpine 7.2 LTS:
   when: always
 
 Alpine 7.1:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.1-alpine"
   script:
@@ -120,7 +123,7 @@ Alpine 7.1:
   when: always
 
 Alpine 7.1 LTS:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.1-alpine-lts"
   script:
@@ -140,7 +143,7 @@ Alpine 7.1 LTS:
 #   when: always
 
 FPM 7.1:
-  stage: fpm
+  stage: build
   variables:
     IMAGE_VERSION: "7.1-fpm"
   script:
@@ -152,7 +155,7 @@ FPM 7.1:
   when: always
 
 FPM 7.2:
-  stage: fpm
+  stage: build
   variables:
     IMAGE_VERSION: "7.2-fpm"
   script:
@@ -164,7 +167,7 @@ FPM 7.2:
   when: always
 
 FPM 7.3:
-  stage: fpm
+  stage: build
   variables:
     IMAGE_VERSION: "7.3-fpm"
   script:
