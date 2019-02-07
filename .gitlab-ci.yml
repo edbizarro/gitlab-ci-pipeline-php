@@ -2,9 +2,6 @@ stages:
   - build
   - test
   - publish
-  - debian
-  - alpine
-  - fpm
 
 image: docker:latest
 
