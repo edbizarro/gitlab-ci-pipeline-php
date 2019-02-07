@@ -15,7 +15,7 @@ apk add --no-cache \
     rsync \
     sudo
 
-apk add --no-cache openssl openssl-dev
+apk add --no-cache openssl openssl-dev openssh-client
 
 apk add --no-cache --virtual .build-deps build-base autoconf
 
