@@ -1,19 +1,28 @@
 FROM php:7.3-alpine
 
+ARG BUILD_DATE
+ARG VCS_REF
+ARG BUILD_VERSION
+
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      php="7.3" \
-      node="11.9.0"
+      PHP="7.3" \
+      NODE="11.9.0" \
+      org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.vcs-url="https://github.com/edbizarro/gitlab-ci-pipeline-php" \
+      org.label-schema.vcs-ref=$VCS_REF
 
 # Set correct environment variables
-ENV IMAGE_USER=php
-ENV HOME=/home/$IMAGE_USER
-ENV COMPOSER_HOME=$HOME/.composer
-ENV PATH=$HOME/.yarn/bin:$PATH
-ENV GOSS_VERSION="0.3.6"
-ENV NODE_VERSION="11.9.0"
-ENV NPM_VERSION=6
-ENV YARN_VERSION=latest
-ENV PHP_VERSION=7.3
+ENV IMAGE_USER=php \
+    HOME=/home/$IMAGE_USER \
+    COMPOSER_HOME=$HOME/.composer \
+    PATH=$HOME/.yarn/bin:$PATH \
+    GOSS_VERSION="0.3.6" \
+    NODE_VERSION="11.9.0" \
+    NPM_VERSION=6 \
+    YARN_VERSION=latest \
+    PHP_VERSION=7.3
 
 WORKDIR /tmp
 

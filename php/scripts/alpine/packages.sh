@@ -11,12 +11,12 @@ apk add --no-cache \
     git \
     grep \
     make \
+    openssh-client \
+    openssl \
+    openssl-dev \
     python \
     rsync \
-    sudo \
-    openssl \
-    openssl-dev\
-    openssh-client
+    sudo
 
 apk add --no-cache --virtual .build-deps build-base autoconf
 
