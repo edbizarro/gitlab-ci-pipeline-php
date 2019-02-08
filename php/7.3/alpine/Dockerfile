@@ -13,15 +13,15 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       org.label-schema.vcs-ref=$VCS_REF
 
 # Set correct environment variables
-ENV IMAGE_USER=php \
-    HOME=/home/$IMAGE_USER \
-    COMPOSER_HOME=$HOME/.composer \
-    PATH=$HOME/.yarn/bin:$PATH \
+ENV IMAGE_USER="php" \
+    HOME="/home/$IMAGE_USER" \
+    COMPOSER_HOME="$HOME/.composer" \
+    PATH="$HOME/.yarn/bin:$PATH" \
     GOSS_VERSION="0.3.6" \
     NODE_VERSION="11.9.0" \
-    NPM_VERSION=6 \
-    YARN_VERSION=latest \
-    PHP_VERSION=7.3
+    NPM_VERSION="6" \
+    YARN_VERSION="latest" \
+    PHP_VERSION="7.3"
 
 WORKDIR /tmp
 
