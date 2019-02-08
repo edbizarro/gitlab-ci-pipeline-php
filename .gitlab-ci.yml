@@ -22,12 +22,7 @@ Debian 7.3:
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build \
-        --compress \
-        --cache-from $NAMESPACE:$IMAGE_VERSION \
-        --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
-        -t $NAMESPACE:$IMAGE_VERSION \
-        -f php/7.3/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:latest
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:7

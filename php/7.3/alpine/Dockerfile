@@ -2,7 +2,6 @@ FROM php:7.3-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG BUILD_VERSION
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       PHP="7.3" \
