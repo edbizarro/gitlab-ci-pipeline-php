@@ -5,8 +5,12 @@ set -euf -o pipefail
 apk update && apk upgrade --no-cache
 
 apk add --no-cache \
+    g++ \
+    gcc \
     git \
     grep \
+    libc-dev \
+    make \
     openssh-client \
     openssl \
     python \
@@ -17,15 +21,11 @@ apk add --no-cache \
 apk add --no-cache --virtual .persistent-deps \
 		ca-certificates \
 		tar \
-		xz
+		xz \
+    curl
 
 apk add --no-cache --virtual .build-deps \
     autoconf \
     build-base \
-    curl \
     file \
-    g++ \
-    gcc \
-    libc-dev \
-    make \
     openssl-dev
