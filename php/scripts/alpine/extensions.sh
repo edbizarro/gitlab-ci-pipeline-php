@@ -33,7 +33,7 @@ apk --update --no-cache add \
 
 
 if [[ $PHP_VERSION == "7.3" ]]; then
-  apk --update --no-cache add libzip-dev
+  apk --update --no-cache add libzip-dev libsodium-dev
 else
   apk --no-cache add --repository http://dl-cdn.alpinelinux.org/alpine/v3.5/community libzip-dev
 fi
