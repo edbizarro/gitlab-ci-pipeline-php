@@ -1,8 +1,16 @@
 FROM php:7.2-alpine
 
+ARG BUILD_DATE
+ARG VCS_REF
+
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      php="7.2" \
-      node="11.9.0"
+      PHP="7.2" \
+      NODE="11.9.0" \
+      org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.vcs-url="https://github.com/edbizarro/gitlab-ci-pipeline-php" \
+      org.label-schema.vcs-ref=$VCS_REF
 
 # Set correct environment variables
 ENV IMAGE_USER=php
@@ -23,7 +31,7 @@ COPY --from=mhart/alpine-node:11.9.0 /usr/bin/node /usr/bin/
 COPY --from=mhart/alpine-node:11.9.0 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
 # COPY INSTALL SCRIPTS
-RUN chown -R root:root /usr && chmod +x /tmp/*.sh \
+RUN chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \
     && mkdir -p /var/www/html \
     && apk add --update --no-cache bash \
