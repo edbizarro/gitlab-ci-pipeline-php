@@ -7,6 +7,7 @@ LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
       PHP="7.2" \
       NODE="11.9.0" \
       org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
+      org.label-schema.description=":coffee: Docker images for build and test PHP applications with Gitlab CI (or any other CI plataform!)" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0" \
       org.label-schema.vcs-url="https://github.com/edbizarro/gitlab-ci-pipeline-php" \
