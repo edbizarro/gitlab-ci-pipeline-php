@@ -1,23 +1,31 @@
 #!/bin/bash
 
+set -euf -o pipefail
+
 apk update && apk upgrade --no-cache
 
 apk add --no-cache \
-    ca-certificates \
-    curl \
-    file \
-    g++ \
-    gcc \
     git \
     grep \
-    make \
     openssh-client \
     openssl \
-    openssl-dev \
     python \
     rsync \
     sudo
 
-apk add --no-cache --virtual .build-deps build-base autoconf
+# persistent / runtime deps
+RUN apk add --no-cache --virtual .persistent-deps \
+		ca-certificates \
+		tar \
+		xz
 
-rm -rf /usr/share/man
+apk add --no-cache --virtual .build-deps \
+    autoconf \
+    build-base \
+    curl \
+    file \
+    g++ \
+    gcc \
+    libc-dev \
+    make \
+    openssl-dev
