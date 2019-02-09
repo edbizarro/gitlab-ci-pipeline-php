@@ -14,7 +14,7 @@ apk add --no-cache \
     sudo
 
 # persistent / runtime deps
-RUN apk add --no-cache --virtual .persistent-deps \
+apk add --no-cache --virtual .persistent-deps \
 		ca-certificates \
 		tar \
 		xz
