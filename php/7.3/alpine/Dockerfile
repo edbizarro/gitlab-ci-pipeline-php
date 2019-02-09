@@ -31,7 +31,7 @@ COPY --from=mhart/alpine-node:11.9.0 /usr/bin/node /usr/bin/
 COPY --from=mhart/alpine-node:11.9.0 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
 # COPY INSTALL SCRIPTS
-RUN chown -R root:root /usr && chmod +x /tmp/*.sh \
+RUN chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \
     && mkdir -p /var/www/html \
     && apk add --update --no-cache bash \
