@@ -1,8 +1,7 @@
 stages:
-  - debian
-  - chromium
-  - alpine
-  - fpm
+  - build
+  - test
+  - publish
 
 image: docker:latest
 
@@ -17,7 +16,7 @@ before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
 Debian 7.3:
-  stage: debian
+  stage: build
   variables:
     IMAGE_VERSION: "7.3"
   script:
@@ -27,13 +26,14 @@ Debian 7.3:
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:latest
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:7
+    # - docker run -t --rm -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION
     - docker push $NAMESPACE:$IMAGE_VERSION
     - docker push $NAMESPACE:7
     - docker push $NAMESPACE:latest
   when: always
 
 Debian 7.2:
-  stage: debian
+  stage: build
   variables:
     IMAGE_VERSION: "7.2"
   script:
@@ -45,7 +45,7 @@ Debian 7.2:
   when: always
 
 Debian 7.1:
-  stage: debian
+  stage: build
   variables:
     IMAGE_VERSION: "7.1"
   script:
@@ -57,7 +57,7 @@ Debian 7.1:
   when: always
 
 Debian 7.0:
-  stage: debian
+  stage: build
   variables:
     IMAGE_VERSION: "7.0"
   script:
@@ -68,7 +68,7 @@ Debian 7.0:
   when: always
 
 Chromium 7.3:
-  stage: chromium
+  stage: build
   variables:
     IMAGE_VERSION: "7.3-chromium"
   script:
@@ -83,7 +83,7 @@ Chromium 7.3:
   when: always
 
 Chromium 7.2:
-  stage: chromium
+  stage: build
   variables:
     IMAGE_VERSION: "7.2-chromium"
   script:
@@ -94,7 +94,7 @@ Chromium 7.2:
   when: always
 
 Chromium 7.1:
-  stage: chromium
+  stage: build
   variables:
     IMAGE_VERSION: "7.1-chromium"
   script:
@@ -105,7 +105,7 @@ Chromium 7.1:
   when: always
 
 Chromium 7.0:
-  stage: dechromiumbian
+  stage: build
   variables:
     IMAGE_VERSION: "7.0-chromium"
   script:
@@ -116,13 +116,13 @@ Chromium 7.0:
   when: always
 
 Alpine 7.3:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.3-alpine"
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/alpine/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:alpine
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -130,13 +130,13 @@ Alpine 7.3:
   when: always
 
 Alpine 7.3 LTS:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.3-alpine-lts"
   script:
     - docker pull php:7.3-alpine || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/alpine/Dockerfile-lts .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/alpine/Dockerfile-lts .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2-lts.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:alpine-lts
     - docker push $NAMESPACE:$IMAGE_VERSION
@@ -144,49 +144,49 @@ Alpine 7.3 LTS:
   when: always
 
 Alpine 7.2:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.2-alpine"
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
 Alpine 7.2 LTS:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.2-alpine-lts"
   script:
     - docker pull php:7.2-alpine || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile-lts .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/alpine/Dockerfile-lts .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2-lts.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
 Alpine 7.1:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.1-alpine"
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
 Alpine 7.1 LTS:
-  stage: alpine
+  stage: build
   variables:
     IMAGE_VERSION: "7.1-alpine-lts"
   script:
     - docker pull php:7.1-alpine || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile-lts .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/alpine/Dockerfile-lts .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-lts.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
@@ -200,7 +200,7 @@ Alpine 7.1 LTS:
 #   when: always
 
 FPM 7.1:
-  stage: fpm
+  stage: build
   variables:
     IMAGE_VERSION: "7.1-fpm"
   script:
@@ -212,7 +212,7 @@ FPM 7.1:
   when: always
 
 FPM 7.2:
-  stage: fpm
+  stage: build
   variables:
     IMAGE_VERSION: "7.2-fpm"
   script:
@@ -224,7 +224,7 @@ FPM 7.2:
   when: always
 
 FPM 7.3:
-  stage: fpm
+  stage: build
   variables:
     IMAGE_VERSION: "7.3-fpm"
   script:

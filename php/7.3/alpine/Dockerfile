@@ -1,16 +1,25 @@
 FROM php:7.3-alpine
 
+ARG BUILD_DATE
+ARG VCS_REF
+
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      php="7.3" \
-      node="11.9.0"
+      PHP="7.3" \
+      NODE="11.9.0" \
+      org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
+      org.label-schema.description=":coffee: Docker images for build and test PHP applications with Gitlab CI (or any other CI plataform!)" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.vcs-url="https://github.com/edbizarro/gitlab-ci-pipeline-php" \
+      org.label-schema.vcs-ref=$VCS_REF
 
 # Set correct environment variables
 ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
-ENV GOSS_VERSION="0.3.6"
-ENV NODE_VERSION="11.9.0"
+ENV GOSS_VERSION=0.3.6
+ENV NODE_VERSION=11.9.0
 ENV NPM_VERSION=6
 ENV YARN_VERSION=latest
 ENV PHP_VERSION=7.3
@@ -23,7 +32,7 @@ COPY --from=mhart/alpine-node:11.9.0 /usr/bin/node /usr/bin/
 COPY --from=mhart/alpine-node:11.9.0 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
 # COPY INSTALL SCRIPTS
-RUN chown -R root:root /usr && chmod +x /tmp/*.sh \
+RUN chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \
     && mkdir -p /var/www/html \
     && apk add --update --no-cache bash \
