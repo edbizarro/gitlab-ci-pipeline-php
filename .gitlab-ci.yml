@@ -1,7 +1,7 @@
 stages:
   - build
-  - test
   - publish
+  - test
 
 image: docker:latest
 
@@ -182,7 +182,4 @@ Trigger Test:
   stage: test
   script:
     - "curl -X POST -F token=$TRIGGER_TOKEN -F ref="Images Build" https://gitlab.com/api/v4/projects/6295501/trigger/pipeline"
-  dependencies:
-    - FPM 7.3
-    - FPM 7.2
-    - FPM 7.1
+  when: on_success
