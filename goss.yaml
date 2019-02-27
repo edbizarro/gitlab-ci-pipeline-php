@@ -9,7 +9,7 @@ command:
   node --version:
     exit-status: 0
     stdout:
-      - v11
+      - "v11.10"
   yarn --version:
     exit-status: 0
   npm --version:
