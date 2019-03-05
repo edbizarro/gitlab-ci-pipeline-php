@@ -33,7 +33,7 @@ RUN bash ./packages.sh \
        mkdir -p /var/www/html \
     && composer global require "hirak/prestissimo:^0.3"  \
     && rm -rf ~/.composer/cache/* \
-    && chown -R $IMAGE_USER:$IMAGE_USER /var/www $COMPOSER_HOME $HOME/.config \
+    && chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
     && curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
 
 USER $IMAGE_USER
