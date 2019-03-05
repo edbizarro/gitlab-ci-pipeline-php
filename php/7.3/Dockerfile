@@ -30,7 +30,7 @@ RUN bash ./packages.sh \
        echo "PATH=$(yarn global bin):$PATH" >> /root/.profile && \
        echo "PATH=$(yarn global bin):$PATH" >> /root/.bashrc && \
        echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
-       mkdir -p /var/www/html && \
+       mkdir -p /var/www/html \
     && composer global require "hirak/prestissimo:^0.3"  \
     && rm -rf ~/.composer/cache/* \
     && chown -R $IMAGE_USER:$IMAGE_USER /var/www $COMPOSER_HOME $HOME/.config \
