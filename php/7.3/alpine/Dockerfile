@@ -42,7 +42,7 @@ RUN chmod +x /tmp/*.sh \
     && bash ./cleanup.sh \
     && composer global require "hirak/prestissimo:^0.3" \
     && rm -rf ~/.composer/cache/* \
-    && chown -R $IMAGE_USER:$IMAGE_USER /var/www \
+    && chown -R $IMAGE_USER:$IMAGE_USER /var/www $COMPOSER_HOME $HOME/.config \
     && echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers \
     && curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
 
