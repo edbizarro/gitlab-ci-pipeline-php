@@ -17,7 +17,7 @@ echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 DEBIAN_FRONTEND=noninteractive
   dpkg-reconfigure -f noninteractive tzdata \
   && apt-get update \
-  && apt-get upgrade -y \
+  && apt-get upgrade -yqq \
   &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
       apt-transport-https \
       apt-utils \

@@ -4,14 +4,14 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
-      PHP="7.3" \
-      NODE="11.13.0" \
-      org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
-      org.label-schema.description=":coffee: Docker images for build and test PHP applications with Gitlab CI (or any other CI plataform!)" \
-      org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.schema-version="1.0" \
-      org.label-schema.vcs-url="https://github.com/edbizarro/gitlab-ci-pipeline-php" \
-      org.label-schema.vcs-ref=$VCS_REF
+  PHP="7.3" \
+  NODE="11.13.0" \
+  org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
+  org.label-schema.description=":coffee: Docker images for build and test PHP applications with Gitlab CI (or any other CI plataform!)" \
+  org.label-schema.build-date=$BUILD_DATE \
+  org.label-schema.schema-version="1.0" \
+  org.label-schema.vcs-url="https://github.com/edbizarro/gitlab-ci-pipeline-php" \
+  org.label-schema.vcs-ref=$VCS_REF
 
 # Set correct environment variables
 ENV IMAGE_USER=php
@@ -33,18 +33,18 @@ COPY --from=mhart/alpine-node:11.13.0 /usr/lib/libgcc* /usr/lib/libstdc* /usr/li
 
 # COPY INSTALL SCRIPTS
 RUN chmod +x /tmp/*.sh \
-    && adduser -D $IMAGE_USER \
-    && mkdir -p /var/www/html \
-    && apk add --update --no-cache bash \
-    && bash ./packages.sh \
-    && bash ./extensions.sh \
-    && bash ./nodeyarn.sh \
-    && bash ./cleanup.sh \
-    && composer global require "hirak/prestissimo:^0.3" \
-    && rm -rf ~/.composer/cache/* \
-    && chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
-    && echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers \
-    && curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh
+  && adduser -D $IMAGE_USER \
+  && mkdir -p /var/www/html \
+  && apk add --update --no-cache bash \
+  && bash ./packages.sh \
+  && bash ./extensions.sh \
+  && bash ./nodeyarn.sh \
+  && composer global require "hirak/prestissimo:^0.3" \
+  && rm -rf ~/.composer/cache/* \
+  && chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
+  && echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers \
+  && curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh \
+  && bash ./cleanup.sh
 
 USER $IMAGE_USER
 
