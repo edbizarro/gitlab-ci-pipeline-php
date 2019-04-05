@@ -5,6 +5,7 @@
 ![Logo](https://raw.githubusercontent.com/edbizarro/gitlab-ci-pipeline-php/master/gitlab-ci-pipeline-php.png)
 
 ---
+![GitHub last commit](https://img.shields.io/github/last-commit/edbizarro/gitlab-ci-pipeline-php.svg?style=for-the-badge&logo=git) [![Docker Pulls](https://img.shields.io/docker/pulls/edbizarro/gitlab-ci-pipeline-php.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/edbizarro/gitlab-ci-pipeline-php/)
 
 ## Based on [Official PHP images](https://hub.docker.com/_/php/)
 
@@ -27,9 +28,6 @@ All versions (except `lts`) come with [Node 11](https://nodejs.org/en/), [Compos
 > `lts` version come with node v10
 
 >> PHP 7.0.x is now deprecated and removed from this documentation. Your scripts will not stop working since the images are still available but they will not be receiving new builds from now on.
-
-[![Docker Pulls](https://img.shields.io/docker/pulls/edbizarro/gitlab-ci-pipeline-php.svg?style=for-the-badge)](https://hub.docker.com/r/edbizarro/gitlab-ci-pipeline-php/)
-
 
 ---
 
