@@ -18,7 +18,7 @@ DEBIAN_FRONTEND=noninteractive
   dpkg-reconfigure -f noninteractive tzdata \
   && apt-get update \
   && apt-get upgrade -yqq \
-  &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
+  &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq — no-install-recommends \
       apt-transport-https \
       apt-utils \
       build-essential \
@@ -33,5 +33,4 @@ DEBIAN_FRONTEND=noninteractive
       sudo \
       unzip \
       zlib1g-dev \
-      --no-install-recommends \
       && rm -rf /var/lib/apt/lists/*

@@ -68,7 +68,7 @@ else
     "
 fi
 
-apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps --no-install-recommends \
+DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps --no-install-recommends \
   && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-install -j$(nproc) $extensions \
