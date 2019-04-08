@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     apt-utils \
