@@ -1,5 +1,6 @@
 stages:
   - build
+  - build-chromium
   - publish
   - test
 
@@ -22,7 +23,7 @@ Debian 7.3:
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:latest
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:7
@@ -132,13 +133,6 @@ Alpine 7.1 LTS:
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
 
-# Alpine (make):
-#   stage: alpine
-#   script:
-#     - apk add --no-cache make
-#     - make all
-#   when: always
-
 FPM 7.1:
   stage: build
   variables:
@@ -177,7 +171,49 @@ FPM 7.3:
     - docker push $NAMESPACE:fpm
   when: always
 
-Trigger Test:
+Chromium 7.3:
+  stage: build-chromium
+  variables:
+    IMAGE_VERSION: "7.3-chromium"
+  script:
+    - docker pull php:$IMAGE_VERSION || true
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/chromium/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2.yaml v
+    - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
+  dependencies:
+    - Debian 7.3
+
+Chromium 7.2:
+  stage: build-chromium
+  variables:
+    IMAGE_VERSION: "7.2-chromium"
+  script:
+    - docker pull php:$IMAGE_VERSION || true
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/chromium/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2.yaml v
+    - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
+  dependencies:
+    - Debian 7.2
+
+Chromium 7.1:
+  stage: build-chromium
+  variables:
+    IMAGE_VERSION: "7.1-chromium"
+  script:
+    - docker pull php:$IMAGE_VERSION || true
+    - docker pull $NAMESPACE:$IMAGE_VERSION || true
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/chromium/Dockerfile .
+    - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2.yaml v
+    - docker push $NAMESPACE:$IMAGE_VERSION
+  when: always
+  dependencies:
+    - Debian 7.1
+
+Trigger Extenal Test:
   stage: test
   script:
     - apk add --update curl

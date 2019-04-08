@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ln -s /usr/lib/npm/bin/npm-cli.js /usr/bin/npm
 
