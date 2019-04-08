@@ -39,7 +39,7 @@ Everything you need to test Laravel projects :D
 
 #### Laravel Dusk
 
-To run Dusk tests we need chromium installed on the image, to not bloat the main images with chromium we have a special tag for this.
+To run Dusk tests we need chromium installed on the image, because of that we have a special tag for this case.
 
 - ```7.3-chromium``` [(7.3/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.3/chromium/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.3-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.3-chromium "Get your own image badge on microbadger.com")
 
