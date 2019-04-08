@@ -134,4 +134,4 @@ fi
 
 echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
 
-apt-get purge -y --auto-remove $buildDeps
+apt-get purge -yqq --auto-remove $buildDeps
