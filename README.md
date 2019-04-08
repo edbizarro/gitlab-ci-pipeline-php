@@ -37,6 +37,12 @@ All images come with PHP (with all laravel required extensions), Composer (with 
 
 Everything you need to test Laravel projects :D
 
+#### Laravel Dusk
+
+To run Dusk tests we need chromium installed on the image, to not bloat the main images with chromium we have a special tag for this.
+
+- ```7.3-chromium``` [(7.3/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.3/chromium/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.3-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.3-chromium "Get your own image badge on microbadger.com")
+
 ---
 
 ## Gitlab pipeline examples

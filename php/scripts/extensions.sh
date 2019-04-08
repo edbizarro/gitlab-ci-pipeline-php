@@ -68,8 +68,8 @@ else
     "
 fi
 
-DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps --no-install-recommends \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps --no-install-recommends \
+DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps \
   && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-install -j$(nproc) $extensions \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \

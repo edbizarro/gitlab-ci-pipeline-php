@@ -10,7 +10,8 @@ apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     libc-dev \
     libpcre3-dev \
     pkg-config \
-    re2c
+    re2c \
+    wget
 
 apt-get autoremove -yqq --purge
 apt-get autoclean -yqq
