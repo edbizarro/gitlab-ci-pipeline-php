@@ -7,7 +7,8 @@
 ---
 ![GitHub last commit](https://img.shields.io/github/last-commit/edbizarro/gitlab-ci-pipeline-php.svg?style=for-the-badge&logo=git) [![Docker Pulls](https://img.shields.io/docker/pulls/edbizarro/gitlab-ci-pipeline-php.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/edbizarro/gitlab-ci-pipeline-php/)
 
-## Based on [Official PHP images](https://hub.docker.com/_/php/)
+## Based on [Official PHP images](https://hub.docker.com/_/php/) [![building status](https://gitlab.com/edbizarro/gitlab-ci-pipeline-php/badges/master/pipeline.svg)](https://gitlab.com/edbizarro/gitlab-ci-pipeline-php/commits/master)
+
 
 
 - ```7```, ```7.3```, ```latest``` [(7.3/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.3/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.3.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.3 "Get your own image badge on microbadger.com")
