@@ -22,10 +22,10 @@ build:
 
 test:
 	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.1-alpine goss -g goss.yaml v
-	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.2-alpine goss -g goss-7.2.yaml v
+	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.2-alpine goss -g goss-7.2-3.yaml v
 	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.1-alpine-lts goss -g goss-lts.yaml v
-	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.2-alpine-lts goss -g goss-7.2-lts.yaml v
-	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.3-alpine-lts goss -g goss-7.2-lts.yaml v
+	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.2-alpine-lts goss -g goss-7.2-3-lts.yaml v
+	docker run -t --rm -v $(PWD):/var/www/html ${NAMESPACE}:7.3-alpine-lts goss -g goss-7.2-3-lts.yaml v
 
 push:
 	docker tag ${NAMESPACE}:7.3-alpine ${NAMESPACE}:alpine
