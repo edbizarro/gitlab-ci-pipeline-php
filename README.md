@@ -32,13 +32,13 @@ All versions (except `lts`) come with [Node 11](https://nodejs.org/en/), [Compos
 
 ---
 
-### Laravel users
+## Laravel users
 
 All images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up installs), Node and [Yarn](https://yarnpkg.com).
 
 Everything you need to test Laravel projects :D
 
-#### Laravel Dusk
+### Laravel Dusk
 
 To run Dusk tests we need chromium installed on the image, because of that we have a special tag for this case.
 
@@ -50,9 +50,9 @@ To run Dusk tests we need chromium installed on the image, because of that we ha
 
 ## Gitlab pipeline examples
 
-Laravel test examples
+### Laravel test examples
 
-### Simple ```.gitlab-ci.yml``` using mysql service
+#### Simple ```.gitlab-ci.yml``` using mysql service
 
 ```yaml
 # Variables
@@ -67,7 +67,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine
   script:
     - yarn
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
@@ -77,7 +77,7 @@ test:
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
 ```
 
-### Advanced ```.gitlab-ci.yml``` using mysql service, stages and cache
+#### Advanced ```.gitlab-ci.yml``` using mysql service, stages and cache
 
 ```yaml
 stages:
@@ -106,7 +106,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine
   script:
     - sudo yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
@@ -118,17 +118,64 @@ test:
   artifacts:
     paths:
       - ./storage/logs # for debugging
-    expire_in: 1 days
+    expire_in: 7 days
     when: always
 
 deploy:
   stage: deploy
-  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine
   script:
     - echo "Deploy all the things!"
   only:
     - master
   when: on_success
+```
+
+#### Laravel Dusk tests ```.gitlab-ci.yml``` using mysql service and cache
+
+```yaml
+stages:
+  - test
+
+# Variables
+variables:
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_USER: homestead
+  MYSQL_PASSWORD: secret
+  MYSQL_DATABASE: homestead
+  DB_HOST: mysql
+
+# Speed up builds
+cache:
+  key: $CI_BUILD_REF_NAME # changed to $CI_COMMIT_REF_NAME in Gitlab 9.x
+  paths:
+    - vendor
+    - node_modules
+    - public
+    - .yarn
+
+
+test:
+  stage: test
+  services:
+    - mysql:5.7
+  image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine
+  script:
+    - yarn install --pure-lockfile
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    - cp .env.example .env
+    - php artisan key:generate
+    - php artisan migrate:refresh --seed
+    - php artisan serve &
+    - ./vendor/laravel/dusk/bin/chromedriver-linux --port=9515 &
+    - sleep 5
+    - php artisan dusk
+  artifacts:
+    paths:
+      - ./storage/logs # for debugging
+      - ./tests/Browser/screenshots # for Dusk screenshots
+    expire_in: 7 days
+    when: always
 ```
 ---
 
