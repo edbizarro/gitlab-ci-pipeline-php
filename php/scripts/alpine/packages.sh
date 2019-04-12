@@ -15,7 +15,8 @@ apk add --no-cache \
     openssl \
     python \
     rsync \
-    sudo
+    sudo \
+    zip
 
 # persistent / runtime deps
 apk add --no-cache --virtual .persistent-deps \

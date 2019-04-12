@@ -36,5 +36,6 @@ DEBIAN_FRONTEND=noninteractive
       rsync \
       sudo \
       unzip \
+      zip \
       zlib1g-dev \
       && rm -rf /var/lib/apt/lists/*
