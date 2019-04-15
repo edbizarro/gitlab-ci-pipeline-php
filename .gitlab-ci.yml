@@ -40,7 +40,7 @@ Debian 7.2:
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss -g goss-7.2-3.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
@@ -52,7 +52,7 @@ Debian 7.1:
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html edbizarro/gitlab-ci-pipeline-php:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
@@ -140,7 +140,7 @@ FPM 7.1:
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/fpm/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.1/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
@@ -152,7 +152,7 @@ FPM 7.2:
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/fpm/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.2/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2-3.yaml v
     - docker push $NAMESPACE:$IMAGE_VERSION
   when: always
@@ -164,7 +164,7 @@ FPM 7.3:
   script:
     - docker pull php:$IMAGE_VERSION || true
     - docker pull $NAMESPACE:$IMAGE_VERSION || true
-    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/fpm/Dockerfile .
+    - docker build --compress --cache-from $NAMESPACE:$IMAGE_VERSION --build-arg VCS_REF=$CI_COMMIT_SHORT_SHA --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') -t $NAMESPACE:$IMAGE_VERSION -f php/7.3/fpm/Dockerfile .
     - docker run -t --rm -v $(pwd):/var/www/html $NAMESPACE:$IMAGE_VERSION goss -g goss-7.2-3.yaml v
     - docker tag $NAMESPACE:$IMAGE_VERSION $NAMESPACE:fpm
     - docker push $NAMESPACE:$IMAGE_VERSION
