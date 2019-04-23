@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get purge -yqq --auto-remove \
+apt-get purge -yqq \
     apt-utils \
     autoconf \
     build-essential \
