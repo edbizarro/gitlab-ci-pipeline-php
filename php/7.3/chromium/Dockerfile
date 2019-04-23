@@ -29,8 +29,8 @@ COPY ./php/scripts/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
 RUN bash ./packages.sh \
-  && bash ./chromium.sh \
-  && bash ./cleanup.sh
+  && bash ./cleanup.sh \
+  && bash ./chromium.sh
 
 USER $IMAGE_USER
 

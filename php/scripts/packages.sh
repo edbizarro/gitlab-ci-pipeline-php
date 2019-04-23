@@ -13,7 +13,7 @@ echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 #
 # we don't need and apt cache in a container
 echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
-echo 'apt::install-recommends "false";' > /etc/apt/apt.conf
+echo 'APT::Install-Recommends "false";' > /etc/apt/apt.conf
 
 DEBIAN_FRONTEND=noninteractive
   dpkg-reconfigure -f noninteractive tzdata \

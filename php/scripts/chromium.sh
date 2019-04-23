@@ -4,10 +4,10 @@ set -euf -o pipefail
 
 # Installing Chromium for Dusk
 DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
-    wget \
     libgconf-2-4 \
-    libxi6 \
     libnss3 \
+    libxi6 \
+    wget \
     xvfb
 
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
