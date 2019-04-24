@@ -176,6 +176,7 @@ test:
     paths:
       - ./storage/logs # for debugging
       - ./tests/Browser/screenshots # for Dusk screenshots
+      - ./tests/Browser/console
     expire_in: 7 days
     when: always
 ```
