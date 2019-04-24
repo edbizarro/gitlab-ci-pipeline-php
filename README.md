@@ -9,7 +9,7 @@
 
 ---
 
-## Based on [Official PHP images](https://hub.docker.com/_/php/) 
+## Based on [Official PHP images](https://hub.docker.com/_/php/)
 
 
 
@@ -26,7 +26,7 @@
 - ```7.1-alpine-lts``` [(7.1/alpine/Dockerfile-lts)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/alpine/Dockerfile-lts) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.1-alpine-lts.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.1-alpine-lts "Get your own image badge on microbadger.com")
 - ```7.1-fpm``` [(7.1/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/fpm/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.1-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.1-fpm "Get your own image badge on microbadger.com")
 
-All versions (except `lts`) come with [Node 12](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
+All versions (except `lts`) come with [Node 11](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
 
 > `lts` version come with node v10
 
