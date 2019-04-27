@@ -5,7 +5,7 @@ ARG VCS_REF
 
 LABEL maintainer="Eduardo Bizarro <eduardo@zendev.com.br>" \
   PHP="7.3" \
-  NODE="11.14.0" \
+  NODE="12.0.0" \
   org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
   org.label-schema.description=":coffee: Docker images for build and test PHP applications with Gitlab CI (or any other CI plataform!)" \
   org.label-schema.build-date=$BUILD_DATE \
