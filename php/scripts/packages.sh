@@ -22,9 +22,8 @@ DEBIAN_FRONTEND=noninteractive
   &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
       apt-transport-https \
       apt-utils \
-      ca-certificates
-
-  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
+      ca-certificates \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
       build-essential \
       curl \
       git \
