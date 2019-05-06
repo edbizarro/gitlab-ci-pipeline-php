@@ -3,7 +3,6 @@
 ln -s /usr/lib/npm/bin/npm-cli.js /usr/bin/npm
 
 npm i -g npm@${NPM_VERSION}
-npm i -g gulp
 
 curl -o- -L https://yarnpkg.com/install.sh | bash
 
