@@ -55,7 +55,7 @@ docker-php-source delete
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 if [[ $PHP_VERSION == "7.3" ]]; then
-  git clone --depth 1 -b 2.7.0RC1 "https://github.com/xdebug/xdebug" \
+  git clone --depth 1 -b 2.7.2 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
     && ./configure \
@@ -64,7 +64,7 @@ if [[ $PHP_VERSION == "7.3" ]]; then
     && docker-php-ext-enable xdebug
 
 elif [[ $PHP_VERSION == "7.2" ]]; then
-  git clone --depth 1 "https://github.com/xdebug/xdebug" \
+  git clone --depth 1 -b 2.7.2 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
     && ./configure \
@@ -83,10 +83,10 @@ else
 fi
 
 docker-php-source extract \
-    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/4.2.0.tar.gz" \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/4.3.0.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-4.2.0 /usr/src/php/ext/redis \
+    && mv phpredis-4.3.0 /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
     && docker-php-source delete
 
