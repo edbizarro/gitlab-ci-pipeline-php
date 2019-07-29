@@ -29,6 +29,7 @@ DEBIAN_FRONTEND=noninteractive
       git \
       gnupg2 \
       libc-client-dev \
+      mariadb-client \
       openssh-client \
       python \
       python-dev \

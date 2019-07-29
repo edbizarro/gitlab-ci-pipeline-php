@@ -11,12 +11,14 @@ apk update \
     grep \
     libc-dev \
     make \
+    mariadb-client \
     openssh-client \
     openssl \
     python \
     rsync \
     sudo \
     zip
+
 # persistent / runtime deps
 apk add --no-cache --virtual .persistent-deps \
 		ca-certificates \
