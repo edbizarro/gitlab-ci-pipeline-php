@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-apk del --purge grep build-base autoconf build-base file openssl-dev
+apk del --purge grep build-base file openssl-dev
 
 rm -rf \
         /tmp/* \
