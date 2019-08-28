@@ -3,7 +3,6 @@
 set -euf -o pipefail
 
 extensions=" \
-amqp \
 bcmath \
 bz2 \
 calendar \
@@ -89,8 +88,8 @@ if [[ $PHP_VERSION == "7.2" ]]; then
     && docker-php-source delete \
 
   pecl channel-update pecl.php.net \
-    && pecl install redis apcu mongodb imagick xdebug \
-    && docker-php-ext-enable redis apcu mongodb imagick xdebug
+    && pecl install amqp redis apcu mongodb imagick xdebug \
+    && docker-php-ext-enable amqp redis apcu mongodb imagick xdebug
 
 elif [[ $PHP_VERSION == "7.3" ]]; then
   docker-php-source extract \
@@ -100,14 +99,14 @@ elif [[ $PHP_VERSION == "7.3" ]]; then
     && docker-php-source delete \
 
   pecl channel-update pecl.php.net \
-    && pecl install redis apcu mongodb imagick xdebug-beta \
-    && docker-php-ext-enable redis apcu mongodb imagick xdebug
+    && pecl install amqp redis apcu mongodb imagick xdebug-beta \
+    && docker-php-ext-enable amqp redis apcu mongodb imagick xdebug
 
 else
   apt-get update && docker-php-ext-install -j$(nproc) mcrypt
   pecl channel-update pecl.php.net \
-    && pecl install redis mongodb xdebug apcu memcached imagick \
-    && docker-php-ext-enable redis mongodb xdebug apcu memcached imagick
+    && pecl install amqp redis mongodb xdebug apcu memcached imagick \
+    && docker-php-ext-enable amqp redis mongodb xdebug apcu memcached imagick
 fi
 
 { \

@@ -3,7 +3,6 @@
 set -euf -o pipefail
 
 apk --update --no-cache add \
-  amqp \
   bzip2 \
   bzip2-dev \
   curl-dev \
@@ -81,6 +80,9 @@ else
 
     pecl install xdebug \
       && docker-php-ext-enable xdebug
+
+    pecl install amqp \
+      && docker-php-ext-enable amqp
 fi
 
 docker-php-source extract \
@@ -103,6 +105,9 @@ pecl install imagick \
 
 pecl install mongodb \
     && docker-php-ext-enable mongodb
+
+pecl install amqp \
+  && docker-php-ext-enable amqp
 
 git clone "https://github.com/php-memcached-dev/php-memcached.git" \
     && cd php-memcached \
