@@ -33,33 +33,34 @@ command:
   php -m:
     exit-status: 0
     stdout:
-      - pcntl
+      - amqp
+      - apcu
       - bcmath
       - bz2
       - calendar
-      - iconv
-      - intl
+      - exif
       - gd
+      - iconv
+      - imagick
+      - imap
+      - intl
       - ldap
       - mbstring
-      - memcached
       - mcrypt
+      - memcached
+      - mongodb
       - mysqli
+      - pcntl
       - pdo_mysql
       - pdo_pgsql
       - pgsql
       - redis
       - soap
-      - Zend OPcache
-      - zip
-      - mongodb
-      - apcu
-      - imap
+      - xdebug
       - xml
       - xmlrpc
-      - xdebug
-      - exif
-      - imagick
+      - Zend OPcache
+      - zip
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:

@@ -29,6 +29,7 @@ command:
   php -m:
     exit-status: 0
     stdout:
+      - amqp
       - apcu
       - bcmath
       - bz2
