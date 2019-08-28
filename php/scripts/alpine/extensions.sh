@@ -27,6 +27,8 @@ apk --update --no-cache add \
   openldap-dev \
   pcre-dev \
   postgresql-dev \
+  rabbitmq-c \
+  rabbitmq-c-dev \
   readline-dev \
   sqlite-dev \
   zlib-dev

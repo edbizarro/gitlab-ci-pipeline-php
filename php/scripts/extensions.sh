@@ -40,6 +40,7 @@ if [[ $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
     libmemcachedutil2 \
     libpng-dev \
     libpq-dev \
+    librabbitmq-dev \
     libssl-dev \
     libxml2-dev \
     libzip-dev \
@@ -63,6 +64,7 @@ else
     libmemcachedutil2 \
     libpng-dev \
     libpq-dev \
+    librabbitmq-dev \
     libxml2-dev \
     mcrypt \
     "
