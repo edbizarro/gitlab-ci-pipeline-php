@@ -3,6 +3,7 @@
 set -euf -o pipefail
 
 extensions=" \
+amqp \
 bcmath \
 bz2 \
 calendar \

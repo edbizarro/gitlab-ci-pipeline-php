@@ -3,6 +3,7 @@
 set -euf -o pipefail
 
 apk --update --no-cache add \
+  amqp \
   bzip2 \
   bzip2-dev \
   curl-dev \
