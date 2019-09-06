@@ -11,7 +11,7 @@ apk update \
     grep \
     libc-dev \
     make \
-    mariadb-client \
+    mysql-client \
     openssh-client \
     openssl \
     python \
