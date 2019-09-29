@@ -28,6 +28,7 @@ DEBIAN_FRONTEND=noninteractive
       curl \
       git \
       gnupg2 \
+      jq \
       libc-client-dev \
       mariadb-client \
       openssh-client \

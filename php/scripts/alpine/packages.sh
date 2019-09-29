@@ -9,6 +9,7 @@ apk update \
     gcc \
     git \
     grep \
+    jq \
     libc-dev \
     make \
     mariadb-client \

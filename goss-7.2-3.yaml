@@ -26,6 +26,8 @@ command:
     exit-status: 0
   g++ --version:
     exit-status: 0
+  jq --version:
+    exit-status: 0
   php -m:
     exit-status: 0
     stdout:
