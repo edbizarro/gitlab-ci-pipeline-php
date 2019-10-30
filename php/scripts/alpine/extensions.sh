@@ -5,6 +5,7 @@ set -euf -o pipefail
 apk --update --no-cache add \
   bzip2 \
   bzip2-dev \
+  cassandra-cpp-driver \
   curl-dev \
   cyrus-sasl-dev \
   freetype-dev \
@@ -100,6 +101,17 @@ docker-php-source extract \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
     && apk del .phpize-deps-configure \
+    && docker-php-source delete
+
+docker-php-source extract \
+    && apk add --no-cache --virtual .cassandra-deps libressl-dev libuv-dev cassandra-cpp-driver-dev \
+    && curl -L -o /tmp/cassandra.tar.gz "https://github.com/datastax/php-driver/archive/v1.3.2.tar.gz" \
+    && tar xfz /tmp/cassandra.tar.gz \
+    && rm -r /tmp/cassandra.tar.gz \
+    && mv php-driver-1.3.2/ext /usr/src/php/ext/cassandra \
+    && rm -rf php-driver-1.3.2 \
+    && docker-php-ext-install cassandra \
+    && apk del .cassandra-deps \
     && docker-php-source delete
 
 pecl install imagick \
