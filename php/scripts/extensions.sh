@@ -27,8 +27,6 @@ if [[ $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
     default-libmysqlclient-dev \
     libbz2-dev \
     libsasl2-dev \
-    libuv1-dev \
-    multiarch-support \
     " \
   runtimeDeps=" \
     imagemagick \
@@ -45,16 +43,16 @@ if [[ $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
     libpq-dev \
     librabbitmq-dev \
     libssl-dev \
+    libuv1-dev \
     libxml2-dev \
     libzip-dev \
+    multiarch-support \
     "
 else
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
     libsasl2-dev \
-    libuv1-dev \
-    multiarch-support \
     " \
   runtimeDeps=" \
     imagemagick \
@@ -71,8 +69,10 @@ else
     libpng-dev \
     libpq-dev \
     librabbitmq-dev \
+    libuv1-dev \
     libxml2-dev \
     mcrypt \
+    multiarch-support \
     "
 fi
 
@@ -92,7 +92,7 @@ docker-php-source extract \
     && curl -L -o /tmp/cassandra-cpp-driver.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver_2.14.0-1_amd64.deb" \
     && curl -L -o /tmp/cassandra-cpp-driver-dev.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver-dev_2.14.0-1_amd64.deb" \
     && dpkg -i /tmp/cassandra-cpp-driver.deb /tmp/cassandra-cpp-driver-dev.deb \
-    && rm /tmp/cassandra-cpp-driver*.deb \
+    && rm /tmp/cassandra-cpp-driver.deb /tmp/cassandra-cpp-driver-dev.deb \
     && curl -L -o /tmp/cassandra.tar.gz "https://github.com/datastax/php-driver/archive/v1.3.2.tar.gz" \
     && tar xfz /tmp/cassandra.tar.gz \
     && rm -r /tmp/cassandra.tar.gz \
