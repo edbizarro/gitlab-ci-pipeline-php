@@ -108,8 +108,8 @@ docker-php-source extract \
     && curl -L -o /tmp/cassandra.tar.gz "https://github.com/datastax/php-driver/archive/v1.3.2.tar.gz" \
     && tar xfz /tmp/cassandra.tar.gz \
     && rm -r /tmp/cassandra.tar.gz \
-    && mv php-driver-*/ext /usr/src/php/ext/cassandra \
-    && rm -rf php-driver-* \
+    && mv php-driver-1.3.2/ext /usr/src/php/ext/cassandra \
+    && rm -rf php-driver-1.3.2 \
     && docker-php-ext-install cassandra \
     && apk del .cassandra-deps \
     && docker-php-source delete
