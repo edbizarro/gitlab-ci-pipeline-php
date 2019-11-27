@@ -28,11 +28,11 @@
 
 All versions come with [Node 12](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
 
->> PHP 7.0.x is now deprecated and removed from this documentation. Your scripts will not stop working since the images are still available but they will not be receiving new builds from now on.
+> PHP 7.0.x is now deprecated and removed from this repo. Your scripts will not stop working since the images are still available but they will not be receiving new builds from now on.
 
 ---
 
-## Laravel users
+## Laravel projects
 
 All images come with PHP (with all laravel required extensions), Composer (with [hirak/prestissimo](https://github.com/hirak/prestissimo) to speed up installs), Node and [Yarn](https://yarnpkg.com).
 
@@ -45,6 +45,8 @@ To run Dusk tests we need chromium installed on the image, because of that we ha
 - ```7.3-chromium``` [(7.3/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.3/chromium/Dockerfile) [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.3-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.3-chromium "Get your own image badge on microbadger.com")
 - ```7.2-chromium``` [(7.2/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.2/chromium/Dockerfile) [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.2-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.2-chromium "Get your own image badge on microbadger.com")
 - ```7.1-chromium``` [(7.1/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.1/chromium/Dockerfile) [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.1-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.1-chromium "Get your own image badge on microbadger.com")
+
+Check *Dusk example* for more details.
 
 ---
 
