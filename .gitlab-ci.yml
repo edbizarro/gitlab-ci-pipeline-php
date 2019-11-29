@@ -223,10 +223,10 @@ Chromium 7.1:
   when: always
   dependencies:
     - Debian 7.1
-
-Trigger Extenal Test:
-  stage: test
-  script:
-    - apk add --update curl
-    - "curl -X POST -F token=$TRIGGER_TOKEN -F ref=master https://gitlab.com/api/v4/projects/6295501/trigger/pipeline"
-  when: on_success
+#
+# Trigger Extenal Test:
+#   stage: test
+#   script:
+#     - apk add --update curl
+#     - "curl -X POST -F token=$TRIGGER_TOKEN -F ref=master https://gitlab.com/api/v4/projects/6295501/trigger/pipeline"
+#   when: on_success
