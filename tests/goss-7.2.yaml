@@ -30,10 +30,6 @@ command:
     exit-status: 0
   jq --version:
     exit-status: 0
-  php --version:
-    exit-status: 0
-    stdout:
-      - 7
   php -m:
     exit-status: 0
     stdout:
@@ -51,10 +47,10 @@ command:
       - intl
       - ldap
       - mbstring
-      - mcrypt
       - memcached
       - mongodb
       - mysqli
+      - OPcache
       - pcntl
       - pdo_mysql
       - pdo_pgsql
@@ -64,9 +60,7 @@ command:
       - xdebug
       - xml
       - xmlrpc
-      - Zend OPcache
       - zip
-
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:
     exists: true
