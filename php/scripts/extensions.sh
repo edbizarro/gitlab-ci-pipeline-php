@@ -22,7 +22,7 @@ xmlrpc \
 zip
 "
 
-if [[ $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
+if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
   buildDeps=" \
     default-libmysqlclient-dev \
     libbz2-dev \
@@ -112,7 +112,7 @@ if [[ $PHP_VERSION == "7.2" ]]; then
     && pecl install amqp redis apcu mongodb imagick xdebug \
     && docker-php-ext-enable amqp redis apcu mongodb imagick xdebug
 
-elif [[ $PHP_VERSION == "7.3" ]]; then
+elif [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
@@ -143,16 +143,16 @@ fi
 
 { \
     echo 'apc.shm_segments=1'; \
-    echo 'apc.shm_size=512M'; \
+    echo 'apc.shm_size=1024M'; \
     echo 'apc.num_files_hint=7000'; \
     echo 'apc.user_entries_hint=4096'; \
     echo 'apc.ttl=7200'; \
     echo 'apc.user_ttl=7200'; \
     echo 'apc.gc_ttl=3600'; \
-    echo 'apc.max_file_size=50M'; \
+    echo 'apc.max_file_size=100M'; \
     echo 'apc.stat=1'; \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
-echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
+echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/zz-conf.ini
 
 apt-get purge -yqq --auto-remove $buildDeps
