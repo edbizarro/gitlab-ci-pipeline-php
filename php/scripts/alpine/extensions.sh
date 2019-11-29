@@ -58,7 +58,7 @@ docker-php-source delete
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 if [[ $PHP_VERSION == "7.3" ]]; then
-  git clone --depth 1 -b 2.7.2 "https://github.com/xdebug/xdebug" \
+  git clone --depth 1 -b 2.8.0 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
     && ./configure \
