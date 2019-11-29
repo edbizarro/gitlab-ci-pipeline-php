@@ -27,6 +27,7 @@ if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]
     default-libmysqlclient-dev \
     libbz2-dev \
     libsasl2-dev \
+    pkg-config \
     " \
   runtimeDeps=" \
     imagemagick \
