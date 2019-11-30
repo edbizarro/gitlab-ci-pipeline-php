@@ -31,6 +31,7 @@ DEBIAN_FRONTEND=noninteractive
       jq \
       libc-client-dev \
       mariadb-client \
+      mongo-tools \
       openssh-client \
       python \
       python-dev \
