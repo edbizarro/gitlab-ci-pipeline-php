@@ -3,7 +3,6 @@
 set -euf -o pipefail
 
 apk update \
-&& apk --no-cache upgrade \
 && apk --no-cache add \
     g++ \
     gcc \

@@ -35,7 +35,7 @@ apk --update --no-cache add \
   zlib-dev
 
 
-if [[ $PHP_VERSION == "7.3" ]]; then
+if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
   apk --update --no-cache add libzip-dev libsodium-dev
 else
   apk --no-cache add --repository http://dl-cdn.alpinelinux.org/alpine/v3.5/community libzip-dev
@@ -57,7 +57,7 @@ docker-php-source delete
 # pecl install pdo_sqlsrv sqlsrv \
 #   && docker-php-ext-enable pdo_sqlsrv sqlsrv
 
-if [[ $PHP_VERSION == "7.3" ]]; then
+if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
   git clone --depth 1 -b 2.8.0 "https://github.com/xdebug/xdebug" \
     && cd xdebug \
     && phpize \
