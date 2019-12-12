@@ -1,4 +1,4 @@
-# Build and test PHP applications with Gitlab CI (or any other CI platform!
+# Build and test PHP applications with Gitlab CI (or any other CI platform)
 
 > Docker images with everything you'll need to build and test PHP applications.
 
