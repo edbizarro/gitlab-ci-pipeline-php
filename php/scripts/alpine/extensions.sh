@@ -81,15 +81,12 @@ else
 
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) mcrypt
 
-    pecl install xdebug \
-      && docker-php-ext-enable xdebug
-
-    pecl install amqp \
-      && docker-php-ext-enable amqp
+    pecl install xdebug amqp \
+      && docker-php-ext-enable xdebug amqp
 fi
 
 docker-php-source extract \
-    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/4.3.0.tar.gz" \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/5.1.1.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
     && mv phpredis-4.3.0 /usr/src/php/ext/redis \
