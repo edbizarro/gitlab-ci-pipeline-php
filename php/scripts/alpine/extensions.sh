@@ -50,7 +50,6 @@ docker-php-source delete
 
 if [[ $PHP_VERSION == "7.4" ]]; then
   docker-php-ext-configure gd --with-freetype --with-jpeg
-
 else
   docker-php-ext-configure gd \
           --with-gd \
