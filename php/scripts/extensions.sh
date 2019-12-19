@@ -7,9 +7,7 @@ bcmath \
 bz2 \
 calendar \
 exif \
-iconv \
 intl \
-mbstring \
 mysqli \
 opcache \
 pcntl \
@@ -17,7 +15,6 @@ pdo_mysql \
 pdo_pgsql \
 pgsql \
 soap \
-xml \
 xmlrpc \
 zip
 "
@@ -77,18 +74,31 @@ else
     "
 fi
 
-DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps \
-  && rm -rf /var/lib/apt/lists/* \
-  && docker-php-ext-install -j$(nproc) $extensions \
-  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-  && docker-php-ext-install -j$(nproc) gd \
-  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-  && docker-php-ext-install -j$(nproc) ldap \
-  && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-  && docker-php-ext-install -j$(nproc) imap \
-  && docker-php-source delete
-
+if [[ $PHP_VERSION == "7.4" ]]; then
+  DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install -j$(nproc) $extensions \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-configure ldap --with-libdir \
+    && docker-php-ext-install -j$(nproc) ldap \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+    && docker-php-ext-install -j$(nproc) imap \
+    && docker-php-source delete
+else
+  DEBIAN_FRONTEND=noninteractive apt-get install -yqq $buildDeps \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install -j$(nproc) $extensions \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+    && docker-php-ext-install -j$(nproc) ldap \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+    && docker-php-ext-install -j$(nproc) imap \
+    && docker-php-source delete
+fi
 docker-php-source extract \
     && curl -L -o /tmp/cassandra-cpp-driver.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver_2.14.0-1_amd64.deb" \
     && curl -L -o /tmp/cassandra-cpp-driver-dev.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver-dev_2.14.0-1_amd64.deb" \
