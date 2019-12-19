@@ -25,6 +25,7 @@ apk add --no-cache --virtual .persistent-deps \
 		tar \
 		xz \
     curl
+
 apk add --no-cache \
     autoconf \
     build-base \

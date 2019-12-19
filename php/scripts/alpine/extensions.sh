@@ -43,7 +43,7 @@ fi
 
 docker-php-ext-configure ldap
 docker-php-ext-install -j "$(nproc)" ldap
-docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+PHP_OPENSSL=yes docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 docker-php-ext-install -j "$(nproc)" imap
 docker-php-ext-configure gd \
         --with-gd \
@@ -62,6 +62,7 @@ if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
     && cd xdebug \
     && phpize \
     && ./configure \
+    && make clean \
     && make \
     && make install \
     && docker-php-ext-enable xdebug
