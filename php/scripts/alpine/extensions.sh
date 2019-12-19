@@ -37,16 +37,8 @@ apk --update --no-cache add \
 
 if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
   apk --update --no-cache add libzip-dev libsodium-dev
-
-  docker-php-ext-configure gd --with-freetype --with-jpeg
 else
   apk --no-cache add --repository http://dl-cdn.alpinelinux.org/alpine/v3.5/community libzip-dev
-
-  docker-php-ext-configure gd \
-          --with-gd \
-          --with-freetype-dir=/usr/include \
-          --with-jpeg-dir=/usr/include \
-          --with-png-dir=/usr/include
 fi
 
 docker-php-ext-configure ldap
@@ -54,9 +46,20 @@ docker-php-ext-install -j "$(nproc)" ldap
 PHP_OPENSSL=yes docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 docker-php-ext-install -j "$(nproc)" imap
 docker-php-ext-install -j "$(nproc)" exif xmlrpc pcntl bcmath bz2 calendar intl mysqli opcache pdo_mysql pdo_pgsql pgsql soap zip
-docker-php-ext-install -j "$(nproc)" gd
-
 docker-php-source delete
+
+if [[ $PHP_VERSION == "7.4" ]]; then
+  docker-php-ext-configure gd --with-freetype --with-jpeg
+
+else
+  docker-php-ext-configure gd \
+          --with-gd \
+          --with-freetype-dir=/usr/include \
+          --with-jpeg-dir=/usr/include \
+          --with-png-dir=/usr/include
+fi
+
+docker-php-ext-install -j "$(nproc)" gd
 
 if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
   git clone --depth 1 -b 2.9.0 "https://github.com/xdebug/xdebug" \
