@@ -156,4 +156,4 @@ git clone "https://github.com/php-memcached-dev/php-memcached.git" \
     echo 'apc.stat=1'; \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
-echo "memory_limit=512M" > /usr/local/etc/php/conf.d/zz-conf.ini
+echo "memory_limit=1G" > /usr/local/etc/php/conf.d/zz-conf.ini
