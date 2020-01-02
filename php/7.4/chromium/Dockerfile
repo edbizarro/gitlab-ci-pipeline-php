@@ -1,10 +1,10 @@
-FROM edbizarro/gitlab-ci-pipeline-php:7.1
+FROM edbizarro/gitlab-ci-pipeline-php:7.4
 
 ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL maintainer="Eduardo Bizarro <edbizarro@gmail.com>" \
-  PHP="7.1" \
+  PHP="7.4" \
   NODE="12" \
   org.label-schema.name="edbizarro/gitlab-ci-pipeline-php" \
   org.label-schema.description=":coffee: Docker images for build and test PHP applications with Gitlab CI (or any other CI plataform!)" \
@@ -19,7 +19,7 @@ ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 ENV GOSS_VERSION="0.3.8"
-ENV PHP_VERSION=7.1
+ENV PHP_VERSION=7.4
 
 USER root
 
