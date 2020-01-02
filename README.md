@@ -79,7 +79,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
   script:
     - yarn install --pure-lockfile
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
@@ -118,7 +118,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
   script:
     - yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
@@ -135,7 +135,7 @@ test:
 
 deploy:
   stage: deploy
-  image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
   script:
     - echo "Deploy all the things!"
   only:
@@ -171,7 +171,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.3-chromium
+  image: edbizarro/gitlab-ci-pipeline-php:7.4-chromium
   script:
     - yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
