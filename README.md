@@ -38,7 +38,7 @@
 
 All versions come with [Node 12](https://nodejs.org/en/), [Composer](https://getcomposer.org/) and [Yarn](https://yarnpkg.com)
 
-> PHP 7.0.x and 7.1.x is now deprecated and removed from this repo since they reachd end of life. Your scripts will not stop working since the images are still available but they will not be receiving new builds from now on. For more informations please visit https://www.php.net/supported-versions.php
+> PHP 7.0.x and 7.1.x are now deprecated and removed from this repo since they reach end of life. Your scripts will not stop working since the images are still available but they will not be receiving new builds from now on. For more information please visit https://www.php.net/supported-versions.php
 
 ---
 
