@@ -106,11 +106,12 @@ docker-php-source extract \
 
 docker-php-source extract \
     && apk add --no-cache --virtual .cassandra-deps libressl-dev libuv-dev cassandra-cpp-driver-dev \
-    && curl -L -o /tmp/cassandra.tar.gz "https://github.com/datastax/php-driver/archive/v1.3.2.tar.gz" \
-    && tar xfz /tmp/cassandra.tar.gz \
+    && curl -L -o /tmp/cassandra.tar.gz "https://github.com/datastax/php-driver/archive/24d85d9f1d.tar.gz" \
+    && mkdir /tmp/cassandra \
+    && tar xfz /tmp/cassandra.tar.gz --strip 1 -C /tmp/cassandra \
     && rm -r /tmp/cassandra.tar.gz \
-    && mv php-driver-1.3.2/ext /usr/src/php/ext/cassandra \
-    && rm -rf php-driver-1.3.2 \
+    && mv /tmp/cassandra/ext /usr/src/php/ext/cassandra \
+    && rm -rf /tmp/cassandra \
     && docker-php-ext-install cassandra \
     && apk del .cassandra-deps \
     && docker-php-source delete
