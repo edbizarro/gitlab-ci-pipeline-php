@@ -14,6 +14,7 @@ apk update \
     mariadb-client \
     openssh-client \
     openssl \
+    patch \
     python \
     rsync \
     sudo \
