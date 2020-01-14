@@ -16,6 +16,7 @@ pdo_pgsql \
 pgsql \
 soap \
 xmlrpc \
+xsl \
 zip
 "
 
