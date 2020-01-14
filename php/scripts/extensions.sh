@@ -45,6 +45,7 @@ if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]
     libuv1-dev \
     libxml2-dev \
     libzip-dev \
+    libxslt1-dev \
     multiarch-support \
     "
 else
