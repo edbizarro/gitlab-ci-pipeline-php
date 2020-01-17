@@ -65,6 +65,8 @@ command:
       - xml
       - xmlrpc
       - zip
+      - xsl
+
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:
     exists: true

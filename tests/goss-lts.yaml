@@ -66,6 +66,7 @@ command:
       - xmlrpc
       - Zend OPcache
       - zip
+      - xsl
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:

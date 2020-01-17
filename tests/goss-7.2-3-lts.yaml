@@ -38,6 +38,7 @@ command:
       - bcmath
       - bz2
       - calendar
+      - cassandra
       - exif
       - gd
       - iconv
@@ -60,6 +61,7 @@ command:
       - xml
       - xmlrpc
       - zip
+      - xsl
 
 file:
   /usr/local/etc/php/conf.d/zz-conf.ini:
