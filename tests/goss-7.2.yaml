@@ -45,6 +45,7 @@ command:
       - cassandra
       - exif
       - gd
+      - gmp
       - iconv
       - imagick
       - imap
