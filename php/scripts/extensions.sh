@@ -39,6 +39,7 @@ if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]
     libmemcached-dev \
     libmemcachedutil2 \
     libpng-dev \
+    libwebp-dev \
     libpq-dev \
     librabbitmq-dev \
     libssl-dev \
@@ -81,7 +82,7 @@ if [[ $PHP_VERSION == "7.4" ]]; then
     && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install -j$(nproc) $extensions \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install -j$(nproc) ldap \
@@ -93,7 +94,7 @@ else
     && DEBIAN_FRONTEND=noninteractive apt-get install -yqq $runtimeDeps \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install -j$(nproc) $extensions \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install -j$(nproc) ldap \
