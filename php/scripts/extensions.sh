@@ -7,6 +7,7 @@ bcmath \
 bz2 \
 calendar \
 exif \
+gmp \
 intl \
 mysqli \
 opcache \
