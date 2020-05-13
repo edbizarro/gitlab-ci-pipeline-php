@@ -7,6 +7,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
     libgconf-2-4 \
     libnss3 \
     libxi6 \
+    libgbm-dev \
     wget \
     xvfb
 
