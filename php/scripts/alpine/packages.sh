@@ -2,8 +2,7 @@
 
 set -euf -o pipefail
 
-apk update \
-&& apk --no-cache add \
+apk --update --no-cache add \
     g++ \
     gcc \
     git \
@@ -15,19 +14,19 @@ apk update \
     openssh-client \
     openssl \
     patch \
-    python \
+    python3 \
     rsync \
     sudo \
     zip
 
 # persistent / runtime deps
-apk add --no-cache --virtual .persistent-deps \
+apk add --update --no-cache --virtual .persistent-deps \
 		ca-certificates \
 		tar \
 		xz \
     curl
 
-apk add --no-cache \
+apk add --update --no-cache \
     autoconf \
     build-base \
     file \
