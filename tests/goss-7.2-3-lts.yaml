@@ -20,7 +20,7 @@ command:
     exit-status: 0
   composer --version:
     exit-status: 0
-  python333 --version:
+  python3 --version:
     exit-status: 0
   make --version:
     exit-status: 0
