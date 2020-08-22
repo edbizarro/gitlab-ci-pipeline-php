@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 ln -s /usr/lib/npm/bin/npm-cli.js /usr/bin/npm
 
 npm i -g npm@${NPM_VERSION}

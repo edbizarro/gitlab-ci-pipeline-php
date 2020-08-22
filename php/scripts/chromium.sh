@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euf -o pipefail
+set -euo pipefail
 
 # Installing Chromium for Dusk
 DEBIAN_FRONTEND=noninteractive apt-get install -yqq \

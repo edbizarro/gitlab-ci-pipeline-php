@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euf -o pipefail
+set -euo pipefail
 
 apk --update --no-cache add \
     g++ \

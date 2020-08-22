@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euf -o pipefail
+set -euo pipefail
 
 # NODE JS
 curl -sL https://deb.nodesource.com/setup_12.x | bash - \

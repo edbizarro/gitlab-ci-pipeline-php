@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euf -o pipefail
+set -euo pipefail
 
 extensions=" \
 bcmath \

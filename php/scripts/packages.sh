@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euf -o pipefail
+set -euo pipefail
 
 ############################################################
 # Speedup DPKG and don't use cache for packages
