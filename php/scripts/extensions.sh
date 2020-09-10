@@ -38,6 +38,7 @@ if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]
     libldap2-dev \
     libmagickwand-dev \
     libmemcached-dev \
+    libmemcached \
     libmemcachedutil2 \
     libpng-dev \
     libpq-dev \
@@ -66,6 +67,7 @@ else
     libmagickwand-dev \
     libmcrypt-dev \
     libmemcached-dev \
+    libmemcached \
     libmemcachedutil2 \
     libpng-dev \
     libpq-dev \
