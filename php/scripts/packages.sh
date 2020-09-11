@@ -18,6 +18,7 @@ echo 'APT::Install-Recommends "false";' > /etc/apt/apt.conf
 DEBIAN_FRONTEND=noninteractive
   dpkg-reconfigure -f noninteractive tzdata \
   && apt-get update \
+  && apt-get upgrade \
   &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
       apt-transport-https \
       apt-utils \
