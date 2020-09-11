@@ -3,7 +3,8 @@
 set -euo pipefail
 
 # Installing Chromium for Dusk
-DEBIAN_FRONTEND=noninteractive apt-get install -yq \
+apt-get update \
+  && apt-get install -yq \
     libgconf-2-4 \
     libnss3 \
     libxi6 \
