@@ -10,20 +10,18 @@ set -euo pipefail
 # this forces dpkg not to call sync() after package extraction and speeds up
 # install
 echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
-#
 # we don't need and apt cache in a container
 echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 echo 'APT::Install-Recommends "false";' > /etc/apt/apt.conf
+export DEBIAN_FRONTEND=noninteractive
 
-DEBIAN_FRONTEND=noninteractive
   dpkg-reconfigure -f noninteractive tzdata \
   && apt-get update \
-  && apt-get upgrade \
-  &&  DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
+  && apt-get install -yq \
       apt-transport-https \
       apt-utils \
       ca-certificates \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -yqq \
+  && apt-get install -yq \
       build-essential \
       curl \
       git \
