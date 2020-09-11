@@ -42,6 +42,7 @@ command:
       - bcmath
       - bz2
       - calendar
+      - cassandra
       - exif
       - gd
       - gmp
