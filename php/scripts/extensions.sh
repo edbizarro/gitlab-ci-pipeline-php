@@ -46,9 +46,10 @@ export runtimeDeps=" \
     librabbitmq-dev \
     libssl-dev \
     libuv1-dev \
+    libwebp-dev \
     libxml2-dev \
-    libzip-dev \
     libxslt1-dev \
+    libzip-dev \
     multiarch-support \
     "
 else
@@ -75,6 +76,7 @@ export runtimeDeps=" \
     libpq-dev \
     librabbitmq-dev \
     libuv1-dev \
+    libwebp-dev \
     libxml2-dev \
     mcrypt \
     multiarch-support \
@@ -88,7 +90,7 @@ apt-get update \
   && docker-php-ext-install -j$(nproc) $extensions
 
 if [[ $PHP_VERSION == "7.4" ]]; then
-    docker-php-ext-configure gd --with-freetype --with-jpeg \
+    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install -j$(nproc) ldap \
@@ -96,7 +98,7 @@ if [[ $PHP_VERSION == "7.4" ]]; then
     && docker-php-ext-install -j$(nproc) imap \
     && docker-php-source delete
 else
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install -j$(nproc) ldap \
