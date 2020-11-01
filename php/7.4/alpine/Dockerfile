@@ -27,7 +27,7 @@ ENV PHP_VERSION=7.4
 WORKDIR /tmp
 
 COPY ./php/scripts/alpine/*.sh /tmp/
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY --from=mhart/alpine-node:12 /usr/bin/node /usr/bin/
 COPY --from=mhart/alpine-node:12 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
