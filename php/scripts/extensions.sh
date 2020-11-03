@@ -173,6 +173,7 @@ fi
     echo 'apc.stat=1'; \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
-echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/zz-conf.ini
+echo 'memory_limit=1024M' > /usr/local/etc/php/conf.d/zz-conf.ini
+echo 'xdebug.coverage_enable=1' > /usr/local/etc/php/conf.d/20-xdebug.ini
 
 apt-get purge -yqq --auto-remove $buildDeps
