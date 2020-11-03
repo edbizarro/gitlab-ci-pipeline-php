@@ -38,7 +38,6 @@ RUN bash ./packages.sh \
   echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
   mkdir -p /var/www/html && \
   chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
-  && composer global require "hirak/prestissimo:^0.3"  \
   && rm -rf ~/.composer/cache/* \
   && chown -R $IMAGE_USER:$IMAGE_USER $COMPOSER_HOME \
   && curl -fsSL https://goss.rocks/install | GOSS_VER=v${GOSS_VERSION} sh \

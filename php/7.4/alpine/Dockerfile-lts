@@ -39,7 +39,6 @@ RUN chmod +x /tmp/*.sh \
     && bash ./packages.sh \
     && bash ./extensions.sh \
     && bash ./nodeyarn.sh \
-    && composer global require "hirak/prestissimo:^0.3" \
     && rm -rf ~/.composer/cache/* \
     && chown -R $IMAGE_USER:$IMAGE_USER /var/www $HOME \
     && echo "$IMAGE_USER  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers \
