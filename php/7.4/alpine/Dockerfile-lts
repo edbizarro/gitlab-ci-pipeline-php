@@ -19,7 +19,7 @@ ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
 ENV GOSS_VERSION="0.3.8"
-ENV NODE_VERSION="12.16.1"
+ENV NODE_VERSION="14"
 ENV NPM_VERSION=6
 ENV YARN_VERSION=latest
 ENV PHP_VERSION=7.4
@@ -29,8 +29,8 @@ WORKDIR /tmp
 # COPY INSTALL SCRIPTS
 COPY ./php/scripts/alpine/*.sh /tmp/
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
-COPY --from=mhart/alpine-node:12.16.1 /usr/bin/node /usr/bin/
-COPY --from=mhart/alpine-node:12.16.1 /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
+COPY --from=mhart/alpine-node:$NODE_VERSION /usr/bin/node /usr/bin/
+COPY --from=mhart/alpine-node:$NODE_VERSION /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/* /usr/lib/
 
 RUN chmod +x /tmp/*.sh \
     && adduser -D $IMAGE_USER \
