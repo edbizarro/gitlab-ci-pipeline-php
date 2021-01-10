@@ -17,7 +17,6 @@ export extensions=" \
   pdo_pgsql \
   pgsql \
   soap \
-  xmlrpc \
   xsl \
   zip
   "
@@ -36,6 +35,7 @@ else
   pdo_pgsql \
   pgsql \
   soap \
+  xmlrpc \
   xsl \
   zip
   "
