@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+if [[ $PHP_VERSION == "8.0" ]]; then
 export extensions=" \
   bcmath \
   bz2 \
@@ -20,6 +21,25 @@ export extensions=" \
   xsl \
   zip
   "
+else
+  export extensions=" \
+  bcmath \
+  bz2 \
+  calendar \
+  exif \
+  gmp \
+  intl \
+  mysqli \
+  opcache \
+  pcntl \
+  pdo_mysql \
+  pdo_pgsql \
+  pgsql \
+  soap \
+  xsl \
+  zip
+  "
+fi
 
 if [[ $PHP_VERSION == "8.0" || $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
 
