@@ -2,85 +2,103 @@
 
 set -euo pipefail
 
-export extensions=" \
-  bcmath \
-  bz2 \
-  calendar \
-  exif \
-  gmp \
-  intl \
-  mysqli \
-  opcache \
-  pcntl \
-  pdo_mysql \
-  pdo_pgsql \
-  pgsql \
-  soap \
-  xmlrpc \
-  xsl \
-  zip
-  "
-
-if [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
-
-export buildDeps=" \
-    default-libmysqlclient-dev \
-    libbz2-dev \
-    libsasl2-dev \
-    pkg-config \
-    "
-
-export runtimeDeps=" \
-    imagemagick \
-    libfreetype6-dev \
-    libgmp-dev \
-    libicu-dev \
-    libjpeg-dev \
-    libkrb5-dev \
-    libldap2-dev \
-    libmagickwand-dev \
-    libmemcached-dev \
-    libmemcachedutil2 \
-    libpng-dev \
-    libpq-dev \
-    librabbitmq-dev \
-    libssl-dev \
-    libuv1-dev \
-    libwebp-dev \
-    libxml2-dev \
-    libxslt1-dev \
-    libzip-dev \
-    multiarch-support \
+if [[ $PHP_VERSION == "8.0" ]]; then
+  export extensions=" \
+    bcmath \
+    bz2 \
+    calendar \
+    exif \
+    gmp \
+    intl \
+    mysqli \
+    opcache \
+    pcntl \
+    pdo_mysql \
+    pdo_pgsql \
+    pgsql \
+    soap \
+    xsl \
+    zip
     "
 else
-
-export buildDeps=" \
-    default-libmysqlclient-dev \
-    libbz2-dev \
-    libsasl2-dev \
+  export extensions=" \
+    bcmath \
+    bz2 \
+    calendar \
+    exif \
+    gmp \
+    intl \
+    mysqli \
+    opcache \
+    pcntl \
+    pdo_mysql \
+    pdo_pgsql \
+    pgsql \
+    soap \
+    xmlrpc \
+    xsl \
+    zip
     "
+fi
 
-export runtimeDeps=" \
-    imagemagick \
-    libfreetype6-dev \
-    libgmp-dev \
-    libicu-dev \
-    libjpeg-dev \
-    libkrb5-dev \
-    libldap2-dev \
-    libmagickwand-dev \
-    libmcrypt-dev \
-    libmemcached-dev \
-    libmemcachedutil2 \
-    libpng-dev \
-    libpq-dev \
-    librabbitmq-dev \
-    libuv1-dev \
-    libwebp-dev \
-    libxml2-dev \
-    mcrypt \
-    multiarch-support \
-    "
+if [[ $PHP_VERSION == "8.0" || $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
+  export buildDeps=" \
+      default-libmysqlclient-dev \
+      libbz2-dev \
+      libsasl2-dev \
+      pkg-config \
+      "
+
+  export runtimeDeps=" \
+      imagemagick \
+      libfreetype6-dev \
+      libgmp-dev \
+      libicu-dev \
+      libjpeg-dev \
+      libkrb5-dev \
+      libldap2-dev \
+      libmagickwand-dev \
+      libmemcached-dev \
+      libmemcachedutil2 \
+      libpng-dev \
+      libpq-dev \
+      librabbitmq-dev \
+      libssl-dev \
+      libuv1-dev \
+      libwebp-dev \
+      libxml2-dev \
+      libxslt1-dev \
+      libzip-dev \
+      multiarch-support \
+      "
+else
+  export buildDeps=" \
+      default-libmysqlclient-dev \
+      libbz2-dev \
+      libsasl2-dev \
+      "
+
+  export runtimeDeps=" \
+      imagemagick \
+      libfreetype6-dev \
+      libgmp-dev \
+      libicu-dev \
+      libjpeg-dev \
+      libkrb5-dev \
+      libldap2-dev \
+      libmagickwand-dev \
+      libmcrypt-dev \
+      libmemcached-dev \
+      libmemcachedutil2 \
+      libpng-dev \
+      libpq-dev \
+      librabbitmq-dev \
+      libuv1-dev \
+      libwebp-dev \
+      libxml2-dev \
+      mcrypt \
+      multiarch-support \
+      "
 fi
 
 apt-get update \
@@ -89,8 +107,8 @@ apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-install -j$(nproc) $extensions
 
-if [[ $PHP_VERSION == "7.4" ]]; then
-    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+if [[ $PHP_VERSION == "8.0" || $PHP_VERSION == "7.4" ]]; then
+  docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install -j$(nproc) ldap \
@@ -98,7 +116,7 @@ if [[ $PHP_VERSION == "7.4" ]]; then
     && docker-php-ext-install -j$(nproc) imap \
     && docker-php-source delete
 else
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/ \
+  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install -j$(nproc) ldap \
@@ -107,7 +125,8 @@ else
     && docker-php-source delete
 fi
 
-docker-php-source extract \
+if ! [[ $PHP_VERSION == "8.0" ]]; then
+  docker-php-source extract \
     && curl -L -o /tmp/cassandra-cpp-driver.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver_2.14.0-1_amd64.deb" \
     && curl -L -o /tmp/cassandra-cpp-driver-dev.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver-dev_2.14.0-1_amd64.deb" \
     && dpkg -i /tmp/cassandra-cpp-driver.deb /tmp/cassandra-cpp-driver-dev.deb \
@@ -121,22 +140,65 @@ docker-php-source extract \
     && rm -rf /tmp/cassandra \
     && docker-php-ext-install cassandra \
     && docker-php-source delete
+fi
 
-if [[ $PHP_VERSION == "7.2" ]]; then
+if [[ $PHP_VERSION == "8.0" ]]; then
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
+    && docker-php-ext-enable memcached \
     && docker-php-source delete
 
   pecl channel-update pecl.php.net \
-    && pecl install amqp redis apcu mongodb imagick xdebug \
-    && docker-php-ext-enable amqp redis apcu mongodb imagick xdebug
+    && pecl install redis apcu mongodb xdebug \
+    && docker-php-ext-enable redis apcu mongodb xdebug
+
+  #AMQP
+  docker-php-source extract \
+    && mkdir /usr/src/php/ext/amqp \
+    && curl -L https://github.com/php-amqp/php-amqp/archive/master.tar.gz | tar -xzC /usr/src/php/ext/amqp --strip-components=1 \
+    && docker-php-ext-install amqp \
+    && docker-php-source delete
+
+  #Imagick
+  cd /usr/local/src \
+    && git clone https://github.com/Imagick/imagick \
+    && cd imagick \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
+    && cd .. \
+    && rm -rf imagick \
+    && docker-php-ext-enable imagick
+
+  #XMLRPC
+  mkdir /usr/local/src/xmlrpc \
+    && cd /usr/local/src/xmlrpc \
+    && curl -L https://pecl.php.net/get/xmlrpc-1.0.0RC1.tgz | tar -xzC /usr/local/src/xmlrpc --strip-components=1 \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
+    && cd .. \
+    && rm -rf xmlrpc \
+    && docker-php-ext-enable xmlrpc
 
 elif [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
     && docker-php-ext-enable memcached \
+    && docker-php-source delete
+
+  pecl channel-update pecl.php.net \
+    && pecl install amqp redis apcu mongodb imagick xdebug \
+    && docker-php-ext-enable amqp redis apcu mongodb imagick xdebug
+
+elif [[ $PHP_VERSION == "7.2" ]]; then
+  docker-php-source extract \
+    && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
+    && docker-php-ext-install memcached \
     && docker-php-source delete
 
   pecl channel-update pecl.php.net \
@@ -174,6 +236,12 @@ fi
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo 'memory_limit=1024M' > /usr/local/etc/php/conf.d/zz-conf.ini
-echo 'xdebug.coverage_enable=1' > /usr/local/etc/php/conf.d/20-xdebug.ini
+
+if [[ $PHP_VERSION == "8.0" ]]; then
+  # https://xdebug.org/docs/upgrade_guide#changed-xdebug.coverage_enable
+  echo 'xdebug.mode=coverage' > /usr/local/etc/php/conf.d/20-xdebug.ini
+else
+  echo 'xdebug.coverage_enable=1' > /usr/local/etc/php/conf.d/20-xdebug.ini
+fi
 
 apt-get purge -yqq --auto-remove $buildDeps
