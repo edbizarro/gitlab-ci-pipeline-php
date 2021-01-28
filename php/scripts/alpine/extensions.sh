@@ -207,3 +207,10 @@ git clone "https://github.com/php-memcached-dev/php-memcached.git" \
 } > /usr/local/etc/php/conf.d/apcu-recommended.ini
 
 echo "memory_limit=1G" > /usr/local/etc/php/conf.d/zz-conf.ini
+
+if [[ $PHP_VERSION == "8.0" ]]; then
+  # https://xdebug.org/docs/upgrade_guide#changed-xdebug.coverage_enable
+  echo 'xdebug.mode=coverage' > /usr/local/etc/php/conf.d/20-xdebug.ini
+else
+  echo 'xdebug.coverage_enable=1' > /usr/local/etc/php/conf.d/20-xdebug.ini
+fi
