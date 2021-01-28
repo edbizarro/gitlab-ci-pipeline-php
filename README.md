@@ -11,9 +11,16 @@
 
 ## Based on [Official PHP images](https://hub.docker.com/_/php/)
 
-> PHP 7.4 available
+> PHP 8.0 available
 
-- ```7.4```, ```7```, ```latest``` [(7.4/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.4/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.4.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.4 "Get your own image badge on microbadger.com")
+- ```8.0```, ```8```, ```latest``` [(8.0/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/8.0/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:8.0.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:8.0 "Get your own image badge on microbadger.com")
+
+- ```8.0-alpine```, ```alpine``` [(8.0/alpine/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/8.0/alpine/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:8.0-alpine.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:8.0-alpine "Get your own image badge on microbadger.com")
+
+
+- ```8.0-fpm```, ```fpm``` [(8.0/fpm/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/8.0/fpm/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:8.0-fpm.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:8.0-fpm "Get your own image badge on microbadger.com")
+
+- ```7.4```, ```7``` [(7.4/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.4/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.4.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.4 "Get your own image badge on microbadger.com")
 
 - ```7.4-alpine```, ```alpine``` [(7.4/alpine/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.4/alpine/Dockerfile) - [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.4-alpine.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.4-alpine "Get your own image badge on microbadger.com")
 
@@ -52,6 +59,7 @@ Everything you need to test Laravel projects :D
 
 To run Dusk tests we need chromium installed on the image, because of that we have a special tag for this case.
 
+- ```8.0-chromium``` [(8.0/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/8.0/chromium/Dockerfile) [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:8.0-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:8.0-chromium "Get your own image badge on microbadger.com")
 - ```7.4-chromium``` [(7.4/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.4/chromium/Dockerfile) [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.4-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.4-chromium "Get your own image badge on microbadger.com")
 - ```7.3-chromium``` [(7.3/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.3/chromium/Dockerfile) [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.3-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.3-chromium "Get your own image badge on microbadger.com")
 - ```7.2-chromium``` [(7.2/chromium/Dockerfile)](https://github.com/edbizarro/gitlab-ci-pipeline-php/blob/master/php/7.2/chromium/Dockerfile) [![](https://images.microbadger.com/badges/image/edbizarro/gitlab-ci-pipeline-php:7.2-chromium.svg)](https://microbadger.com/images/edbizarro/gitlab-ci-pipeline-php:7.2-chromium "Get your own image badge on microbadger.com")
@@ -79,7 +87,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:8.0-alpine
   script:
     - yarn install --pure-lockfile
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
@@ -118,7 +126,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:8.0-alpine
   script:
     - yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
@@ -135,7 +143,7 @@ test:
 
 deploy:
   stage: deploy
-  image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
+  image: edbizarro/gitlab-ci-pipeline-php:8.0-alpine
   script:
     - echo "Deploy all the things!"
   only:
@@ -171,7 +179,7 @@ test:
   stage: test
   services:
     - mysql:5.7
-  image: edbizarro/gitlab-ci-pipeline-php:7.4-chromium
+  image: edbizarro/gitlab-ci-pipeline-php:8.0-chromium
   script:
     - yarn config set cache-folder .yarn
     - yarn install --pure-lockfile
