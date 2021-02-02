@@ -68,6 +68,10 @@ command:
       - xsl
 
 file:
+  /usr/local/etc/php/conf.d/20-xdebug.ini:
+    exists: true
+    contains:
+      - xdebug.mode
   /usr/local/etc/php/conf.d/zz-conf.ini:
     exists: true
     contains:
