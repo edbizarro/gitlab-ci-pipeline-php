@@ -52,7 +52,6 @@ command:
       - intl
       - ldap
       - mbstring
-      - mcrypt
       - memcached
       - mongodb
       - mysqli

@@ -41,65 +41,36 @@ else
     "
 fi
 
-if [[ $PHP_VERSION == "8.0" || $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" || $PHP_VERSION == "7.2" ]]; then
-  export buildDeps=" \
-      default-libmysqlclient-dev \
-      libbz2-dev \
-      libsasl2-dev \
-      pkg-config \
-      "
+export buildDeps=" \
+    default-libmysqlclient-dev \
+    libbz2-dev \
+    libsasl2-dev \
+    pkg-config \
+    "
 
-  export runtimeDeps=" \
-      imagemagick \
-      libfreetype6-dev \
-      libgmp-dev \
-      libicu-dev \
-      libjpeg-dev \
-      libkrb5-dev \
-      libldap2-dev \
-      libmagickwand-dev \
-      libmemcached-dev \
-      libmemcachedutil2 \
-      libpng-dev \
-      libpq-dev \
-      librabbitmq-dev \
-      libssl-dev \
-      libuv1-dev \
-      libwebp-dev \
-      libxml2-dev \
-      libxslt1-dev \
-      libzip-dev \
-      multiarch-support \
-      "
-else
-  export buildDeps=" \
-      default-libmysqlclient-dev \
-      libbz2-dev \
-      libsasl2-dev \
-      "
+export runtimeDeps=" \
+    imagemagick \
+    libfreetype6-dev \
+    libgmp-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libkrb5-dev \
+    libldap2-dev \
+    libmagickwand-dev \
+    libmemcached-dev \
+    libmemcachedutil2 \
+    libpng-dev \
+    libpq-dev \
+    librabbitmq-dev \
+    libssl-dev \
+    libuv1-dev \
+    libwebp-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libzip-dev \
+    multiarch-support \
+    "
 
-  export runtimeDeps=" \
-      imagemagick \
-      libfreetype6-dev \
-      libgmp-dev \
-      libicu-dev \
-      libjpeg-dev \
-      libkrb5-dev \
-      libldap2-dev \
-      libmagickwand-dev \
-      libmcrypt-dev \
-      libmemcached-dev \
-      libmemcachedutil2 \
-      libpng-dev \
-      libpq-dev \
-      librabbitmq-dev \
-      libuv1-dev \
-      libwebp-dev \
-      libxml2-dev \
-      mcrypt \
-      multiarch-support \
-      "
-fi
 
 apt-get update \
   && apt-get install -yq $buildDeps \
@@ -140,9 +111,7 @@ if ! [[ $PHP_VERSION == "8.0" ]]; then
     && rm -rf /tmp/cassandra \
     && docker-php-ext-install cassandra \
     && docker-php-source delete
-fi
 
-if [[ $PHP_VERSION == "8.0" ]]; then
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
@@ -184,7 +153,23 @@ if [[ $PHP_VERSION == "8.0" ]]; then
     && rm -rf xmlrpc \
     && docker-php-ext-enable xmlrpc
 
-elif [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
+else
+
+  docker-php-source extract \
+    && curl -L -o /tmp/cassandra-cpp-driver.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver_2.14.0-1_amd64.deb" \
+    && curl -L -o /tmp/cassandra-cpp-driver-dev.deb "https://downloads.datastax.com/cpp-driver/ubuntu/18.04/cassandra/v2.14.0/cassandra-cpp-driver-dev_2.14.0-1_amd64.deb" \
+    && dpkg -i /tmp/cassandra-cpp-driver.deb /tmp/cassandra-cpp-driver-dev.deb \
+    && rm /tmp/cassandra-cpp-driver.deb /tmp/cassandra-cpp-driver-dev.deb \
+    && curl -L -o /tmp/cassandra.tar.gz "https://github.com/datastax/php-driver/archive/24d85d9f1d.tar.gz" \
+    && mkdir /tmp/cassandra \
+    && tar xfz /tmp/cassandra.tar.gz --strip 1 -C /tmp/cassandra \
+    && rm -r /tmp/cassandra.tar.gz \
+    && curl -L "https://github.com/datastax/php-driver/pull/135.patch" | patch -p1 -d /tmp/cassandra -i - \
+    && mv /tmp/cassandra/ext /usr/src/php/ext/cassandra \
+    && rm -rf /tmp/cassandra \
+    && docker-php-ext-install cassandra \
+    && docker-php-source delete
+
   docker-php-source extract \
     && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
     && docker-php-ext-install memcached \
@@ -194,22 +179,6 @@ elif [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
   pecl channel-update pecl.php.net \
     && pecl install amqp redis apcu mongodb imagick xdebug \
     && docker-php-ext-enable amqp redis apcu mongodb imagick xdebug
-
-elif [[ $PHP_VERSION == "7.2" ]]; then
-  docker-php-source extract \
-    && git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
-    && docker-php-ext-install memcached \
-    && docker-php-source delete
-
-  pecl channel-update pecl.php.net \
-    && pecl install amqp redis apcu mongodb imagick xdebug \
-    && docker-php-ext-enable amqp redis apcu mongodb imagick xdebug
-
-else
-  apt-get update && docker-php-ext-install -j$(nproc) mcrypt
-  pecl channel-update pecl.php.net \
-    && pecl install amqp redis mongodb xdebug apcu memcached imagick \
-    && docker-php-ext-enable amqp redis mongodb xdebug apcu memcached imagick
 fi
 
 { \
