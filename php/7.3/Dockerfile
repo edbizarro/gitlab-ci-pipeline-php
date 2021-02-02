@@ -18,7 +18,7 @@ ENV IMAGE_USER=php
 ENV HOME=/home/$IMAGE_USER
 ENV COMPOSER_HOME=$HOME/.composer
 ENV PATH=$HOME/.yarn/bin:$PATH
-ENV GOSS_VERSION="0.3.8"
+ENV GOSS_VERSION="0.3.16"
 ENV PHP_VERSION=7.3
 
 USER root
@@ -26,7 +26,7 @@ USER root
 WORKDIR /tmp
 
 # COPY INSTALL SCRIPTS
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY ./php/scripts/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
