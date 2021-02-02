@@ -6,6 +6,10 @@ package:
     installed: true
 
 command:
+  composer --version:
+    exit-status: 0
+    stdout:
+      - "2."
   node --version:
     exit-status: 0
     stdout:
@@ -17,8 +21,6 @@ command:
     stdout:
       - "6"
   sudo npm --version:
-    exit-status: 0
-  composer --version:
     exit-status: 0
   python3 --version:
     exit-status: 0
@@ -62,6 +64,7 @@ command:
       - pgsql
       - redis
       - soap
+      - sodium
       - xdebug
       - xml
       - xmlrpc
@@ -82,9 +85,6 @@ file:
   /usr/local/etc/php/conf.d/apcu-recommended.ini:
     exists: true
   /home/php:
-    exists: true
-    owner: php
-  /home/php/.composer:
     exists: true
     owner: php
   /home/php/.config:

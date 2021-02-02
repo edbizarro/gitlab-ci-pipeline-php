@@ -34,12 +34,7 @@ apk --update --no-cache add \
   sqlite-dev \
   zlib-dev
 
-
-if [[ $PHP_VERSION == "8.0" || $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
-  apk --update --no-cache add libzip-dev libsodium-dev
-else
-  apk --update --no-cache add --repository http://dl-cdn.alpinelinux.org/alpine/v3.5/community libzip-dev
-fi
+apk --update --no-cache add libzip-dev libsodium-dev
 
 if [[ $PHP_VERSION == "8.0" ]]; then
   docker-php-ext-configure ldap
@@ -69,48 +64,21 @@ fi
 
 docker-php-ext-install -j "$(nproc)" gd
 
-if [[ $PHP_VERSION == "8.0" ]]; then
-  git clone --depth 1 -b 3.0.2 "https://github.com/xdebug/xdebug" \
-    && cd xdebug \
-    && phpize \
-    && ./configure \
-    && make clean \
-    && make \
-    && make install \
-    && docker-php-ext-enable xdebug
-elif [[ $PHP_VERSION == "7.4" || $PHP_VERSION == "7.3" ]]; then
-  git clone --depth 1 -b 2.9.0 "https://github.com/xdebug/xdebug" \
-    && cd xdebug \
-    && phpize \
-    && ./configure \
-    && make clean \
-    && make \
-    && make install \
-    && docker-php-ext-enable xdebug
-elif [[ $PHP_VERSION == "7.2" ]]; then
-  git clone --depth 1 -b 2.7.2 "https://github.com/xdebug/xdebug" \
-    && cd xdebug \
-    && phpize \
-    && ./configure \
-    && make \
-    && make install \
-    && docker-php-ext-enable xdebug
-else
-  apk --update --no-cache add \
-    libmcrypt-dev \
-    libmcrypt \
 
-    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) mcrypt
-
-    pecl install xdebug \
-      && docker-php-ext-enable xdebug
-fi
+git clone --depth 1 -b 3.0.2 "https://github.com/xdebug/xdebug" \
+  && cd xdebug \
+  && phpize \
+  && ./configure \
+  && make clean \
+  && make \
+  && make install \
+  && docker-php-ext-enable xdebug
 
 docker-php-source extract \
-    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/5.3.2.tar.gz" \
+    && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/5.3.3.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-5.3.2 /usr/src/php/ext/redis \
+    && mv phpredis-5.3.3 /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
     && docker-php-source delete
 
