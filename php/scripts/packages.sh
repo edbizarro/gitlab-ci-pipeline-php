@@ -14,8 +14,12 @@ echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 echo 'APT::Install-Recommends "false";' > /etc/apt/apt.conf
 export DEBIAN_FRONTEND=noninteractive
-
-  dpkg-reconfigure -f noninteractive tzdata \
+# Debian doesn't include MySQL, so install its repo manually, see guide:
+# https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/#repo-qg-apt-repo-manual-setup
+# Install MySQL's PGP key, allow for retry as MIT keyserver is often very slow
+apt-key adv --keyserver pgp.mit.edu --recv-keys 5072E1F5 || apt-key adv --keyserver pgp.mit.edu --recv-keys 5072E1F5
+echo deb http://repo.mysql.com/apt/debian/ `lsb_release -sc` mysql-8.0 > /etc/apt/sources.list.d/mysql.list
+dpkg-reconfigure -f noninteractive tzdata \
   && apt-get update \
   && apt-get install -yq \
       apt-transport-https \
@@ -28,7 +32,7 @@ export DEBIAN_FRONTEND=noninteractive
       gnupg2 \
       jq \
       libc-client-dev \
-      mariadb-client \
+      mysql-client \
       mongo-tools \
       openssh-client \
       python \
@@ -38,4 +42,4 @@ export DEBIAN_FRONTEND=noninteractive
       unzip \
       zip \
       zlib1g-dev \
-      && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/*
