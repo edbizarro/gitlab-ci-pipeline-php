@@ -63,7 +63,7 @@ else
 fi
 
 docker-php-ext-install -j "$(nproc)" gd
-
+docker-php-ext-install -j "$(nproc)" sockets
 
 git clone --depth 1 -b 3.0.2 "https://github.com/xdebug/xdebug" \
   && cd xdebug \

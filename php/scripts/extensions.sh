@@ -37,6 +37,7 @@ else
     soap \
     xmlrpc \
     xsl \
+    sockets \
     zip
     "
 fi
