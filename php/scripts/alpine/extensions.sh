@@ -90,12 +90,11 @@ docker-php-source extract \
     && docker-php-source delete
 
 docker-php-source extract \
-    && apk add --no-cache --virtual .cassandra-deps libressl-dev libuv-dev cassandra-cpp-driver-dev \
-    && curl -L -o /tmp/cassandra.tar.gz "https://github.com/datastax/php-driver/archive/24d85d9f1d.tar.gz" \
+    && apk add --no-cache --virtual .cassandra-deps openssl-dev libuv-dev cassandra-cpp-driver-dev \
+    && curl -L -o /tmp/cassandra.tar.gz "https://github.com/nano-interactive/php-driver/archive/refs/tags/v1.3.3.tar.gz" \
     && mkdir /tmp/cassandra \
     && tar xfz /tmp/cassandra.tar.gz --strip 1 -C /tmp/cassandra \
     && rm -r /tmp/cassandra.tar.gz \
-    && curl -L "https://github.com/datastax/php-driver/pull/135.patch" | patch -p1 -d /tmp/cassandra -i - \
     && mv /tmp/cassandra/ext /usr/src/php/ext/cassandra \
     && rm -rf /tmp/cassandra \
     && docker-php-ext-install cassandra \
